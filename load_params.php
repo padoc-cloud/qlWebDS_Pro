@@ -29,7 +29,8 @@
   
   define('USE_CACHE', $g_params->Get('site', 'use_cache'));
   define('SITES_PER_PAGE' , $g_params->Get('site','view_sites_per_page') );
-  define('USE_CAPTCHA' , $g_params->Get('site','use_captcha'));
+  // define('USE_CAPTCHA' , $g_params->Get('site','use_captcha'));
+  define('USE_CAPTCHA' , false);
   define('CATALOG_ADDRESS' , $g_params->Get('site','site_address'));
   define('DEFAULT_CHARSET', $g_params->Get('site', 'site_charset'));
   define('ADMIN_EMAIL', $g_params->Get('site','admin_email'));

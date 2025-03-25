@@ -2,6 +2,7 @@
 
   // start session
   session_start();
+
   
   // debug performance check class 
   include('php4_classes/debug.class.php');
@@ -11,7 +12,7 @@
   define ('THUMB_DIR', './thumbnails/');
   
   define ('MAIN_CATALOG', './');
-
+  
   // initialize classes
   // filter POST data
   // makes $g_cache_addr
@@ -89,14 +90,14 @@
 			}
 		}
   	} 
-	if (isset($_GET['categ'])) {
-	    if (is_numeric($_GET['categ'])) {
-	      $cur_cat_id = (int) $_GET['categ'];
-	      $cur_cat_row = $g_categ->GetCategory($cur_cat_id);
-	    }
-	}
+    if (isset($_GET['categ'])) {
+        if (is_numeric($_GET['categ'])) {
+          $cur_cat_id = (int) $_GET['categ'];
+          $cur_cat_row = $g_categ->GetCategory($cur_cat_id);
+        }
+    }
 	
-	if (!$cur_cat_row) {
+	  if (!$cur_cat_row) {
 
       include('404.php');
     	

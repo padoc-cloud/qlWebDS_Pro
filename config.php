@@ -27,7 +27,6 @@
 	define('WAYBACK_MACHINE_CODE_URL', 'http://web.archive.org/web/');
 	define('LICENSE_TYPE', '1DL');
 	define('BRAND_TYPE', 'B');
-	define('SCRIPT_URL_DEV', 'http://localhost/ql-server/');  // new line 
 
 	global $developer, $developer_website, $developer_url, $script_family, $script_group, $script_name, $script_name_short, $script, $full_version, $version, $version_number, $sub_version, $copyright, $years, $foot, $thumbnail_code_url, $thumbnail_backlink, $alexa_code_url_traffic, $alexa_code_url_java, $alexa_code_url_graph, $wayback_machine_code_url, $license_type, $brand_type;
 

@@ -62,20 +62,26 @@
 
   $g_user->CheckIfIsLogged();
 
- // security  Modified for simple by: 03/24/2025
+ // security 
  if (!isset($_GET['o'])) {
   foreach ($_POST as $key => $value) {
-      if (is_string($value)) {
-          if (!$g_user->IsLogged()) {
-              $value = get_magic_quotes_gpc() ? stripslashes($value) : $value;
-              $_POST[$key] = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
-          } else {
-              $value = get_magic_quotes_gpc() ? stripslashes($value) : $value;
-              $_POST[$key] = stripslashes($value);
-          }
-      }
+  
+   if(is_string($value)) {
+   
+     if (!$g_user->IsLogged()) {
+       if (function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc()) {
+          $value = stripslashes($value);
+       }     
+       $_POST[$key] =  htmlspecialchars($value);
+
+     } else {
+       if (function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc()) {
+          $_POST[$key] = stripslashes($_POST[$key]);
+       }
+     }
+   }
   }
-}
+ }
   
   $g_addr = htmlentities($_SERVER['PHP_SELF']);
   $g_cache_addr = htmlentities($_SERVER['QUERY_STRING']);

@@ -44,8 +44,6 @@
     if (! $DB->Open()) {
         echo 'Error: Couldn`t connect to Database';
         exit;
-    } else {
-        echo "DB opened successfully!";
     }
 
     $isError = false;
@@ -53,7 +51,7 @@
 
     $install_tables = [];
 	$a_data_query = [];
-    $script_url = SCRIPT_URL_DEV;
+    $script_url = '';
 
     $form = ['url', 'pass', 'user', 'email', 'conf_no', 'query_params_data',
         'query_captcha_tbl',
