@@ -1,5 +1,7 @@
 <?php 
   
+  // This file performs debugging operations for the application. It includes methods for measuring execution time of specific code blocks and logging performance data.
+  
   class DebugClass {
     
     var $m_DB;

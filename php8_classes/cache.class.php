@@ -1,5 +1,7 @@
 <?php
 
+  // This file performs caching operations by managing cached files in a specified directory. It includes methods for creating, retrieving, deleting, and clearing cache files.
+
   class CacheClass {
     var $bck;
     
