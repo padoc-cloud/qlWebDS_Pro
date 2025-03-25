@@ -9,7 +9,7 @@
 // Some servers seem to have a problem with this. You may use "dir" as part of the name
 
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'ql-test');
+define('DB_NAME', 'ql-test');    // needs to be changed by your database name
 define('DB_USER', 'root');
 define('DB_PASS', '12345678');
 

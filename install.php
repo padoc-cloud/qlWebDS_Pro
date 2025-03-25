@@ -133,7 +133,7 @@ End License //-->
 
 <?php
 
-    // } else {
+    // } else {    // block code
 
     $id          = 0;
     $info        = '';
@@ -177,6 +177,7 @@ End License //-->
 
     $install_tables = [];
 	$a_data_query = [];
+    $script_url = SCRIPT_URL_DEV;
 
     $form = ['url', 'pass', 'user', 'email', 'conf_no', 'query_params_data',
         'query_captcha_tbl',

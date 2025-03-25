@@ -111,7 +111,7 @@ function GoogleCH($url, $length=null, $init=GOOGLE_MAGIC) {
 // converts a string into an array of integers containing the numeric value of the char 
 function strord($string) { 
     for($i=0;$i<strlen($string);$i++) { 
-        $result[$i] = ord($string{$i}); 
+        $result[$i] = ord($string[$i]); 
     } 
     return $result; 
 } 
@@ -177,7 +177,7 @@ function getrank($url)
                 // if the check less than -2^31
                 $Check = ($Check < -2147483648) ? ($Check + $Int32Unit) : $Check;
             }
-            $Check += ord($Str{$i}); 
+            $Check += ord($Str[$i]); 
         }
         return $Check;
     }
@@ -207,7 +207,7 @@ function getrank($url)
         $length = strlen($HashStr);
         
         for ($i = $length - 1;  $i >= 0;  $i --) {
-            $Re = $HashStr{$i};
+            $Re = $HashStr[$i];
             if (1 === ($Flag % 2)) {              
                 $Re += $Re;     
                 $Re = (int)($Re / 10) + ($Re % 10);

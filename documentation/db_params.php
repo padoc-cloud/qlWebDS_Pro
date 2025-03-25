@@ -20,7 +20,7 @@ define('DB_TABLE_PREFIX', 'qlWebDS_');
 
 // CAUTION!!! Do NOT change below this line!!!
 
-<!-- Start License
+// <!-- Start License
 /*
 **********************************************************************************************************************************************************
 All below listed notices MUST remain intact.
@@ -129,6 +129,6 @@ Copyright (c) 2007-2025 Contact USA Inc. (http://www.qlWebScripts.com) All Right
 All above listed notices MUST remain intact.
 **********************************************************************************************************************************************************
 */
-End License //-->
+// End License //-->?
 
 ?>
