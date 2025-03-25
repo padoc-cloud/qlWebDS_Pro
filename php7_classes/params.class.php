@@ -1,7 +1,9 @@
 <?php
   
 /*
-parameters table name: prefix_params
+  This file performs parameter management operations for the application. It includes methods for initializing, retrieving, updating, and storing serialized parameters in a database.
+  
+  Parameters table name: prefix_params
 */
   
   class ParamsClass {

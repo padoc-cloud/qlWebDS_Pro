@@ -1,11 +1,11 @@
 <?php
 
 /*
+This file performs user authentication and management operations for the application. It includes methods for logging in, logging out, session handling, user registration, and access level management.
+
 Table Fields:
 	id;  user;  pass;  access_level;  last_active;  last_ip
   
-Errors:
-	100 002 - 'Login and password ok, couldn`t set login time';
 */
  
 class UserLogin {

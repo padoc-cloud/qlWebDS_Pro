@@ -1,5 +1,7 @@
 <?php
   
+  // This file performs template management operations for the application. It includes methods for loading, processing, and dynamically populating HTML templates with data.
+  
   class TemplateClass {
       var $m_path = '';
       var $m_tplt = '';

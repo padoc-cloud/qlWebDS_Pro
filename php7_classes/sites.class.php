@@ -1,5 +1,6 @@
 <?php
 
+  // This file performs site management operations for the application. It includes methods for adding, updating, deleting, and retrieving site data, as well as managing site connections, payments, visits, and search functionality.
   // define site status
   define('SITE_WAITING_FOR_PAYMENT', -1);
   define('SITE_WAITING', 0);

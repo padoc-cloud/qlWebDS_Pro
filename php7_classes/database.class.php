@@ -1,5 +1,6 @@
 <?php
 
+// This file performs database management operations for the application. It includes methods for connecting to the database, executing queries, managing transactions, and retrieving or manipulating data.
 class DataBase
 {
     private static $oInstance = false;

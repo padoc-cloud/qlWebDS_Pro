@@ -1,54 +1,7 @@
 <?php
 
-/*
-Usage:
-SetCombo($name, $combo, $comboId, $comboValue=false)
-$name - field name
-$combo - table with values
-$comboId - table column
-$comboValue - table column 
- 
-MakeForm($dane, $values)
-$dane = array($value1, $value2)
-$value = 'field_type-size|field_name|[field_value]'
- 
-Field_types:
-  T - text
-  F - text (float value, must insert parseAmount javascipt function in page header)
-  P - password
-  I - text (int)
-  H - hidden
-  TA - textarea
-  C - checkbox
-  CK - radio
-  CBO - combo
-  CBOM - multiple combo
+// This file performs form generation and validation operations for the application. It includes methods for dynamically creating form fields, handling input values, and validating user input.
 
-Example:
-  dane = array('TA-150-6-7|name|[value]')
-  values = array('name'=>value);
-
-JavaScript Function:
-	function parseAmount(name){
-	var s = name.value;
-	var out = '';
-	if (s == "")
-		return (true);
-    for (i = 0; i < s.length; i++)
-      {
-         var cl = s.charAt(i);
-         var c = s.charCodeAt(i);
-         if (c == 44 ) {
-            out = out + '.';
-         } else if ( ((c > 47) && (c < 59)) || (c == 46)){
-             out = out + cl;
-         } else {
-         }
-     }
-    name.value = out;
-}  
-*/
- 
  class FormClass {
    var $m_errors =array();
    var $m_combo = array();

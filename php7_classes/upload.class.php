@@ -1,5 +1,7 @@
 <?php
 
+  // This file performs file upload and management operations for the application. It includes methods for uploading, validating, resizing images, and handling file naming conflicts.
+
   class UploadClass {
     
     var $max_photo_size = MAX_LOGO_SIZE; 
