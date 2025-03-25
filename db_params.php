@@ -10,7 +10,7 @@
 
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'ql-test');    // needs to be changed by your database name
-define('DB_USER', 'root');
+define('DB_USER', 'root');        
 define('DB_PASS', '12345678');
 
 // In most cases, you will not want to change line 19: define('DB_TABLE_PREFIX', 'qlWebDS_');

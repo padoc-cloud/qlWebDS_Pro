@@ -18,9 +18,13 @@ parameters table name: prefix_params
     var $eText;
     var $eNo;
     var $eFunc;
+
+    function __construct() {
+      $this->ParamsClass();
+    }
                     
     function ParamsClass() {
-        $this->m_DB =& DataBase::getInstance();
+        $this->m_DB = DataBase::getInstance();
         if (!$this->m_DB->Open()) {
           $this->eText = 'DB connection failed';
           $this->eNo = 300001;
@@ -43,7 +47,7 @@ parameters table name: prefix_params
 
         foreach ($table as $row) {
           
-          $aParams = unserialize($row['params']);
+          $aParams = @unserialize($row['params']);
           $this->m_params[$row['id']] = $aParams;     
           
           $this->m_paramsTable[$row['id']] = $row['params'];     
@@ -59,7 +63,7 @@ parameters table name: prefix_params
 
       if ($preserve and isset($this->m_paramsTable[$type])) {
         
-        $oldParams = unserialize($this->m_paramsTable[$type]);
+        $oldParams = @unserialize($this->m_paramsTable[$type]);
         if (is_array($oldParams)) {
           $aParams = array_merge($oldParams, $aParams);
 
@@ -90,7 +94,7 @@ parameters table name: prefix_params
 
       if (isset($pTable[$type])) {
 
-        $aParams = unserialize($pTable[$type]);
+        $aParams = @unserialize($pTable[$type]);
         return $aParams;
         
       } else {

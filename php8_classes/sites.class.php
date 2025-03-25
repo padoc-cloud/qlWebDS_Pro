@@ -27,6 +27,10 @@
     var $eText;
     var $eNo;
     var $eFunc;
+
+    function __construct() {
+      $this->SitesClass();
+    }
     
     function SitesClass() {
         
@@ -55,8 +59,8 @@
       $pid = true;
       $id = 0;
             
-      $tmp_name = mysql_real_escape_string($a_values['url']);
-      $tmp_company = mysql_real_escape_string($a_values['company']);
+      $tmp_name = mysqli_real_escape_string($this->m_DB->m_conn, $a_values['url']);
+      $tmp_company = mysqli_real_escape_string($this->m_DB->m_conn, $a_values['company']);
       $query = "SELECT * FROM $this->m_table WHERE url='$tmp_name' and company='$tmp_company' ";
       $row = $this->m_DB->GetRow($query);
       
@@ -236,7 +240,7 @@
     }  
     
     function GetSiteByURL($url) {
-      $url = mysql_real_escape_string($url);
+      $url = mysqli_real_escape_string($this->m_DB->m_conn, $url);
       
       $query = "SELECT * FROM $this->m_table WHERE url='$url' ";
       $row = $this->m_DB->GetRow($query);
@@ -247,8 +251,8 @@
       }
     }
     function GetListingByCompanyURL($company,$url) {
-      $company = mysql_real_escape_string($company);
-      $url = mysql_real_escape_string($url);
+      $company = mysqli_real_escape_string($this->m_DB->m_conn, $company);
+      $url = mysqli_real_escape_string($this->m_DB->m_conn, $url);
       
       $query = "SELECT * FROM $this->m_table WHERE company='$company' and url='$url' ";
       $row = $this->m_DB->GetRow($query);

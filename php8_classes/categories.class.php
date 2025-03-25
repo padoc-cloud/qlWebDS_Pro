@@ -14,6 +14,10 @@
             
     var $m_mainCategs = array();
     var $m_categs = array();
+
+    function __construct() {
+      $this->CategoriesClass();
+    }
     
     function CategoriesClass() {
 
@@ -220,7 +224,7 @@
         return false;
       }
 
-      $tmp_name = mysql_real_escape_string($values['name']);
+      $tmp_name = mysqli_real_escape_string($this->m_DB->m_conn, $values['name']);
       $id_up = (int) $values['id_up'];
       $query = "SELECT * FROM $this->m_table WHERE name='$tmp_name' AND id_up=$id_up";
       $row = $this->m_DB->GetRow($query);

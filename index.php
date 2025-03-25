@@ -22,8 +22,8 @@
 
   // check if admin URL field is filled (site address)
   if ( strlen($g_params->Get('site', 'site_address'))<5 ) {
-    echo 'go to <a href="admin/">admin</a> and fill in correct Site Settings (Config->Site Settings)<br><a href="http://www.qlWebScripts.com" target="_blank"><u>qlWeb Scripts</u></a>';
-    exit; 
+    echo 'go to <a href="admin/">admin</a> and fill in correct Site Settings (Config->Site Settings)<br>';
+    // exit; 
   } 
 
   include('users_online.php');

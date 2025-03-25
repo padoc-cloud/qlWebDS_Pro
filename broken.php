@@ -1,14 +1,19 @@
 <?php
 
   require_once('db_params.php');
-  
-  if (version_compare( phpversion(), '5.0') < 0) {  
-      define('IS_PHP5' , false);
-      define('CLASS_DIR', 'php4_classes/'); 
-  } else {
-     define('IS_PHP5' , true);
-     define('CLASS_DIR', 'php5_classes/'); 
-  }
+  // New code here
+	$versionParts = explode('.', phpversion());
+	$majorVersion = (int)$versionParts[0];
+	// End of new code
+
+    // Modified by: 2025-03-024
+  	if (version_compare( phpversion(), '5.0' ) < 0) {  
+		define('IS_PHP5' , false);
+		define('CLASS_DIR', 'php4_classes/'); 
+	} else if (version_compare( phpversion(), '5.0' ) >= 0) {    // modified by: 2025-03-24
+		define('IS_PHP5' , true);                                // don't need to change this variable
+		define('CLASS_DIR', 'php' . $majorVersion . '_classes/'); 
+	}
     
   // connect to database
   require_once(CLASS_DIR.'database.class.php');
