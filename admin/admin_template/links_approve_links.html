@@ -1,0 +1,79 @@
+<h4>{lang approve_title}</h4>
+<table>
+<tr><td colspan="7">{pagging}</td></tr>
+</table>
+<div style="background-color: #96afd5; font-weight: bold; border: 1px solid #999; padding: 3px; margin: 3px;">
+Sort by: <a href="index.php?mod=links&amp;inc=paid_links">{lang paid_links}</a> |
+  <a href="index.php?mod=links&amp;inc=not_paid_links">{lang maybe_paid_links}</a> |
+  <a href="index.php?mod=links&amp;inc=free_links">{lang free_links}</a>
+</div>
+<form action="" name="links_form" method="POST" onsubmit="return ConfirmForm()">
+  <table class="table2">
+  <tbody>
+  <tr>
+    <th>&nbsp; &nbsp; &nbsp; &nbsp; &radic;</th>
+    <th><a href="{addr}&amp;ord=id&amp;sort={isort}" title="Listing ID">#</a></th>
+    <th><a href="{addr}&amp;ord=title&amp;sort={tsort}">Title</a></th>
+    <th><a href="{addr}&amp;ord=url&amp;sort={usort}">URL</a></th>
+    <th><a href="{addr}&amp;ord=pr&amp;sort={prsort}">PR</a></th>
+    <th> &nbsp;$</th>
+    <th>Action</th>
+  </tr>
+  {row sites}
+  <tr {even_class}>
+    <td>&nbsp; &nbsp; &nbsp; &nbsp; <input type="checkbox" name="site_cbx[{id}[1]]"></td>
+    <td>{id}[1]</td>
+    <td id="td_{id}[1]">
+      <a href="#" onClick="setVisible('{id}[1]', true, event); return false;">{title}[1]</a>
+      <!-- info div -->
+      <div id="info_{id}[1]" class="info_div" style="display: none" onClick="setVisible('{id}[1]', false, event)">
+        <table style="width: 100%;">
+         <tr><td>Id: </td><td><a href="{more_address}[1]" target="_blank">{id}[1]</a></td></tr>
+         <tr><td>PageRank: </td><td> {pr}[1]</td></tr>
+         <tr><td>Email: </td><td> {email}[1]</td></tr>                  
+         <tr><td>Paid Listing: </td><td> {paid_link}[1]</td></tr>
+         {if if_rows_paid_link==1} 
+         <tr><td>Amount: </td><td> {amount}[1]{currency}[1]</td></tr>
+         <tr><td>Info: </td><td> {link_error}[1]</td></tr>         
+         <tr><td>Payer: </td><td> {pemail}[1]</td></tr>
+         <tr><td>Payment Date: </td><td> {payment_date}[1]</td></tr>
+         <tr><td>Subscription: </td><td> {subscription}[1]</td></tr>                               
+         {end if_rows_paid_link}
+         <tr><td>Added: </td><td> {date}[1]</td></tr>
+         <tr><td>IP: </td><td> {ip}[1]</td></tr>
+        </table>
+      </div>
+      <!-- end info div -->
+    </td>
+    <td>{url}[1]</td>
+    <td>{pr}[1]</td>    
+    <td style="text-align: center;">
+    {if if_rows_type==1}Free{end if_rows_type}
+    {if if_rows_type==2}<center><img src="admin_template/images/paid.gif" alt="Paid"></center>{end if_rows_type}
+    {if if_rows_type==0}<center><img src="admin_template/images/not_paid.gif" alt="Not Paid"></center>{end if_rows_type}
+    </td>
+    <td>
+      <a href="index.php?mod=links&amp;inc=edit&amp;id={id}[1]" title="Edit"><center><img src="admin_template/images/edit.gif" alt="Edit"></center></a>
+    </td>
+  </tr>
+  <tr {even_class}><td align="center" valign="middle"><a href="{site_url}[1]" target="_blank" title="Go to {site_url}[1]"><img src="{thumbnail_code_url}{site_url}[1]" border="1" width="70" height="60" alt="Thumbnail for {site_url}[1]"></a></td>
+	<td colspan="5"><strong>Categories:</strong> {categories}[1] | <strong>Listing Type:</strong> {link_type}[1]</td><td><a href="{addr}&amp;delete_id={id}[1]" onClick="return confirmDelete();" title="Delete"><center><img src="admin_template/images/delete.gif" alt="Delete"></center></a></td></tr>
+  {if if_rows_deep==1}
+  <tr {even_class}><td>&nbsp;</td><td colspan="6"><b>Deep Links:</b> {deep_links}[1]</td></tr>  
+  {end if_rows_deep}
+  {if if_rows_note==1}
+  <tr {even_class}><td>&nbsp;</td><td colspan="6" style="text-decoration: none; color: #CD5C5C;"><b>User Note:</b> {note}[1]</td></tr>  
+  {end if_rows_note}
+  <tr {even_class}>
+	<td colspan="7" style="border-bottom: 1px solid black; text-decoration: none;">{description}[1]</td>
+  </tr>
+  {/row sites}
+  <tr><td colspan="7">{pagging}</td></tr>
+  </tbody>
+  </table>
+ <div>&nbsp;</div>
+  <input type="button" name="check" id="check" value="Check All" class="button2" onClick="select_all('site_cbx', 1);">
+  <input type="submit" name="submit_add" class="button2" value="{lang submit_add}">
+  <input type="submit" name="submit_ban" class="button2" value="{lang submit_ban}">
+  <input type="submit" name="submit_del" class="button2" value="{lang submit_del}">
+</form>

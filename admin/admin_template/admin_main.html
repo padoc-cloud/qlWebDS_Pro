@@ -1,0 +1,58 @@
+{notifications}
+<h4> Sitemap, Cache, Google PageRank, Database Backup{if php_5==1}, and Logos Backup{end php_5}</h4>
+<form action="" method="POST">
+<table class="table3">
+ <tbody>
+  <tr><th class="sub_title">Sitemap</th><th><input type="submit" name="submit" class="button2" value="{lang generate_sitemap}"></th></tr>
+ <tr><td>{lang sitemap_date}:</td><td>{sitemap_date}</td></tr>
+ <tr>
+  <td>{lang sitemap_address}:</td>
+  <td>{sitemap_address}</td>
+ </tr>
+ <tr>
+  <td colspan="2"><font style="color: #CC0033; font-size: 14px;"> &raquo; </font>Requires 666 permissions to &quot;sitemap.xml.gz&quot; file</td>
+ </tr>
+ </tbody>
+</table> 
+</form>
+<form action="" method="POST">
+<table class="table3">
+ <tbody>
+  <tr><th class="sub_title">{lang cache}</th><th><input type="submit" name="empty_cache" value="{lang empty_cache}" class="button2"></th></tr>
+  <tr><td colspan="2"><font style="color: #CC0033;"> &raquo; </font>Empty Cache after each admin change or file upload</td></tr>
+ </tbody>
+</table>
+</form>
+<form action="" method="POST">
+<table class="table3">
+ <tbody>
+  <tr><th class="sub_title">Google PageRank (PR)</th><th><input type="submit" name="clear_pagerank" value="{lang clear_pagerank}" class="button2"></th></tr>
+  <tr><td colspan="2"><font style="color: #CC0033; font-size: 14px;"> &raquo; </font>Clear PageRank - especially after each Google PageRank update</td></tr>
+ </tbody>
+</table>
+</form>
+<form action="" method="POST">
+<table class="table3">
+ <tbody>
+  <tr><th class="sub_title" colspan="2">{lang database_backup}</th></tr>
+  <tr><td colspan="2"><font style="color: #CC0033; font-size: 14px;"> &raquo; </font>Backup your MySQL Database. Remember to use FTP to backup your Files!</td></tr>
+  <tr><td>{lang backup_dir}:</td><td>{backup_dir}</td></tr>
+  <tr><td>{lang last_backup}:</td><td>{backup_date}</td></tr>
+  <tr><th>{lang actions}:</th><th><input type="submit" name="make_backup" value="{lang make_backup}" class="button2"></th></tr>
+  <tr><th>Download MySQL Database to your Computer:</th><th><a href="{download_backup_url}" target="_blank" title="Download your MySQL Database"><u>{lang download_backup}</u></a></th></tr>
+  <tr><td colspan="2"><font style="color: #CC0033; font-size: 14px;"> &raquo; </font>If it opens in a new window - close it once your Backup is completed</td></tr>
+ </tbody>
+</table>
+</form>
+{if php_5==1}
+<form action="" method="POST">
+<table class="table3">
+ <tbody>
+  <tr><th class="sub_title" colspan="2">{lang logos_backup}</th></tr>
+  <tr><td>{lang backup_dir}:</td><td>{backup_dir}</td></tr>
+  <tr><td>{lang last_backup}:</td><td>{backup_logos_date}</td></tr>
+  <tr><th>{lang logos_actions}:</th><th><input type="submit" name="make_logos_backup" value="{lang make_logos_backup}" class="button2"></th></tr>
+ </tbody>
+</table>
+</form>
+{end php_5}

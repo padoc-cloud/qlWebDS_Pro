@@ -1,0 +1,4 @@
+*************************************************************************************
+Simple CSS Templates for qlWebDS may be created in just about 30 minutes.
+Please go to: http://www.qlwebScripts.com/modules.php?name=Manuals
+*************************************************************************************

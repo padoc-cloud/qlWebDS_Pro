@@ -1,0 +1,567 @@
+/* Template: Diamonds */
+
+html, body {
+background-color: #e1d7cb;
+margin: 20px;
+}
+
+table, html, body {
+font-weight: normal;
+font-family: Verdana;
+font-size: 12px;
+color: #000000;
+vertical-align: top;
+}
+
+select, input {
+font-family: Verdana;
+font-size: 11px;
+color: #000000;
+border: 1px solid #000000;
+background-color: #ffffff;
+}
+
+td {
+vertical-align: top;
+}
+
+a {
+text-decoration: none;
+color: #000000;
+}
+
+a:hover {
+color: #529426;
+text-decoration: none;
+}
+
+p {
+margin: 0;
+padding: 0;
+}
+
+/* main */
+.ql_main {
+background-color: #ffffff;
+border: 2px solid #cbc3b8;
+width: 100%;
+text-align: center;
+}
+
+.ql_main table.form_o {
+width: 500px;
+background-color: rgb(238, 238, 238);
+margin: auto;
+margin-top: 5px;
+border: 1px solid #ccc;
+}
+
+.ql_main table.form_o td {
+padding: 2px;
+}
+
+.ql_main table.form_i {
+width: 100%;
+border: 1px solid #000000;
+background-color: rgb(255, 255, 255);
+border-collapse: collapse;
+text-align: left;
+}
+
+.ql_main table.form_i td {
+padding: 1px;
+padding-left: 10px;
+}
+
+.ql_main td.lCForm {
+line-height: 1.8em;
+padding-right: 10px;
+padding-left: 10px;
+border-right: 1px solid black;
+font-size: 90%;
+font-weight: bold;
+}
+
+.ql_main td.rCForm {
+line-height: 1.8em;
+padding-right: 10px;
+padding-left: 10px;
+}
+
+.ql_main td.nag {
+background-color: #8899aa;
+color: white;
+text-align: center;
+border-bottom: 1px solid #000000;
+font-weight: bold;
+padding: 2px;
+}
+
+.ql_main tr.colored {
+background-color: #eeeeee;
+}
+
+.ql_main input {
+font-family: Verdana;
+color: #232323;
+border: 1px solid #bdbdbe;
+background-color: #e1e1e1;
+}
+
+.ql_main input.button {
+font-weight: bold;
+width: 80px;
+}
+
+.ql_main textarea {
+font-family: Verdana;
+font-size: 90%;
+color: #232323;
+border: 1px solid #bdbdbe;
+background-color: #e1e1e1;
+}
+
+/* main menu table */
+.ql_main table.main_menu {
+width: 100%;
+text-align: left;
+}
+
+.ql_main table.main_menu td {
+width: 33%;
+padding: 5px 5px 5px 5px;
+}
+
+.ql_main table.main_menu p.cat {
+padding: 0 0 5px 0;
+margin: 0;
+width: 100%;
+color: #509425;
+font-weight: bold;
+text-decoration: underline;
+font-size: 14px;
+}
+
+.ql_main table.main_menu p.subcat {
+padding: 10px 5px 10px 10px;
+margin: 0;
+width: auto;
+color: #509425;
+background-color: #eef4d8;
+border: 1px solid #e2e9bf;
+font-weight: normal;
+}
+
+.ql_main table.main_menu p.subcat a {
+color: #509425;
+font-weight: normal;
+background-image: url(images/arrow.gif);
+background-repeat: no-repeat;
+padding-left: 15px;
+}
+
+.ql_main table.main_menu p.subcat a:hover {
+color: #000000;
+font-weight: normal;
+}
+
+/* subcategory menu */
+.ql_main table.sub_menu {
+width: 100%;
+text-align: left;
+}
+
+.ql_main table.sub_menu td {
+width: 33%;
+padding: 3px;
+font-size: 90%;
+border: 1px solid #e2e9bd;
+background-color: #eef4d8;
+color: #509425;
+}
+
+.ql_main table.sub_menu td a {
+font-weight: bold;
+}
+
+/* subcategory sites */
+.ql_main table.sites {
+width: 100%;
+text-align: left;
+}
+
+.ql_main table.sites td {
+padding: 5px;
+}
+
+.ql_main table.sites td.featured {
+background-color: #eef4d8;
+border: 1px solid #e2e9bd;
+padding: 5px;
+}
+
+.ql_main table.sites p {
+padding: 2px;
+margin: 0;
+}
+
+.ql_main table.sites span.do_not_disp {
+display: none;
+}
+
+.ql_main table.sites span.title { 
+font-weight: bold;
+color: #22415d;
+}
+
+.ql_main table.sites div.disp {
+border-bottom: 2px solid #AAA;
+font-size: 100%;
+}
+
+
+/* site info */
+.ql_main table.site_info {
+width: 100%;
+text-align: left;
+}
+
+.ql_main table.site_info td {
+padding: 10px;
+}
+
+.ql_main table.site_info td.featured {
+padding: 10px;
+}
+
+.ql_main table.site_info p {
+padding: 5px;
+margin: 0;
+padding-left: 5px;
+}
+
+.ql_main table.site_info span.si_text {
+font-weight: bold;
+color: #15134d;
+}
+
+.ql_main div.image {
+padding: 2px;
+margin-right: 10px;
+float: left;
+border: 1px solid #000000;
+}
+
+.ql_main div.image_latest_most {
+text-align: center;
+padding: 2px;
+margin-right: 10px;
+margin-top: 15px;
+float: left;
+width: 580px;
+border: 1px solid #7788aa;
+}
+
+.ql_main div.site {
+padding: 5px;
+float: left;
+width: auto;
+}
+
+.ql_main div.alexa {
+text-align: left;
+margin-top: 5px;
+clear: both;
+}
+
+.ql_main table.site_info p.do_not_disp { 
+display: none;
+}
+
+.ql_main table.site_info span.do_not_disp {
+display: none;
+}
+
+.ql_main table.site_info span.title {
+font-weight:
+bold;
+color: #22415d;
+}
+
+/* top of category menu */
+.ql_main div.top {
+text-align: left;
+background-color: #f9f9f9;
+border: 1px solid #e7e7e7;
+clear: both;
+float: none;
+height: 15px;
+padding: 4px;
+margin: 2px;
+}
+
+.ql_main div.top a {
+font-size: 90%;
+}
+
+.ql_main p.admin_p {
+text-align: left;
+font-weight: normal;
+border: 1px solid #f00;
+margin: 2px;
+padding: 2px;
+}
+
+/* links */
+a.link1 {
+font-weight: normal;
+color: #509425;
+}
+
+a.link1:hover {
+font-weight: normal;
+color: #000000;
+}
+
+a.link2 {
+font-weight: bold;
+color: #fe9900;
+font-size: 90%;
+}
+
+a.link2:hover {
+text-decoration: underline;
+color: #000000;
+}
+
+a.link3 {
+font-weight: normal;
+color: #509425;
+background-image: url(images/orange.gif);
+background-repeat: no-repeat;
+padding-left: 15px;
+}
+
+a.link3:hover {
+font-weight: normal;
+color: #000000;
+}
+
+a.infolink {
+text-decoration: underline;
+color: #509425;
+}
+
+a.infolink:hover {
+color: #000000;
+}
+
+a.link_admin {
+font-weight: bold;
+font-size: 10px;
+color: #e01311;
+}
+
+a.link_admin:hover {
+text-decoration: underline;
+}
+
+/* left */
+.ql_left {
+background-color: #e1d7cb;
+}
+
+/* right */
+.ql_right {
+background-color: #ffffff;
+width: auto;
+border: 2px solid #cbc3b8;
+text-align: center;
+padding: 3px;
+}
+
+.buttonid {
+background-color: #e1d7cb;
+width: 200px;
+}
+
+.buttonid ul {
+list-style: none;
+margin: 0;
+padding: 0;
+border: none;
+}
+
+.buttonid li.menu_top {
+background-color: #509425;
+width: 230px;
+padding: 5px 5px 5px 15px;
+color: #ffffff;
+font-weight: normal;
+text-align: left;
+}
+
+.buttonid li {
+border-bottom: 3px solid #e1d7cb;
+margin: 0;
+}
+
+.buttonid li a {
+width: 175px;
+display: block;
+padding: 5px 5px 5px 15px;
+background-color: #d9d0c1;
+color: #000000;
+}
+
+.buttonid li a:hover {
+background-color: #d2c8b7;
+color: #000000;
+}
+
+div.statistics {
+margin: 8px auto 15px 15px;
+}
+
+div.latest_feat {
+margin: 5px auto 5px 5px;
+}
+
+/* footer */
+.ql_pagging {
+text-align: left;
+font-weight: bold;
+font-size: 90%;
+padding: 5px;
+}
+
+.ql_pagging a {
+color: #556699;
+}
+
+.ql_foot {
+padding-top: 10px;
+}
+
+.ql_foot a {
+color: #000000;
+text-decoration: underline;
+}
+
+.ql_foot a:hover {
+color: #529426;
+}
+
+/* last added */
+.ql_last {
+text-align: left;
+padding: 5px;
+margin: 0;
+}
+
+.ql_last_featured {
+text-align: center;
+background-color: #eef4d8;
+padding: 10px 5px 5px 5px;
+margin-top: 5px;
+float: left;
+width: 200px;
+border: 1px solid #e2e9bd;
+}
+
+.ql_last p, .ql_last_featured p {
+padding: 0 0 5px 10px;
+}
+
+.ql_last a, .ql_last_featured a {
+font-weight: normal;
+color: #519423;
+text-decoration: none;
+}
+
+a.orange {
+background-image: url(images/orange.gif);
+background-repeat: no-repeat;
+padding-left: 15px;
+}
+
+a.orange:hover {
+color: #000000;
+}
+
+h3 {
+font-family: Georgia;
+font-size: 18px;
+font-weight: normal;
+margin: 0;
+padding: 0;
+}
+
+hr {
+border-bottom: 2px solid #519423;
+margin: 10px 0 10px 0;
+}
+
+.ql_last_featured span.do_not_disp {
+display: none;
+}
+
+/* messages */
+div.info {
+background-color: #f2aa34;
+margin: auto;
+padding: 3px 10px 3px 10px;
+border: 1px solid #cc7315;
+color: white;
+font-weight: bold;
+text-align: left;
+}
+
+div.info p {
+padding: 0;
+margin: 2px;
+}
+
+/* search */
+div.search_categories {
+text-align: left;
+border: 1px solid #e7e7e7;
+clear: both;
+float: none;
+padding: 4px;
+margin: 2px;
+}
+
+/* button */
+input.button2, input.button3 {
+cursor: pointer;
+font-weight: normal;
+padding: 0 7px 0 7px;
+margin: 0;
+border: 2px solid #284775;
+font-size: 90%;
+color: #284775;
+background-color: #e0d6cc;
+}
+
+/* contact us */
+table.contact {
+border-collapse: collapse;
+}
+
+table.contact td {
+border: 1px solid #f5f5f5;
+margin: 0;
+padding: 0;
+}
+
+table.contact td input {
+border: 1px solid black;
+margin: 0;
+padding: 0;
+}
+
+div.spacer {
+clear: both;
+float: none;
+}

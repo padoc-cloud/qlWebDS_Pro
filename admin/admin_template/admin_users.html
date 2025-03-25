@@ -1,0 +1,42 @@
+{notifications}
+<h4>Users</h4>
+<table class="table2">
+<tr><td colspan="6">{pagging}</td></tr>
+</table>
+<div style="background-color: #96afd5; font-weight: bold; border: 1px solid #999; padding: 3px; margin: 3px;">
+  <table class="table2">
+  <tbody>
+  <tr>
+    <th><a href="{addr}&amp;ord=user&amp;sort={un_sort}">User</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+    <th><a href="{addr}&amp;ord=real_name&amp;sort={rn_sort}">Name</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+    <th><a href="{addr}&amp;ord=registration_date&amp;sort={dr_sort}">Date Registered</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+    <th><a href="{addr}&amp;ord=email&amp;sort={e_sort}">E-mail</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+    <th># of Listings</th>
+    <th valign="bottom">Actions:</th>
+  </tr>
+  </tbody>
+  </table>
+</div>
+  <table class="table2">
+  <tbody>
+  <tr>
+	<td colspan="6"><b>Legend:</b> &nbsp; Edit-<img src="admin_template/images/edit.gif" alt="Edit User">&nbsp; &nbsp; Deactivate/Activate User-<img src="admin_template/images/deactivate.gif" border="1" alt="Deactivate User">+&nbsp; &nbsp; Delete User-<img src="admin_template/images/delete.gif" alt="Delete User">&nbsp; &nbsp; Delete User &amp; All Listings-<img src="admin_template/images/delete_user_and_listings.gif" border="0" width="20" height="20" alt="Delete User and All Listings"><br><center><b>Black</b> = Active User,&nbsp; &nbsp; <font style="color: #CC0033;"><b>Red</b></font> = Inactive User</center></td>
+  </tr>
+  {row users}
+  <tr {act_inact_style}[1]>
+    <td><span>{user}[1]</span></td>
+    <td>{real_name}[1]</td>    
+    <td>{registration_date}[1]</td>    
+    <td><a href="mailto:{email}[1]" {act_inact_style}[1] title="Send Email to {user}[1]">{email}[1]</td>    
+    <td><a href="index.php?mod=admin&amp;inc=user_listings&amp;user_id={id}[1]" title=" View User Listings for {user}[1]" {act_inact_style}[1]>{no_listings}[1]</a></td>
+    <td>
+      &nbsp; &nbsp; <a href="index.php?mod=admin&amp;inc=user_edit&amp;user_id={id}[1]" title="Edit"><img src="admin_template/images/edit.gif" alt="Edit User"></a>
+      &nbsp; &nbsp; <a href="{addr}&amp;{act_deact_id}[1]={id}[1]" onClick="return confirmDelete('Are you sure you want to {act_deact_label}[1] User: {user}[1]?');" title="{act_deact_label}[1] User"><img src="admin_template/images/deactivate.gif" border="1" alt="Deactivate User">+</a><br>
+      &nbsp; &nbsp; <a href="{addr}&amp;delete_id={id}[1]" onClick="return confirmDelete('Are you sure you want to Delete User: {user}[1]?');" title="Delete User"><img src="admin_template/images/delete.gif" alt="Delete User"></a>
+      &nbsp; &nbsp; <a href="{addr}&amp;delete_all_id={id}[1]" onClick="return confirmDelete('Are you sure you want to Delete User: {user}[1] and All Listings?');" title="Delete User and All Listings"><img src="admin_template/images/delete_user_and_listings.gif" border="0" width="20" height="20" alt="Delete User and All Listings"></a>
+    </td>
+  </tr>
+  {/row users}
+  <tr><td colspan="6">{pagging}</td></tr>
+  </tbody>
+  </table>

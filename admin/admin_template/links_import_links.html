@@ -1,0 +1,30 @@
+{notifications}
+<h4>Import Listings</h4>
+<form action="" name="my_form" method="POST" enctype="multipart/form-data" onsubmit="return ConfirmForm()">
+	<table class="table1">
+		<tbody>
+     		<tr>
+     			<td colspan="2">
+     				You can only load a file in csv (comma seperated value) format.<br/>
+     				Each row should contain the following columns:<br/>
+     				Column A: Site Name<br/>
+					Column B: Site Url<br/>
+					Column C: Site Description (optional)<br/>
+					Column D: Site Categories (List of Category IDs delimited by character specified below; at least one Category ID is required)<br/>
+					<b>Please Note</b> that Category IDs can be found on Site->Categories page.
+     				<br/>
+     			</td>
+     		</tr>
+			<tr>
+	            <td>File to load:</td>
+	            <td><input name="csv_upload" type="file" maxlength="200" size="65"></td>
+            </tr>
+			<tr>
+            <td>Category ID list delimiter:</td>
+            <td><input type="text" name="delimiter" value="{delimiter}" maxlength="3" size="3"></td>
+            </tr>
+     		<tr><td colspan="2"><input type="submit" name="submit" value="Upload" class="button"></td></tr>
+     		{load_results}
+    	</tbody>
+	</table>
+</form>

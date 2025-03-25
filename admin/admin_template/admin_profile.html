@@ -1,0 +1,20 @@
+<script language="JavaScript">
+function postForm()
+{
+  document.forms[0].submit();
+}
+</script>
+{notifications}
+<h4>Admin Profile</h4>
+<form action="" name="my_form" method="POST">
+	<table class="table1">
+		<tbody>
+			<tr><th class="sub_title" colspan="2">Profile:</th></tr>
+			<tr><td style="width: 120px;">Username:</td><td><input type="text" name="user" value="{user}"></td></tr>
+     		<tr><td>E-mail:</td><td><input type="text" name="email" value="{email}"></td></tr> 
+     		<tr><td>Password:</td><td><input type="password" name="pass"> <label for="change_pass"> Check the box to change password </label><input type="checkbox" id="change_pass" name="change_pass"></td></tr> 
+     		<tr><td>Re-type Password:</td><td><input type="password" name="pass2"></td></tr> 
+     		<tr><td></td><td><input type="submit" name="submit" value="Update" class="button"></td></tr>  
+    	</tbody>
+	</table>
+</form>

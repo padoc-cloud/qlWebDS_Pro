@@ -1,0 +1,45 @@
+<script language="JavaScript">
+function postForm()
+{
+  document.forms[0].submit();
+}
+</script>
+{notifications}
+<h4>E-mails</h4>
+<form action="" name="my_form" method="POST"> 
+<table class="table1">
+  <tbody>
+   <tr><th class="sub_title">E-mail Type:</th></tr>
+   <tr><td> &nbsp; </td></tr>
+   <tr><td>
+    <select name="email_type" onChange="postForm();">
+      <option value="site_pending_email" {site_pending_email selected}>{lang site_pending_email}</option>
+      <option value="payment_email" {payment_email selected}>{lang payment_email}</option>
+      <option value="site_approved_email" {site_approved_email selected}>{lang site_approved_email}</option>
+      <option value="site_not_approved_email" {site_not_approved_email selected}>{lang site_not_approved_email}</option>
+    </select>
+   </td></tr>
+   <tr><td> &nbsp; </td></tr>
+   <tr><th class="sub_title">E-mail Subject Line:</th></tr>
+   <tr><td> &nbsp; </td></tr>
+   <tr><td><input type="text" name="title" value="{title}" style="width: 520px;"></td></tr>
+   <tr><td> &nbsp; </td></tr>
+   <tr><th class="sub_title">E-mail Body:</th></tr>
+   <tr><td> &nbsp; </td></tr>
+   <tr><td><textarea rows="14" name="email_body" style="width: 520px;">{email_body}</textarea></td></tr>
+  </tbody>
+</table>
+<input type="submit" name="save_email" value="Save" class="button">
+</form>
+<div class="separator">&nbsp;</div>
+  Examples of E-mail Links you may insert into the Body and Subject of your E-mails:
+<div class="info2">
+  <p>{my_site_name} - {lang my_site_name}</p>
+  <p>{my_site_title} - {lang my_site_title}</p>
+  <p>{my_site_url} - {lang my_site_url}</p>
+  <p>&nbsp;</p>
+  <p>{user_site_title} - {lang user_site_title}</p>
+  <p>{user_site_url} - {lang user_site_url}</p>
+  <p>{user_categories_links} - {lang user_categories_links}</p>
+  <p>{user_site_info_url} - {lang user_site_info_url}</p>
+</div>

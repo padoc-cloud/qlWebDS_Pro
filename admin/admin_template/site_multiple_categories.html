@@ -1,0 +1,20 @@
+<h4>{top}</h4>
+<form action="index.php?mod=site&amp;inc=categories&amp;id_up={id_up}" method="POST">
+<table class="table1">
+ <tbody>
+ <tr>
+ <td style="vertical-align:top; text-align: center">
+  <div class="info2">
+    Add Sub-categories to:<br /><span style="color: #EE2222">{category}</span><br />
+    Each Sub-category MUST be on a New Line.
+  </div>
+ </td>
+ <td>
+  <div style="font-weight: bold;">Enter New Sub-categories Below:</div>
+  <textarea rows="22" style="width: 300px;" name="new_names"></textarea>
+ </td>
+ </tr>
+ <tr><td></td><td><input type="submit" name="submit_multiple" value="Save" class="button2"></td></tr>
+ </tbody>
+</table>
+</form>

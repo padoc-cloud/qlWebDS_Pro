@@ -1,0 +1,88 @@
+<div class="buttons">{message_7}</div>
+{notifications}
+<h4>Config Settings</h4>
+<form action="" method="POST">
+<input type="submit" name="admin_settings_submit" class="button" value="{lang submit}"><br>
+<p class="sub_title">Admin Notes &amp; Custom URLs</p>
+<table class="table1">
+<tbody>
+  <tr class="tr2"><td class="td1">{lang site_notes}</td><td>{site_notes}</td></tr>
+  <tr><td class="td1">{lang admin_url1}:</td><td>{admin_url1} <a href="{admin_url1_value}" target="_blank" title="Open URL #1"><img src="admin_template/images/go_42x41.jpg" border="0" width="21" height="20" align="bottom" alt="Go"></a></td></tr>
+  <tr class="tr2"><td class="td1">{lang admin_url2}:</td><td>{admin_url2} <a href="{admin_url2_value}" target="_blank" title="Open URL #2"><img src="admin_template/images/go_42x41.jpg" border="0" width="21" height="20" align="bottom" alt="Go"></a></td></tr>
+  <tr><td class="td1">{lang admin_url3}:</td><td>{admin_url3} <a href="{admin_url3_value}" target="_blank" title="Open URL #3"><img src="admin_template/images/go_42x41.jpg" border="0" width="21" height="20" align="bottom" alt="Go"></a></td></tr>
+  <tr class="tr2"><td class="td1">{lang admin_url4}:</td><td>{admin_url4} <a href="{admin_url4_value}" target="_blank" title="Open URL #4"><img src="admin_template/images/go_42x41.jpg" border="0" width="21" height="20" align="bottom" alt="Go"></a></td></tr>
+</tbody>
+</table>
+<p class="sub_title">Site Description (will be visible on the Home Page)</p>
+<table class="table1">
+<tbody>
+  <tr><td class="td1">{lang site_home_description}</td><td>{site_home_description}</td></tr>
+</tbody>
+</table>
+<p class="sub_title">Google Analytics Code</p>
+<table class="table1">
+<tbody>
+  <tr class="tr2"><td class="td1">{lang site_google_analytics}</td><td>{site_google_analytics}</td></tr>
+  <tr><td colspan="2"><font style="color: #CC0033; font-size: 14px; font-weight: bold;"> &raquo; </font>Enter Analytics Code from Your <a href="https://www.google.com/analytics/settings/" target="_blank" title="Go to Your Google Analytics Account"><img src="admin_template/images/google_45x40.jpg" border="0" width="22" height="20" align="bottom" alt="Google"> Google Analytics Account</a> <font color="red">&uarr;</font></td></tr>
+</tbody>
+</table>
+<p class="sub_title">{site settings}</p>
+<table class="table1">
+<tbody>
+  <tr class="tr2"><td>{lang site_title}</td><td>{site_title}</td><td class="td">&nbsp;</td></tr>
+  <tr><td class="td1">{lang site_name}</td><td>{site_name}</td><td>&nbsp;</td></tr>
+  <tr class="tr2">
+	<td>{lang site_company}</td><td>{site_company}</td>
+	<td class="td">
+	<a href="#" onMouseOver="setVisible('company', true, event); return false;" onMouseOut="setVisible('company', false, event); return false;">
+  	&nbsp;<img src="admin_template/images/info_16x16.gif" border="0" width="16" height="16" alt="Info">
+  	</a>
+  	<div class="info_div" style="display: none" id="info_company" onMouseOut="setVisible('company', false, event); return false;">Your company name will be displayed in the footer and in the copyright META tag as: <br>Your Company Name. <br>All Rights Reserved.
+  	</div>
+  	</td>
+  </tr>
+  <tr><td colspan="2"><font style="color: #CC0033; font-size: 14px; font-weight: bold;"> &raquo; </font>Do NOT add a period "." at the end of your company name <font color="red">&uarr;</font></td></tr>
+  <tr class="tr2">
+	<td>{lang site_year}</td><td>{site_year}</td>
+	<td class="td">
+	<a href="#" onMouseOver="setVisible('year', true, event); return false;" onMouseOut="setVisible('year', false, event); return false;">
+  	&nbsp;<img src="admin_template/images/info.gif" alt="Info">
+  	</a>
+  	<div class="info_div" style="display: none" id="info_year" onMouseOut="setVisible('year', false, event); return false;">Enter the actual year you established your site. It will be displayed in the footer and in the copyright META tag as: <br>&copy; Year Established-Current Year<br>and it will automatically update each year.
+  	</div>
+  	</td>
+  </tr>
+  <tr><td>{lang site_description}</td><td>{site_description}</td><td class="td">&nbsp;</td></tr>
+  <tr class="tr2"><td>{lang site_keywords}</td><td>{site_keywords}</td><td>&nbsp;</td></tr>
+  <tr><td>{lang site_charset}</td><td>{site_charset}</td><td class="td">&nbsp;</td></tr>
+</tbody>
+</table>
+<p class="sub_title">{page administration settings}</p>
+<table class="table1">
+<tbody>
+  <tr class="tr2"><td>{lang site_address}</td><td>{site_address}</td></tr>
+  <tr><td colspan="2"><font style="color: #CC0033; font-size: 14px; font-weight: bold;"> &raquo; </font>Your site will not work unless you enter your: http://www.SiteAddress.com/ above <font color="red">&uarr;</font></td></tr>
+  <tr class="tr2"><td>{lang admin_email}</td><td>{admin_email}</td></tr>
+  <tr><td>{lang language}</td><td>{language}</td></tr>
+  <tr class="tr2"><td colspan="2"><font style="color: #CC0033; font-size: 14px; font-weight: bold;"> &raquo; </font>en-English, de-German, es-Spanish, fr-French, pl-Polish, pt-Portuguese, ru-Russian <font color="red">&uarr;</font></td></tr>
+  <tr><td>{lang debug_mode}</td><td>{debug_mode}</td></tr>
+  <tr class="tr2"><td>{lang mod_rewrite}</td><td>{mod_rewrite} Use ONLY with Linux Hosting</td></tr>
+  <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{lang page_extension}</td><td>{page_extension}</td></tr>
+  <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{lang word_separator}</td><td>{word_separator}</td></tr>
+  <tr class="tr2"><td>{lang use_cache}</td><td>{use_cache}</td></tr>
+  <tr><td>{lang use_captcha}</td><td>{use_captcha}</td></tr>
+  <tr class="tr2"><td>{lang categories_on_left}</td><td>{categories_on_left}</td></tr> 
+  <tr><td>{lang dont_send_emails}</td><td>{dont_send_emails}</td></tr>
+  <tr class="tr2"><td>{lang notify_admin}</td><td>{notify_admin}</td></tr>
+  <tr><td>{lang subs_on_main_page}</td><td>{subs_on_main_page}</td></tr>
+  <tr class="tr2"><td>{lang view_sites_per_page}</td><td>{view_sites_per_page}</td></tr>
+  <tr><td>{lang random_site}</td><td>{random_site}</td></tr>
+  <tr class="tr2"><td>{lang statistics_on_main_page}</td><td>{statistics_on_main_page}</td></tr>
+  <tr><td>{lang users_online}</td><td>{users_online}</td></tr>
+  <tr class="tr2"><td>{lang phone_search}</td><td>{phone_search}</td></tr>
+  <tr><td>{lang site_status}</td><td>{site_status}</td></tr>
+  <tr class="tr2"><td>{lang site_under_maintenance}</td><td>{site_under_maintenance}</td></tr>
+</tbody>
+</table>
+<input type="submit" name="admin_settings_submit" class="button" value="{lang submit}">
+</form>

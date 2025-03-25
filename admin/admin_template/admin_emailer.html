@@ -1,0 +1,51 @@
+<script language="JavaScript">
+function postForm()
+{
+  document.forms[0].submit();
+}
+</script>
+{notifications}
+<h4>E-mailer</h4>
+	<table class="table1">
+		<tbody>
+			<tr><th class="sub_title">Last E-mail Action</th></tr>
+			<tr><td>{last_action}</td></tr>
+			<tr><td>&nbsp;</td></tr>
+			<tr><th class="sub_title">Number of Listings in the Directory</th></tr>
+    	</tbody>
+	</table>
+	<table class="table1">
+		<tbody>
+			<tr><td style="width: 80px;">Total:</td><td>{listings_total}</td></tr>
+			<tr><td>Active:</td><td> {listings_active}</td></tr>
+			<tr><td>Inactive:</td><td>{listings_inactive}</td></tr>
+			<tr><td>&nbsp;</td></tr>
+			<tr><th class="sub_title" colspan="2">E-mail Form</th></tr>
+    	</tbody>
+	</table>
+<form action="" name="my_form" method="POST" onsubmit="return ConfirmForm()">
+	<table class="table1">
+		<tbody>
+			<tr><th>From:</th></tr>
+			<tr><td><input type="text" name="from" value="{from}" style="width: 520px;"></td></tr>
+			<tr><th>Subject:</th></tr>
+     		<tr><td><input type="text" name="subject" value="{subject}" style="width: 520px;"></td></tr> 
+			<tr><th>To:</th></tr>
+			<tr><td><input type="radio" name="to" value="list_all" {checked_list_all}/> Send E-mail to Active and Inactive Listings</td></tr>
+			<tr><td><input type="radio" name="to" value="list_active" {checked_list_active}/> Send E-mail to Active Listings Only</td></tr>
+			<tr><td><input type="radio" name="to" value="list_inactive" {checked_list_inactive}/> Send E-mail to Inactive Listings Only</td></tr>
+			<tr><td>
+				<p><input type="radio" name="to" value="list_manual" {checked_list_manual}/> Send E-mail to the Following Addresses Only (separated by comma or semicolon):</p>
+				<p><textarea rows="5" name="address_list" style="width: 520px;">{address_list}</textarea></p>
+			</td></tr>
+			<tr><td>&nbsp;</td></tr>
+			<tr><th class="sub_title">Number of E-mails to be Sent:</th></tr><tr><td><font style="color: #CC0033; font-size: 14px; font-weight: bold;"> &raquo; </font>Check with your Hosting Company. Some hostings will limit e-mails to 200 per 24 hours</td></tr>
+			<tr><td><input type="radio" name="email_number" value="num_all"  {checked_num_all}/> All</td></tr>
+			<tr><td><input type="radio" name="email_number" value="num_part" {checked_num_part}/> Specify Start ID: <input type="text" name="start_id" value="{start_id}" size="4"> and End ID: <input type="text" name="end_id" value="{end_id}" size="4"></td></tr>
+			<tr><td>&nbsp;</td></tr>
+			<tr><th class="sub_title">E-mail Body:</th></tr>
+			<tr><td><textarea rows="14" name="email_body" style="width: 520px;">{email_body}</textarea></td></tr>
+     		<tr><td><input type="submit" name="submit" value="Send" class="button"></td></tr>  
+    	</tbody>
+	</table>
+</form>

@@ -1,0 +1,74 @@
+##################################################################################################################################################
+##							     Linux/Apache Server Settings							##
+##					      		        qlWeb Internet Scripts							##
+##																	##
+##				Copyright (c) Contact USA Inc. (http://www.qlWebScripts.com) All Rights Reserved.				##
+##################################################################################################################################################
+##			You may need to comment some lines on or off (#) to get proper settings for your server.				##		
+##			      PLEASE NOTE: the following settings will only work on Linux/Apache servers.					##
+##################################################################################################################################################
+
+# New to htaccess file?
+# (lines WITH the # in the beginning are NOT functional - OFF)
+# (lines WITHOUT the # in the beginning ARE functional - ON)
+# You may manipulate the lines below accordingly
+
+# For future reference you might want to enter your domain name below:
+# YourDomain.com
+
+# Enter your domain to redirect http://YourDomain.com to http://www.YourDomain.com (recommended)
+# Note - this htaccess method of redirection works ONLY on Linux servers having the Apache ModRewrite module enabled
+# RENAME YourDomain.com with your actual domain name and remove the # from the beginning of the following 2 lines
+# RewriteCond %{HTTP_HOST} ^YourDomain.com [NC]
+# RewriteRule ^(.*)$ http://www.YourDomain.com/$1 [L,R=301]
+
+# Follow symbolic links in this directory (if you have problems with your hosting account's mod rewrite, try to comment off (#) the next line
+Options +FollowSymLinks
+
+RewriteEngine On
+# If script is installed in a subfolder, edit the line below the following example to point to the subfolder
+# Example: RewriteBase /YourSubfolder (RENAME YourSubfolder with your actual subfolder name)
+RewriteBase /
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteRule ^(.*)more-([^-]+).htm(.*)$ index.php?site=$2
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteRule ^(.*).htm(.*)$ index.php?page=$1
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteRule ^(.*)$ index.php?category_path=$1
+
+# Customized error messages: (must do if installed in a subfolder)
+# If installed in a subfolder, edit the line below the example
+# Example: ErrorDocument 404 YourSubfolder/index.php?404.php (RENAME YourSubfolder with your actual subfolder name)
+  ErrorDocument 404 /index.php?page=404
+
+# Protect directories
+<Files ~ "^(languages|cache)$">
+  Order deny,allow
+  Deny from all
+</Files>
+
+# Protect files
+<Files ~ "^(.*)\.(inc|inc\.php|tpl|sql)$">
+  Order deny,allow
+  Deny from all
+</Files>
+
+# Disable directory browsing
+Options -Indexes
+
+# Set the default handler
+DirectoryIndex index.php
+
+# Override PHP settings that cannot be changed at runtime
+# If your server supports PHP settings via htaccess you can comment following two lines off
+# php_value register_globals   0
+# php_value session.auto_start 0

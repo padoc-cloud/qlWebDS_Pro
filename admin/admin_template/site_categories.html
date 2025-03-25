@@ -1,0 +1,84 @@
+{notifications}
+<h4>Categories &raquo; Sub-Categories</h4>
+<h5>{top}</h5>
+{if show_del_categ==1}
+<form action="" name="del_cat_form" method="POST" onsubmit="return ConfirmForm()">
+	<input type="hidden" name="del_cat_id" value="{categ_id}">
+	<table class="table1">
+		<tbody>
+			<tr><th>You are about to delete category: <b>{categ_name}</b>, which contains listings. Please select your action:</th></tr>
+			<tr><td><input type="radio" name="del_action" value="delete" checked> Delete Listings</td></tr>
+			<tr><td><input type="radio" name="del_action" value="move"> Move Listings to:&nbsp; 
+				<select name="move_cat">
+					{row move_category}
+					<option value="{move_cat_id}[1]">{move_cat_name}[1]</option>
+					{/row move_category}
+				</select>
+				&nbsp;category.</td></tr>
+     		<tr><td><input type="submit" name="submit_del" value="Submit" class="button"></td></tr>
+     	</tbody>
+	</table>
+</form>
+{end show_del_categ}
+{if show_add==1}
+<form action="" name="links_form" method="POST">
+<table class="table1">
+ <tbody>
+ <tr><th class="sub_title" >ID</th><th class="sub_title">Name</th><th class="sub_title" colspan="4">Action</th></tr>
+ {row category}
+ <tr>
+  <td>{id}[1]</td>
+  <td><input type="text" name="name[{id}[1]]" value="{name}[1]" style="width: 250px;"></td>
+  <td><input type="submit" name="update[{id}[1]]" class="button2" value="Change/Save"></td>
+  <td><a href="index.php?mod=site&amp;inc=categories&amp;del_id={id}[1]&amp;id_up={id_up}[1]" onClick="return confirmDelete();">[delete]</a>&nbsp;&nbsp;</td>
+  <td>{if show_links==1}<a href="index.php?mod=site&amp;inc=categories&amp;id_up={id}[1]">[add/modify&nbsp;sub]</a>{end show_links}&nbsp;&nbsp;</td>
+  <td>{if show_links==1}<a href="index.php?mod=site&amp;inc=multiple_categories&amp;id_up={id}[1]">[add&nbsp;multiple&nbsp;subs]</a>{end show_links}</td>
+ </tr> 
+ <tr>
+ <td colspan="6">
+  <a href="#" onclick="populate('description{id}[1]')" id="a_description{id}[1]">+ Description</a>
+  <div>
+	<textarea name="description[{id}[1]]" cols="74" rows="3" id="description{id}[1]" style="display: none">{description}[1]</textarea>
+  </div>
+ </td>
+ </tr>
+ <tr>
+ <td colspan="6">
+  <a href="#" onclick="populate('keywords{id}[1]')" id="a_keywords{id}[1]">+ Keywords</a>
+  <div>
+	<textarea name="keywords[{id}[1]]" cols="74" rows="1" id="keywords{id}[1]" style="display: none">{keywords}[1]</textarea>
+  </div>
+ </td>
+ </tr>
+ {/row category}
+ <tr>
+ 	<td style="font-weight: bold; color: #005300;" colspan="6">
+ 	Enter New Category Name Below:
+ 	</td>
+ </tr>
+ <tr>
+  <td colspan="6">
+	  <input type="text" name="new_name" value="" style="width: 250px;">
+	  <input type="submit" name="submit" value="Add New" class="button2">
+  </td>
+ </tr>
+ <tr>
+ <td colspan="6">
+  Description:
+  <div>
+	<textarea name="new_description" cols="74" rows="3"></textarea>
+  </div>
+ </td>
+ </tr>
+ <tr>
+ <td colspan="6">
+  Keywords:
+  <div>
+	<textarea name="new_keywords" cols="74" rows="1"></textarea>
+  </div>
+ </td>
+ </tr>
+ </tbody>
+</table>    
+</form>
+{end show_add}

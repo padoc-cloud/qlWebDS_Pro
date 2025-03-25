@@ -1,0 +1,33 @@
+<h4>Search Approved Listings</h4>
+<div class="spacer">&nbsp;</div>
+<div>
+<form action="" method="get">
+<p><input name="words" value="" maxlength="70" style="width: 250px;" type="text"> &nbsp; <input name="submit" value="Search" class="button3" type="submit"></p>
+<input name="mod" value="links" type="hidden">
+<input name="inc" value="search_approve" type="hidden">
+</form>
+</div>
+<table class="table2">
+	<tbody>
+		<tr>
+			<th class="sub_title">Search Results for Pending Listings: &nbsp; {words}</th>
+		</tr>
+	</tbody>
+</table>
+<hr>
+<div class="top"><b>Found Listings:</b></div>
+<hr>
+<table class="sites">
+{row sites}
+<tr>
+ <td align="center" valign="middle"><br><a href="{site_url}[1]" target="_blank" title="Go to {site_url}[1]"><img src="{thumbnail_code_url}{site_url}[1]" border="1" width="70" height="60" alt="Thumbnail for {site_url}[1]"></a></td>
+ <td class="{featured/normal}[1]">
+  <div style="border-bottom: 1px solid #CCC;"> 
+   <p>&raquo; <a href="{address}[1]" class="link1" target="_blank">{title}[1]</a> &laquo;</p>
+   <p>{description}[1]</p>
+   <p style="color: rgb(170, 34, 34);"> <a href="{edit_address}[1]" class="infolink">[edit]</a> &nbsp;|&nbsp; <b>www:</b> <a href="{address}[1]" class="link1" target="_blank">{address}[1]</a></p>
+  </div> 
+ </td>
+</tr>
+{/row sites}
+</table>

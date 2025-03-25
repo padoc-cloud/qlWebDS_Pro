@@ -1,0 +1,34 @@
+<script type="text/JavaScript" language="JavaScript">
+function postForm()
+{
+  document.forms[0].submit();
+}
+</script>
+{notifications}
+<h4>User Profile Edit</h4>
+<form action="" name="my_form" method="POST">
+<input type="hidden" name="p_user_id" value="{p_user_id}">
+	<table class="table1">
+		<tbody>
+			<tr><th colspan="2">User:</th></tr>
+			<tr><td style="width: 120px;">User Name:</td><td><b>{user}</b></td></tr>
+     		<tr><td>Real Name:</td><td><input type="text" name="real_name" value="{real_name}"></td></tr> 
+     		<tr><td>E-mail:</td><td><input type="text" name="email" value="{email}"></td></tr> 
+     		<tr><td>Company:</td><td><input type="text" name="company" value="{company}"></td></tr> 
+     		<tr><td>Address:</td><td><input type="text" name="address" value="{address}"></td></tr> 
+     		<tr><td>City:</td><td><input type="text" name="city" value="{city}"></td></tr> 
+     		<tr><td>State:</td><td><input type="text" name="state" value="{state}"></td></tr> 
+     		<tr><td>Zip:</td><td><input type="text" name="zip" value="{zip}"></td></tr> 
+     		<tr><td>Country:</td><td>{country}</td></tr> 
+     		<tr><td>Tel:</td><td><input type="text" name="tel" value="{tel}"></td></tr> 
+     		<tr><td>Fax:</td><td><input type="text" name="fax" value="{fax}"></td></tr>
+     		<tr><td>Status:</td><td><select name="status"><option value="1" {stat_act_selected}>Active<option value="0" {stat_inact_selected}>Inactive</select></td></tr>
+     		<tr><td style="text-align: left;">
+	<a href="JavaScript:history.back();" title="{lang back}" class="link2">
+		&laquo; <u>{lang back}</u>
+	</a>
+</td>
+<td><input type="submit" name="submit" value="Update" class="button"></td></tr>  
+    	</tbody>
+	</table>
+</form>

@@ -1,0 +1,293 @@
+<script type="text/javascript" language="JavaScript">
+function links53(three, five) {
+  var id = "links3";
+  if (three) {
+   hideshow(id, "");
+  } else {
+   hideshow(id, "none");
+  }
+  id = "links5";
+  if (five) {
+   hideshow(id, "");
+  } else {
+   hideshow(id, "none");
+  }
+}
+function hideshow(id, hs) {
+  	 if (document.getElementById) { // DOM3 = IE5, NS6
+    		document.getElementById(id).style.display = hs;
+  	 }
+  	 else {
+  	 	 if (document.layers) { // Netscape 4
+  			 document.id.display = hs;
+  		 }
+  		 else { // IE 4
+  			 document.payform.elements[id].style.display= hs;
+  		 }
+  	 } 
+}
+</script>
+<h4>{edit}</h4>
+    {error}
+{notifications}
+<table class="table5">
+ <tr>
+	<th class="sub_title" colspan="2">Change Category</th></tr>
+ {row change_categ}
+<form action="" method="post"> 
+ <tr>
+	<td colspan="2">{category}[1]</td>
+ </tr>
+ <tr>
+	<td>{new_category}[1]</td>
+	<td align="center"><input name="change[{id}[1]]" value="Change Category" type="submit" class="button2"></td>
+ </tr>
+</form>
+ {/row change_categ}
+</table>
+<table>
+<tbody>
+ <tr>
+    <td>
+        <form action="" method="post" name="payform" id="a">
+        {if paid_link==1} 
+        <table class="table5">
+         <tbody>
+           <tr>
+             <th class="sub_title">{lang payment} Info</th>
+           </tr>
+          <tr {style type[1]}>
+            <td class="lCForm"><b>{lang paid}:</b> {paid}&nbsp;&nbsp; | &nbsp;&nbsp;<b>{lang amount}:</b> {amount}-{currency}&nbsp;&nbsp; | &nbsp;&nbsp;<b>{lang subscription}:</b> {subscription}</td>
+          </tr>
+         </tbody>
+        </table>
+        {end paid_link}
+        <table class="table5">
+         <tbody>
+           <tr>
+             <td colspan="2" style="text-align: center;"> <b>{accept}:</b> &raquo; <input type="checkbox" name="status" {active}> &nbsp;&nbsp;&nbsp;&nbsp;<input name="submit" value="{save}" type="submit" class="button">&nbsp;&nbsp;<input name="cancel" value="{cancel}" type="button" class="button" onClick="history.back()"></td>
+           </tr>
+           <tr>
+             <th class="sub_title">Listing Type</th>
+           </tr>
+          <tr class="tr2" {style type[1]}>
+            <td class="lCForm"><input id="type1" onClick="links53(false,false);" name="link_type" value="1" type="radio" {ch1}> <label for="type1">{link type1}</label></td>
+          </tr>
+          <tr {style type[2]}>
+            <td class="lCForm"><input id="type2" onClick="links53(false,false);" name="link_type" value="2" type="radio" {ch2}> <label for="type2">{link type2}</label></td>
+          </tr>
+          <tr class="tr2" {style type[3]}>
+            <td class="lCForm"><input id="type3" onClick="links53(false,false);" name="link_type" value="3" type="radio" {ch3}> <label for="type3">{link type3}</label></td>
+          </tr>
+          <tr {style type[4]}>
+            <td class="lCForm"><input id="type4" onClick="links53(false,false);" name="link_type" value="4" type="radio" {ch4}> <label for="type4">{link type4}</label></td>
+          </tr>
+          <tr class="tr2" {style type[5]}>
+            <td class="lCForm"><input id="type5" onClick="links53(false,false);" name="link_type" value="5" type="radio" {ch5}> <label for="type5">{link type5}</label></td>
+          </tr>
+          <tr {style type[6]}>
+            <td class="lCForm"><input id="type6" onClick="links53(true,false);" name="link_type" value="6" type="radio" {ch6}> <label for="type6">{link type6}</label></td>
+          </tr> 
+          <tr class="tr2" {style type[7]}>
+            <td class="lCForm"><input id="type7" onClick="links53(true,true);" name="link_type" value="7" type="radio" {ch7}> <label for="type7">{link type7}</label></td>
+          </tr>
+          <tr {style type[8]}>
+            <td class="lCForm"><input id="type8" onClick="links53(false,false);" name="link_type" value="8" type="radio" {ch8}> <label for="type8">{link type8}</label></td>
+          </tr>
+          <tr class="tr2" {style type[9]}>
+            <td class="lCForm"><input id="type9" onClick="links53(false,false);" name="link_type" value="9" type="radio" {ch9}> <label for="type9">{link type9}</label></td>
+          </tr>
+         </tbody>
+         </table>
+        <table class="table5">
+         <tbody>
+           <tr>
+             <th class="sub_title" colspan="2">Listing's Info - Change/Edit</th>
+           </tr>
+           <tr>
+             <td class="lCForm"><b>Main {title}:</b><font color="red">*</font></td>
+             <td class="rCForm"><input name="title" value="{title value}" maxlength="175" size="58" type="text"></td>
+           </tr>
+           <tr class="tr2">
+             <td class="lCForm"> &nbsp; {url}:</td>
+             <td class="rCForm"><input name="url" value="{url value}" maxlength="175" size="58" type="text"></td>
+           </tr>
+		   <tr>
+             <td> &nbsp; Link Check:</td><td> &nbsp; Main Link: <a href="{url value}" class="link1" target="_blank">{url value}</a></td>
+           </tr>
+          </tbody>
+          <tbody id="links3" name="links3" style="display: {disp3};">
+           <tr>
+             <td class="lCForm"><b>{title} 1:</b></td>
+             <td class="rCForm"><input name="title1" value="{title1 value}" maxlength="40" size="58" type="text"></td>
+           </tr>
+           <tr class="tr2">
+             <td class="lCForm"> &nbsp; {deep_link_1}:</td>
+             <td class="rCForm"><input name="url1" value="{url1 value}" maxlength="175" size="58" type="text"></td>
+           </tr>
+		   <tr>
+             <td> &nbsp; Link Check 1:</td><td> &nbsp; <a href="{url1 value}" class="link1" target="_blank">{url1 value}</a></td>
+           </tr>
+           <tr>
+             <td class="lCForm"><b>{title} 2:</b></td>
+             <td class="rCForm"><input name="title2" value="{title2 value}" maxlength="40" size="58" type="text"></td>
+           </tr>
+           <tr class="tr2">
+             <td class="lCForm"> &nbsp; {deep_link_2}:</td>
+             <td class="rCForm"><input name="url2" value="{url2 value}" maxlength="175" size="58" type="text"></td>
+           </tr>
+		   <tr>
+             <td> &nbsp; Link Check 2:</td><td> &nbsp; <a href="{url2 value}" class="link1" target="_blank">{url2 value}</a></td>
+           </tr>
+           <tr>
+             <td class="lCForm"><b>{title} 3:</b></td>
+             <td class="rCForm"><input name="title3" value="{title3 value}" maxlength="40" size="58" type="text"></td>
+           </tr>
+           <tr class="tr2">
+             <td class="lCForm"> &nbsp; {deep_link_3}:</td>
+             <td class="rCForm"><input name="url3" value="{url3 value}" maxlength="175" size="58" type="text"></td>
+           </tr>
+		   <tr>
+             <td> &nbsp; Link Check 3:</td><td> &nbsp; <a href="{url3 value}" class="link1" target="_blank">{url3 value}</a></td>
+           </tr>
+          </tbody>
+          <tbody id="links5" name="links5" style="display: {disp5};"> 
+           <tr>
+             <td class="lCForm"><b>{title} 4:</b></td>
+             <td class="rCForm"><input name="title4" value="{title4 value}" maxlength="40" size="58" type="text"></td>
+           </tr>
+           <tr class="tr2">
+             <td class="lCForm"> &nbsp; {deep_link_4}:</td>
+             <td class="rCForm"><input name="url4" value="{url4 value}" maxlength="175" size="58" type="text"></td>
+           </tr>
+		   <tr>
+             <td> &nbsp; Link Check 4:</td><td> &nbsp; <a href="{url4 value}" class="link1" target="_blank">{url4 value}</a></td>
+           </tr>
+           <tr>
+             <td class="lCForm"><b>{title} 5:</b></td>
+             <td class="rCForm"><input name="title5" value="{title5 value}" maxlength="40" size="58" type="text"></td>
+           </tr>
+           <tr class="tr2">
+             <td class="lCForm"> &nbsp; {deep_link_5}:</td>
+             <td class="rCForm"><input name="url5" value="{url5 value}" maxlength="175" size="58" type="text"></td>
+           </tr>
+		   <tr>
+             <td> &nbsp; Link Check 5:</td><td> &nbsp; <a href="{url5 value}" class="link1" target="_blank">{url5 value}</a></td>
+           </tr>
+          </tbody>
+          <tbody>
+           <tr class="tr2">
+             <td class="lCForm">{description_short}:</td>
+             <td class="rCForm"><textarea name="description_short" cols="68" rows="4" id="description_short">{description_short value}</textarea></td>
+           </tr>
+           <tr>
+             <td class="lCForm">{description}:<font color="red">*</font></td>
+             <td class="rCForm"><textarea name="description" cols="68" rows="12" id="description">{description value}</textarea></td>
+           </tr>
+           <tr class="tr2">
+             <td class="lCForm">{original_description}:</td>
+             <td class="rCForm">{original_description value}</td>
+           </tr>
+           <tr>
+             <td class="lCForm">{keywords}:<font color="red">*</font></td>
+             <td class="rCForm"><input name="keywords" value="{keywords value}" maxlength="85" size="58" type="text"></td>
+           </tr>
+           <tr class="tr2">
+             <td class="lCForm">{email}:<font color="red">*</font></td>
+             <td class="rCForm"><input name="email" value="{email value}" maxlength="255" size="58" type="text"></td>
+           </tr>
+           <tr>
+             <td class="lCForm">{lang comp_name}:<font color="red">*</font></td>
+             <td class="rCForm"><input name="company" value="{company value}" maxlength="200" size="58" type="text"></td>
+           </tr>
+           <tr class="tr2">
+             <td class="lCForm">{facebook_url}:</td>
+             <td class="rCForm"><input name="facebook_url" value="{facebook_url value}" maxlength="175" size="58" type="text"></td>
+           </tr>
+           <tr>
+             <td class="lCForm">{twitter_url}:</td>
+             <td class="rCForm"><input name="twitter_url" value="{twitter_url value}" maxlength="175" size="58" type="text"></td>
+           </tr>
+           <tr class="tr2">
+             <td class="lCForm">{youtube_url}:</td>
+             <td class="rCForm"><input name="youtube_url" value="{youtube_url value}" maxlength="175" size="58" type="text"></td>
+           </tr>
+           <tr>
+             <td class="lCForm">{embedded_video_title}:</td>
+             <td class="rCForm"><input name="embedded_video_title" value="{embedded_video_title value}" maxlength="40" size="58" type="text"></td>
+           </tr>
+           <tr class="tr2">
+             <td class="lCForm">{embedded_video_code}:</td>
+             <td class="rCForm"><textarea name="embedded_video_code" cols="68" rows="12" id="embedded_video_code">{embedded_video_code value}</textarea></td>
+           </tr>
+           <tr>
+             <td class="lCForm">{lang product}:</td>
+             <td class="rCForm"><input name="product" value="{product value}" maxlength="200" size="58" type="text"></td>
+           </tr>  
+           <tr class="tr2">
+             <td class="lCForm">{lang address}:</td>
+             <td class="rCForm"><input name="address" value="{address value}" maxlength="200" size="58" type="text"></td>
+           </tr>  
+           <tr>
+             <td class="lCForm">{lang city}:</td>
+             <td class="rCForm"><input name="city" value="{city value}" maxlength="200" size="58" type="text"></td>
+           </tr>  
+           <tr class="tr2">
+             <td class="lCForm">{lang state}:</td>
+             <td class="rCForm"><input name="state" value="{state value}" maxlength="200" size="58" type="text"></td>
+           </tr>  
+           <tr>
+             <td class="lCForm">{lang zip}:</td>
+             <td class="rCForm"><input name="zip" value="{zip value}" maxlength="200" size="58" type="text"></td>
+           </tr>
+           <tr class="tr2">
+             <td class="lCForm">{lang country}:</td>
+			 <td class="rCForm">{country}</td>
+     	   </tr>
+           <tr>
+             <td class="lCForm">{lang tel}:</td>
+             <td class="rCForm"><input name="tel" value="{tel value}" maxlength="200" size="58" type="text"></td>
+           </tr>  
+           <tr class="tr2">
+             <td class="lCForm">{lang fax}:</td>
+             <td class="rCForm"><input name="fax" value="{fax value}" maxlength="200" size="58" type="text"></td>
+           </tr>  
+           <tr>
+             <td class="lCForm">{reciprocal}:</td>
+			 <td class="rCForm"><input name="reciprocal" value="{reciprocal value}" maxlength="175" size="58" type="text"></td>
+           </tr>
+           <tr class="tr2">
+             <td> &nbsp; Reciprocal Link Check:</td>
+			 <td>&nbsp;<a href="{reciprocal value}" class="link1" target="_blank">{reciprocal value}</a></td>
+           </tr>
+           <tr>
+             <td class="lCForm">{note}:</td>
+             <td class="rCForm" style="text-decoration: none; color: #CD5C5C;"><textarea name="note" cols="68" rows="3" id="note">{note value}</textarea></td>
+           </tr>
+           <tr class="tr2">
+				<td class="lCForm">
+					<script src="../java_scripts/CalendarControl.js" type="text/javascript" language="JavaScript">
+					</script>
+					{lang exp_date}:
+				</td>
+             	<td class="rCForm">
+				<form>
+				<img src="admin_template/images/calendar_22x17.gif" border="0" width="22" height="17" alt="Calendar"> Set Listing Expiration Date if Needed:
+				<input name="exp_date" value="{exp_date value}" onfocus="showCalendarControl(this);" maxlength="58" size="58" type="text">
+				<br>(MM-DD-YYYY)
+				</form>
+			</td>
+           </tr>
+           <tr>
+             <th class="sub_title"><b>{accept}:</b></th>
+             <td class="rCForm" style="text-align: center;"> {accept}: &raquo; <input type="checkbox" name="status" {active}> &nbsp;&nbsp;&nbsp; <input name="submit" value="{save}" type="submit" class="button">&nbsp;&nbsp;<input name="cancel" value="{cancel}" type="button" class="button" onClick="history.back()"></td>
+           </tr>
+         </tbody>
+        </table>
+	  </form>
+    </td>
+ </tr>
+</tbody>
+</table>
+    {error}
+{notifications}

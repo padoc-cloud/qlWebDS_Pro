@@ -1,0 +1,23 @@
+<h4>Templates</h4>
+For help in creating simple CSS Templates go <a href="http://www.qlweb.com/modules.php?name=Manuals#templates" target="_blank" title="qlWebDS CSS Guide"><u><b>HERE</b></u></a><br /><br />
+<font color="#CC0000">***IMPORTANT***</font> Please MAKE SURE to Empty Cache (in Admin/Main) after changing<br />
+your Template, making any changes in Admin, or changing any code in .php or .tpl.php files.
+<br /><strong style="text-align: center;">Keep in mind when designing new templates:</strong>
+<br />
+<b>The following 6 files:</b> index.tpl.php, main_menu.tpl.php, subcategory.tpl.php, style.css, readme.txt and screenshot.png are <b>unique</b> in <b>each</b> template.
+<br />
+<b>All remaining ".tpl.php" files</b> are the same among all templates.
+<br /><br />
+{row templates}
+<div class="tpl_preview">
+{preview}[1]
+</div>
+<div class="tpl_info">
+ <h4>{name}[1] Template</h4>
+ <p style="border: 1px solid #BBB; color: #CC0033; text-decoration: underline; border: 1px solid #4e7194; font-weight: bold; background-color: #96afd5;">{activate}[1]</p>
+ <p><strong>Author:</strong> <u>{author}[1]</u> </p>
+ <p><strong>Description:</strong> {description}[1]</p>
+ <p><strong>Version:</strong> {version}[1]</p>
+</div>
+<div style="float: none; clear: both; border-top: 1px solid black;">&nbsp;</div>
+{/row templates}

@@ -1,0 +1,25 @@
+<h4>Search Categories</h4>
+<div class="spacer">&nbsp;</div>
+<div>
+<form action="" method="get">
+<p><input name="words" value="" maxlength="70" style="width: 250px;" type="text"> &nbsp; <input name="submit" value="Search" class="button3" type="submit"></p>
+<input name="mod" value="site" type="hidden">
+<input name="inc" value="search_category" type="hidden">
+</form>
+</div>
+<table class="table2">
+	<tbody>
+		<tr>
+			<th class="sub_title">Search Results for Categories: &nbsp; {words}</th>
+		</tr>
+	</tbody>
+</table>
+<hr>
+<div class="top"><b>Found Categories:</b></div>
+<hr>
+<div class="search_categories">
+	{row category}
+			<i>{category_name}[1]</i> in {parent_cat_path}[1]<br> 
+	{/row category}
+</div>
+<hr>
