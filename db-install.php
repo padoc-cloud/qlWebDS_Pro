@@ -115,7 +115,7 @@ $data_query_str = implode("***", $a_data_query);
 
 $a_post = [
     'submit'               => 'yes',
-    'url'                  => "install.php",
+    'url'                  => "http://localhost/qlWebScripts",
     'pass'                 => "",
     'user'                 => "",
     'email'                => "",
@@ -281,10 +281,6 @@ $a_post = [
     'query_params_data'    => $data_query_str,
 ];
 
-echo "<pre>";
-print_r($_SERVER);
-// exit; // Removed to allow the rest of the script to execute
-
 /*
 * call install on client side
 */
@@ -302,11 +298,10 @@ $directory = dirname($scriptPath);
 
 // Construct the base URL
 $baseUrl = $protocol . "://" . $host;
-echo $baseUrl;
 // <------  end of the new code here ------------>
 
 // create a new cURL resource pointing to client domain
-$ch = curl_init($baseUrl."/ql-server/install.php");
+$ch = curl_init($baseUrl."/install.php");
 
 curl_setopt($ch, CURLOPT_HEADER, false);
 
@@ -331,5 +326,6 @@ if (curl_errno($ch)) {
 } else {
     // close cURL resource, and free up system resources
     curl_close($ch);
+    echo $install_result . "<br>";
     echo('The Database was created successfully!');
 }
