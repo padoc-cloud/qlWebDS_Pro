@@ -15,10 +15,6 @@ include('config.php');
 if (!isset($_POST['submit'])) {
 	header('Location:http://www.Contact-USA.com/qlWebScripts/clients/registration_pro.php?s='.SCRIPT.'&v='.VERSION.'&vn='.VERSION_NUMBER.'&sv='.SUB_VERSION.'&lt='.LICENSE_TYPE.'&bt='.BRAND_TYPE.'&y='.YEARS);
 
-?>
-
-<?php
-
 } else {
 
     $id          = 0;
