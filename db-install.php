@@ -1,6 +1,6 @@
 <?php
 
-$a_data_query = array(
+                $a_data_query = array(
                     'INSERT INTO `qlWebDS_params` VALUES (\'ads\', \'a:13:{s:9:"top_block";s:0:"";s:11:"after_first";s:0:"";s:11:"right_block";s:0:"";s:9:"site_info";s:0:"";s:9:"site_main";s:0:"";s:10:"left_block";s:1193:"<table align="center" cellpadding="2" cellspacing="2" border="0">
         <tr>
             <td align="left" valign="middle">
@@ -109,7 +109,7 @@ $a_data_query = array(
     // params: template
                     'INSERT INTO `qlWebDS_params` VALUES (\'template\', \'a:1:{s:12:"dir_template";s:7:"default";}\');'
     
-                    );
+                );
                                 
                 $data_query_str = implode("***",$a_data_query);
                 
@@ -279,7 +279,7 @@ $a_data_query = array(
                               PRIMARY KEY  (`id`)
                             ) ENGINE=InnoDB CHARACTER SET utf8 AUTO_INCREMENT=1 ;",
                 'query_params_data'=>$data_query_str
-                    );
+                );
                     
         /*
         * call install on client side

@@ -12,11 +12,7 @@
 // CAUTION!!! Do NOT change below this line!!!
 include('config.php');
 
-if (!isset($_POST['submit'])) {
-    // Redirect to the registration page
-    // Note: Please set up with your correct registration URL!
-	header('Location:http://www.Contact-USA.com/qlWebScripts/clients/registration_pro.php?s='.SCRIPT.'&v='.VERSION.'&vn='.VERSION_NUMBER.'&sv='.SUB_VERSION.'&lt='.LICENSE_TYPE.'&bt='.BRAND_TYPE.'&y='.YEARS);
-} else {
+if ($_POST['submit'] == "yes") {
 
     $id          = 0;
     $info        = '';
@@ -356,6 +352,10 @@ if (!isset($_POST['submit'])) {
         );
     }
 
-}
+} else {
 
+    // Redirect to the registration page
+    // Note: Please set up with your correct registration URL!
+	header('Location:http://www.Contact-USA.com/qlWebScripts/clients/registration_pro.php?s='.SCRIPT.'&v='.VERSION.'&vn='.VERSION_NUMBER.'&sv='.SUB_VERSION.'&lt='.LICENSE_TYPE.'&bt='.BRAND_TYPE.'&y='.YEARS);
+}
 ?>
