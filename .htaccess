@@ -1,0 +1,53 @@
+RewriteEngine On
+RewriteBase /qlWebScripts/
+
+# Allow direct access to install.php (important for setup)
+RewriteRule ^install\.php$ - [L]
+RewriteRule ^$ index.php [L]
+
+# Prevent rewriting for real files/dirs/links
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteRule ^more-([^-]+)\.htm$ index.php?site=$1 [L,QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteRule ^(.*)\.htm$ index.php?page=$1 [L,QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteRule ^(.*)$ index.php?category_path=$1 [L,QSA]
+
+# Custom 404 Error
+ErrorDocument 404 /qlWebScripts/index.php?page=404
+
+# Security: Deny access to sensitive directories (modern Apache)
+<IfModule mod_authz_core.c>
+    <FilesMatch "^(languages|cache)$">
+        Require all denied
+    </FilesMatch>
+    <FilesMatch "\.(inc|inc\.php|tpl|sql)$">
+        Require all denied
+    </FilesMatch>
+</IfModule>
+
+# Security: Legacy Apache 2.2
+<IfModule !mod_authz_core.c>
+    <FilesMatch "^(languages|cache)$">
+        Order deny,allow
+        Deny from all
+    </FilesMatch>
+    <FilesMatch "\.(inc|inc\.php|tpl|sql)$">
+        Order deny,allow
+        Deny from all
+    </FilesMatch>
+</IfModule>
+
+# Disable directory listing
+Options -Indexes
+
+# Default index file
+DirectoryIndex index.php
