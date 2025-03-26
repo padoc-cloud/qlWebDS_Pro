@@ -1,15 +1,25 @@
 <?php
-    // This file sets up the application by creating or updating database tables.
-    // It includes configuration and database parameter files.
-    // It determines the PHP version and sets the appropriate class directory.
-    // It connects to the database and checks for existing tables.
-    // It updates existing tables or creates new ones if necessary.
-    // It inserts initial data into the database tables.
-    // It registers an admin user if it's a new installation.
-    // It generates a registration_.html file for confirmation.
-    // It outputs success or error messages for the installation process.
+// This file sets up the application by creating or updating database tables.
+// It includes configuration and database parameter files.
+// It determines the PHP version and sets the appropriate class directory.
+// It connects to the database and checks for existing tables.
+// It updates existing tables or creates new ones if necessary.
+// It inserts initial data into the database tables.
+// It registers an admin user if it's a new installation.
+// It generates a registration_.html file for confirmation.
+// It outputs success or error messages for the installation process.
 
-    include 'config.php';
+// CAUTION!!! Do NOT change below this line!!!
+include('config.php');
+
+if (!isset($_POST['submit'])) {
+	header('Location:http://www.Contact-USA.com/qlWebScripts/clients/registration_pro.php?s='.SCRIPT.'&v='.VERSION.'&vn='.VERSION_NUMBER.'&sv='.SUB_VERSION.'&lt='.LICENSE_TYPE.'&bt='.BRAND_TYPE.'&y='.YEARS);
+
+?>
+
+<?php
+
+} else {
 
     $id          = 0;
     $info        = '';
@@ -350,5 +360,6 @@
 
         return $ret;
     }
+}
 
 ?>
