@@ -1,5 +1,7 @@
 <?php
 
+  // This file performs CAPTCHA generation and validation operations. It includes methods for creating CAPTCHA images, storing them in a database, and verifying user input against the stored CAPTCHA.
+
   class CaptchaClass
   {
     var $m_DB;

@@ -1,15 +1,18 @@
 <?php
-    // This file sets up the application by creating or updating database tables.
-    // It includes configuration and database parameter files.
-    // It determines the PHP version and sets the appropriate class directory.
-    // It connects to the database and checks for existing tables.
-    // It updates existing tables or creates new ones if necessary.
-    // It inserts initial data into the database tables.
-    // It registers an admin user if it's a new installation.
-    // It generates a registration_.html file for confirmation.
-    // It outputs success or error messages for the installation process.
+// This file sets up the application by creating or updating database tables.
+// It includes configuration and database parameter files.
+// It determines the PHP version and sets the appropriate class directory.
+// It connects to the database and checks for existing tables.
+// It updates existing tables or creates new ones if necessary.
+// It inserts initial data into the database tables.
+// It registers an admin user if it's a new installation.
+// It generates a registration_.html file for confirmation.
+// It outputs success or error messages for the installation process.
 
-    include 'config.php';
+// CAUTION!!! Do NOT change below this line!!!
+include('config.php');
+
+if ($_POST['submit'] == "yes") {
 
     $id          = 0;
     $info        = '';
@@ -18,12 +21,12 @@
 
     include 'db_params.php';
 
-	// New code here
+	// Begin New code here - Short Description: Get the major version of PHP
 	$versionParts = explode('.', phpversion());
 	$majorVersion = (int)$versionParts[0];
 	// End of new code
 
-    // Modified by: 2025-03-024
+    // Modified by: 2025-03-024          - Short Description: Check if PHP version is less than 5.0 or greater than or equal to 5.0
   	if (version_compare( phpversion(), '5.0' ) < 0) {  
 		define('IS_PHP5' , false);
 		define('CLASS_DIR', 'php4_classes/'); 
@@ -31,6 +34,7 @@
 		define('IS_PHP5' , true);                                // don't need to change this variable
 		define('CLASS_DIR', 'php' . $majorVersion . '_classes/'); 
 	}
+    // End of modification
 
     include CLASS_DIR . 'database.class.php';
     include CLASS_DIR . 'users.class.php';
@@ -39,6 +43,41 @@
         $DB = DataBase::getInstance();
     } else {
         $DB =& DataBase::getInstance();
+    }
+
+    // return first string located between two given strings
+    function strbetweenstrs($str, $start, $stop)
+    {
+        $ret = false;
+        $ok  = true;
+
+        $start_length = strlen($start);
+        if ($start_length == 0) {
+            $start_pos = 0;
+        } else {
+            $start_pos = strpos($str, $start);
+            if (! ($start_pos === false)) {
+                $start_pos = $start_pos + $start_length;
+            } else {
+                $ok = false;
+            }
+        }
+
+        if ($ok) {
+            $stop_length = strlen($stop);
+            if ($stop_length == 0) {
+                $stop_pos = strlen($str) + 1;
+            } else {
+                $stop_pos = strpos($str, $stop);
+                if ($stop_pos) {
+                    if ($stop_pos > $start_pos) {
+                        $ret = substr($str, $start_pos, $stop_pos - $start_pos);
+                    }
+                }
+            }
+        }
+
+        return $ret;
     }
 
     if (! $DB->Open()) {
@@ -313,42 +352,10 @@
         );
     }
 
-    // }
+} else {
 
-    // misc function
-    // return first string located between two given strings
-    function strbetweenstrs($str, $start, $stop)
-    {
-        $ret = false;
-        $ok  = true;
-
-        $start_length = strlen($start);
-        if ($start_length == 0) {
-            $start_pos = 0;
-        } else {
-            $start_pos = strpos($str, $start);
-            if (! ($start_pos === false)) {
-                $start_pos = $start_pos + $start_length;
-            } else {
-                $ok = false;
-            }
-        }
-
-        if ($ok) {
-            $stop_length = strlen($stop);
-            if ($stop_length == 0) {
-                $stop_pos = strlen($str) + 1;
-            } else {
-                $stop_pos = strpos($str, $stop);
-                if ($stop_pos) {
-                    if ($stop_pos > $start_pos) {
-                        $ret = substr($str, $start_pos, $stop_pos - $start_pos);
-                    }
-                }
-            }
-        }
-
-        return $ret;
-    }
-
+    // Redirect to the registration page
+    // Note: Please set up with your correct registration URL!
+	header('Location:http://www.Contact-USA.com/qlWebScripts/clients/registration_pro.php?s='.SCRIPT.'&v='.VERSION.'&vn='.VERSION_NUMBER.'&sv='.SUB_VERSION.'&lt='.LICENSE_TYPE.'&bt='.BRAND_TYPE.'&y='.YEARS);
+}
 ?>

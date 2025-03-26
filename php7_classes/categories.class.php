@@ -1,5 +1,6 @@
 <?php
 
+  // This file performs category management operations for a database-driven application. It includes methods for retrieving, adding, updating, deleting, and searching categories, as well as managing category hierarchies and caching.
   class CategoriesClass {
   
     var $m_DB;
