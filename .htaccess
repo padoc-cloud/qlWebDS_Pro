@@ -1,5 +1,5 @@
 RewriteEngine On
-RewriteBase /PapirusDirecory/
+RewriteBase /PapirusDirectory/
 
 # Allow direct access to install.php (important for setup)
 RewriteRule ^install\.php$ - [L]
@@ -22,7 +22,7 @@ RewriteCond %{REQUEST_FILENAME} !-l
 RewriteRule ^(.*)$ index.php?category_path=$1 [L,QSA]
 
 # Custom 404 Error
-ErrorDocument 404 /PapirusDirecory/index.php?page=404
+ErrorDocument 404 /PapirusDirectory/index.php?page=404
 
 # Security: Deny access to sensitive directories (modern Apache)
 <IfModule mod_authz_core.c>
