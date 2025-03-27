@@ -106,7 +106,7 @@
        $header .= 'Content-type: text; charset=utf-8' . "";
        $dlg = strlen($mail);
        if($dlg) {     
-          $ok = @mail($mail, "Broken Link/Incorrect Info", $text, $header);
+          $ok = mail($mail, "Broken Link/Incorrect Info", $text, $header);
        }
 	   $aIfRegion['done'] = 1; 
     } else {
