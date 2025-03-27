@@ -624,8 +624,8 @@ class SitesClass
         $len = strlen($url);
         if ($len < 3) {return false;}
 
-        if (strcmp("http://", substr($url, 0, 7)) !== 0) {
-            $url = "http://" . $url;
+        if (strcmp("https://", substr($url, 0, 8)) !== 0) {
+            $url = "https://" . $url;
         }
 
         $url_stuff = parse_url($url);
