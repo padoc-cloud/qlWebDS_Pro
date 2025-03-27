@@ -18,8 +18,6 @@
   // makes $g_cache_addr
   require_once('head.php');
 
-  echo phpversion(). "<br>";
-
   // charset
   header("Content-Type: text/html; charset=".DEFAULT_CHARSET);   
 
