@@ -208,6 +208,7 @@ class DataBase
         }
 
         $sets = implode(', ', $atmp);
+        // echo "<pre>";print_r($values); exit;
 
         $id    = mysqli_real_escape_string($this->m_conn, $id);
         $query = "UPDATE $table SET $sets WHERE id='$id'";
