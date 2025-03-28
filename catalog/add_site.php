@@ -1227,14 +1227,14 @@
     
     if ($listing_paid) {
     	// update site
-        $id = $g_site->UpdateSite($values, $p_id);
+      $id = $g_site->UpdateSite($values, $p_id);
     } else {
     	$id = $g_site->AddSite($values, $payment, $sub_id);
     }
-   
+    
     if (($id>0) or ($listing_paid and isset($id))) {
       if ($listing_paid) {
-		  $id = $p_id;
+		    $id = $p_id;
       }
       $values['id_code'] = $id.'-'.CodeGen();
       $tmp_arr['id_code'] = $values['id_code'];

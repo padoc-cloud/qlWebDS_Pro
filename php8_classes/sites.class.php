@@ -820,7 +820,7 @@ class SitesClass
         $header .= 'Reply-To: <' . ADMIN_EMAIL . '>' . "\r\n" . 'X-Mailer: PHP/' . phpversion();
         $header .= 'MIME-Version: 1.0' . "\r\n";
         $header .= 'Content-type: text/html; charset=' . DEFAULT_CHARSET . "\r\n";
-
+        
         $ret = @mail($aSite['email'], $aMailTpl['title'], $aMailTpl['email_body'], $header);
 
         return $ret;
