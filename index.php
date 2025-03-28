@@ -247,13 +247,8 @@
   // main
   } else if ( count($_GET)==0 ) {
   
-      $g_cache_addr = 'index';
-      if (($g_user->Level()==AL_NORMAL) and USE_CACHE and $g_cache->Get($g_cache_addr) ) {
-        
-        $g_template->SetTemplate($g_cache->Get($g_cache_addr));
-        $tpl_main = $g_template->Get();
-                  
-      } else {    
+    
+    $g_cache_addr = 'index';
 
 		// makes variable $tpl_mmenu      
         include('catalog/main_menu.php');
@@ -333,9 +328,7 @@
 	  	}
 	    
 	  }
-      
-  } 
-
+    
   /*
   // latest featured links    
   $toTemplateLatestFeat = array();

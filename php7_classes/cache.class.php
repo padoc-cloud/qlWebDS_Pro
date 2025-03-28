@@ -1,9 +1,13 @@
 <?php
-  
+
   // This file performs caching operations by managing cached files in a specified directory. It includes methods for creating, retrieving, deleting, and clearing cache files.
-  
+
   class CacheClass {
     var $bck;
+
+    function __construct($dir = '') {
+      $this->CacheClass($dir);
+    }
     
     function CacheClass($dir = '') {
       if (defined('CACHE_DIR')) {
@@ -62,43 +66,37 @@
         if (file_exists($link)) {
            $ok = @unlink($link);
         }
-
       }
-      
       return $ok;
-      
     }
     
     // private 
     function dirTree() {
-      $d = dir($this->bck);
-      $arDir = array();
-
-      while (false !== ($entry = $d->read())) {
-        if($entry != '.' && $entry != '..') {
-           $arDir[] = array('name'=>$entry);
+        $arDir = [];
+        if (is_dir($this->bck)) {
+            $entries = scandir($this->bck); // Use scandir instead of dir()
+            foreach ($entries as $entry) {
+                if ($entry !== '.' && $entry !== '..') {
+                    $arDir[] = ['name' => $entry];
+                }
+            }
         }
-      }
-      $d->close();
-
-      return $arDir;
+        return $arDir;
     }
     
     function filesTree() {
-      $d = dir($this->bck);
-      $arDir = array();
-
-      while (false !== ($entry = $d->read())) {
-        if($entry != '.' && $entry != '..') {
-          if (!is_dir($entry) ) {
-           $arDir[] = array('name'=>$entry);
+      $arDir = [];
+      if (is_dir($this->bck)) {
+          $entries = scandir($this->bck); // Use scandir instead of dir()
+          foreach ($entries as $entry) {
+              $fullPath = $this->bck . $entry;
+              if ($entry !== '.' && $entry !== '..' && !is_dir($fullPath)) {
+                  $arDir[] = ['name' => $entry];
+              }
           }
-        }
       }
-      $d->close();
-
       return $arDir;
-    } 
+    }
                 
   }
 
