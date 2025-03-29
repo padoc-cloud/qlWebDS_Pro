@@ -193,6 +193,8 @@
   		case 'listing_edit':
   		case 'user_claim_listing':
   		case 'latest_listings':
+      case 'submitted_listings':
+        exec(DEFAULT_ECONOMY);
   		case 'most_visited':
   			include('catalog/'.$site.'.php');
   			break;

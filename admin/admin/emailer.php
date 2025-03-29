@@ -97,7 +97,6 @@ if ($g_user->Level() == AL_ADMIN) {
                                 $isError                    = true;
                                 $site_tpl['{address_list}'] = '';
                             }
-
                         }
                         $site_tpl['{checked_list_manual}']            = '';
                         $site_tpl['{checked_list_all}']               = '';
