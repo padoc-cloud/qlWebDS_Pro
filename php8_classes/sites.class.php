@@ -825,7 +825,6 @@ class SitesClass
         
         $ret = @mail($aSite['email'], $aMailTpl['title'], $aMailTpl['email_body'], $header);
         return $ret;
-
     }
 
     // filters
