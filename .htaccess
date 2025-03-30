@@ -39,12 +39,12 @@ RewriteBase /
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-l
-RewriteRule ^more-([^-]+)\.htm$ index.php?site=$1 [L,QSA]
+RewriteRule ^(.*)more-([^-]+).htm(.*)$ index.php?site=$2 [L,QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-l
-RewriteRule ^(.*)\.htm$ index.php?page=$1 [L,QSA]
+RewriteRule ^(.*).htm(.*)$ index.php?page=$1 [L,QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

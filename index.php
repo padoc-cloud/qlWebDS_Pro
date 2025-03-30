@@ -161,7 +161,6 @@
 
   // site info
   } else if (isset($_GET['site'])) {
-  
     if (!is_numeric($_GET['site']) ) {  
 
     	include('404.php');
@@ -193,8 +192,6 @@
   		case 'listing_edit':
   		case 'user_claim_listing':
   		case 'latest_listings':
-      case 'submitted_listings':
-        exec(DEFAULT_ECONOMY);
   		case 'most_visited':
   			include('catalog/'.$site.'.php');
   			break;
@@ -249,8 +246,13 @@
   // main
   } else if ( count($_GET)==0 ) {
   
-    
-    $g_cache_addr = 'index';
+      $g_cache_addr = 'index';
+      if (($g_user->Level()==AL_NORMAL) and USE_CACHE and $g_cache->Get($g_cache_addr) ) {
+        
+        $g_template->SetTemplate($g_cache->Get($g_cache_addr));
+        $tpl_main = $g_template->Get();
+                  
+      } else {    
 
 		// makes variable $tpl_mmenu      
         include('catalog/main_menu.php');
@@ -330,7 +332,9 @@
 	  	}
 	    
 	  }
-    
+      
+  }
+
   /*
   // latest featured links    
   $toTemplateLatestFeat = array();
