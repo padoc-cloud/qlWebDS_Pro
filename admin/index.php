@@ -53,8 +53,10 @@ if ($g_user->Level() == AL_ADMIN) {
             }
 
         }
-    } else { $module = 'config';
-        $inc                                = 'messages';}
+    } else {
+        $module = 'config';
+        $inc    = 'messages';
+    }
 
     // fill template classes
     $hide_div = ' style="display: none;" ';

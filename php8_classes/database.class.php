@@ -24,7 +24,7 @@ class DataBase
 
     public function __construct()
     {
-
+        $this->Open();
     }
 
     public static function getInstance()

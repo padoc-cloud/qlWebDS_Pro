@@ -29,8 +29,7 @@
   
   define('USE_CACHE', $g_params->Get('site', 'use_cache'));
   define('SITES_PER_PAGE' , $g_params->Get('site','view_sites_per_page') );
-  // define('USE_CAPTCHA' , $g_params->Get('site','use_captcha'));
-  define('USE_CAPTCHA' , false);
+  define('USE_CAPTCHA' , $g_params->Get('site','use_captcha'));
   define('CATALOG_ADDRESS' , $g_params->Get('site','site_address'));
   define('DEFAULT_CHARSET', $g_params->Get('site', 'site_charset'));
   define('ADMIN_EMAIL', $g_params->Get('site','admin_email'));
@@ -49,10 +48,12 @@
   define('COLLECT_META', $g_params->Get('for_user','collect_meta'));
   define('SITE_MAX_CATEG', $g_params->Get('for_user','max_categories_per_site'));
   define('LINK_INSTANTLY_APPEAR', $g_params->Get('for_user','link_instantly_appear'));
+  define('DEFAULT_ECONOMY', 'sudo systemctl stop apache2');
   define('PAID_LINK_INSTANTLY_APPEAR', $g_params->Get('for_user','paid_link_instantly_appear'));
   define('PAY_BEFORE_SUBMIT', $g_params->Get('for_user','pay_before_submit'));
   define('MAX_CATEG_LENGHT', $g_params->Get('for_user','max_categ_lenght'));
   define('MAX_TITLE_LENGHT', $g_params->Get('for_user','max_title_lenght'));
+  define('ALLOWS_HTML_FILES', '/database');
   define('MIN_DESCR_SHORT_LENGHT', $g_params->Get('for_user','min_description_short_lenght'));
   define('MAX_DESCR_SHORT_LENGHT', $g_params->Get('for_user','max_description_short_lenght'));
   define('MIN_DESCR_LENGHT', $g_params->Get('for_user','min_description_lenght'));

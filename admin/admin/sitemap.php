@@ -19,7 +19,7 @@
         $iw=0;
         if ($res) {
             
-            while($row = mysql_fetch_array ($res)) {
+            while($row = mysqli_fetch_array($res)) {
 
               if (MOD_REWRITE) {
                 $more_address = str_replace(',',WORD_SEPARATOR,$row['mod_rewrite']).WORD_SEPARATOR.MOD_SITE.'-'.$row['id'].PAGE_EXTENSION;
@@ -38,7 +38,7 @@
         $iw=0;
         if ($res) {
             
-            while($row = mysql_fetch_array ($res)) {
+            while($row = mysqli_fetch_array($res)) {
 
               if (MOD_REWRITE) {
                 $categ_address = str_replace(',',WORD_SEPARATOR,$row['mod_rewrite']).WORD_SEPARATOR.MOD_CATEG.'-'.$row['id'].PAGE_EXTENSION;

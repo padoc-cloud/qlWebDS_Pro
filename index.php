@@ -161,7 +161,6 @@
 
   // site info
   } else if (isset($_GET['site'])) {
-  
     if (!is_numeric($_GET['site']) ) {  
 
     	include('404.php');
@@ -334,7 +333,7 @@
 	    
 	  }
       
-  } 
+  }
 
   /*
   // latest featured links    
