@@ -1164,7 +1164,6 @@ if ($site_added === true) {
     $tmp_tpl->IfRegion($aIfRegion);
 
 } else if (isset($_POST['submit_step2']) && (!$isError)) {
-
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // successful step 2, save site
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1266,7 +1265,7 @@ if ($site_added === true) {
         }
 
         // rename logo file if uploaded
-        if (! empty($logo_filename)) {
+        if (!empty($logo_filename)) {
             rename(LOGO_DIR . '/' . $logo_filename, LOGO_DIR . '/' . $id . LOGO_NAME_SUFFIX);
         }
 
@@ -1275,38 +1274,39 @@ if ($site_added === true) {
             $tpl_adds_array['{url_disp}'] = 'do_not_disp';
         }
 
-        if ($values['status'] == SITE_VIEW) {
-
-            $tpl_adds_array['{title}']       = $values['title'];
-            $tpl_adds_array['{address}']     = $values['url'];
-            $tpl_adds_array['{description}'] = $values['description'];
-            $tpl_adds_array['{id}']          = $id;
-            $if_region['site_new']           = 2;
-
-        } else {
-            $if_region['site_new']           = 1;
-            $tpl_adds_array['{address}']     = $values['url'];
-            $tpl_adds_array['{title}']       = $values['title'];
-            $tpl_adds_array['{description}'] = $values['description'];
+        switch ($values['status']) {
+            case SITE_VIEW:
+                $tpl_adds_array['{title}']       = $values['title'];
+                $tpl_adds_array['{address}']     = $values['url'];
+                $tpl_adds_array['{description}'] = $values['description'];
+                $tpl_adds_array['{id}']          = $id;
+                $if_region['site_new']           = 2;
+                break;
+            default:
+                $if_region['site_new']           = 1;
+                $tpl_adds_array['{title}']       = $values['title'];
+                $tpl_adds_array['{address}']     = $values['url'];
+                $tpl_adds_array['{description}'] = $values['description'];
+                break;
         }
 
         $if_region['subscription'] = 0;
 
         if ($amount > 0 && !$listing_paid) {
-
             include 'catalog/payment.php';
             $if_region['ispayment'] = 1;
-
         } else {
             $if_region['ispayment'] = 0;
-
             $values['id'] = $id;
-
         }
-        if ($values['status'] == SITE_VIEW) {   // if status is approved value, then approved email send to use
-            $g_site->SendEmail($g_params->GetParams('site_approved_email'), $values);
-        } else {
-            $g_site->SendEmail($g_params->GetParams('site_pending_email'), $values);
+
+        switch ($values['status']) {
+            case SITE_VIEW:  // Send approved email if status equals SITE_VIEW
+                $g_site->SendEmail($g_params->GetParams('site_approved_email'), $values);
+                break;
+            default:  // Send pending email for all other statuses
+                $g_site->SendEmail($g_params->GetParams('site_pending_email'), $values);
+                break;
         }
 
         $tmp_tpl->SetTemplate(DIR_TEMPLATE . 'add_site_success.tpl.php');
@@ -1314,7 +1314,6 @@ if ($site_added === true) {
     } else {
         $tmp_tpl->SetTemplate(DIR_TEMPLATE . 'add_site_failure.tpl.php');
     }
-
 } else {
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////

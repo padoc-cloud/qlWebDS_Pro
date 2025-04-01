@@ -25,7 +25,7 @@
    							<p>
     						-&nbsp; 
     						<span class="{url_disp}[1]"><a href="{more address}[1]" title="Listing's Detail Statistics" class="infolink"> [View Details]</a>
-							<br>-&nbsp; <a href="#" onclick="window.open('broken.php?id={id}[1]&amp;s={categ}[1]', 'qlWeb', 'height=250,resizable=yes,scrollbars=yes,width=320');return false;" title="Report Incorrect Info/Broken Link" class="infolink" rel="nofollow">{broken}[1]</a></span>
+							<br>-&nbsp; <a href="#" onclick="window.open('broken.php?id={id}[1]&amp;s={categ}[1]', 'qlWeb', 'height=457,width=630,resizable=yes,scrollbars=yes');return false;" title="Report Incorrect Info/Broken Link" class="infolink" rel="nofollow">{broken}[1]</a></span>
     						<span class="{detail_disp}[1]"><a href="{more address}[1]" title="Listing's Details" class="infolink"> [View Details]</a></span>
    							</p>
 							<span class="{addr_disp}[1]"><br>

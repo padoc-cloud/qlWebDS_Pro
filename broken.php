@@ -35,6 +35,8 @@
   define('ADMIN_EMAIL', $g_params->Get('site', 'admin_email'));
   define('SITE_ADDRESS', $g_params->Get('site', 'site_address'));
   define('USE_CAPTCHA' , $g_params->Get('site','use_captcha'));
+  define('NOREPLY_EMAIL', 'message@notifications.papirusdirectory.com');
+  define('DEFAULT_CHARSET', $g_params->Get('site', 'site_charset'));
   
   define('MAX_CATEG_LENGHT', $g_params->Get('for_user','max_categ_lenght'));
   define('MAX_TITLE_LENGHT', $g_params->Get('for_user','max_title_lenght'));
@@ -110,7 +112,7 @@
 
        $dlg = strlen($mail);
        if($dlg) {     
-          $ok = mail($mail, "Broken Link/Incorrect Info", $text, $header);
+          $ok = @mail($mail, "Broken Link/Incorrect Info", $text, $header);
        }
 	   $aIfRegion['done'] = 1; 
     } else {
