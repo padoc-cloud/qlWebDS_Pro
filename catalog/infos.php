@@ -85,12 +85,14 @@
 	    }
 	    
 	    if($dlg and $mail and !$bad_title and empty($captcha_error)) {
-	      $header = 'From: <' . $mail .'>' . "\r\n";
-	      $header .= 'Reply-To: <' . $mail . '>' . "\r\n" . 'X-Mailer: PHP/4.3.9';
-	      $header .= 'MIME-Version: 1.0' . "\r\n";
-	      $header .= 'Content-type: text/html; charset=' .DEFAULT_CHARSET. "\r\n";
-	      mail(ADMIN_EMAIL, $title, $text.$name.$phone.$mail, $header);        
-	      $cntTemplate['{error}'] = '<font color="#339900">Thank You. Your message was sent.</font>'; 
+		  	$header = 'From: '.SITE_NAME.' <' . NOREPLY_EMAIL . '>' . "\r\n";
+			$header .= 'Reply-To: <' . $mail . '>' . "\r\n";
+			$header .= 'Return-Path: ' . NOREPLY_EMAIL . "\r\n";
+			$header .= 'X-Mailer: PHP/' . phpversion() . "\r\n";
+			$header .= 'MIME-Version: 1.0' . "\r\n";
+			$header .= 'Content-type: text/html; charset=' . DEFAULT_CHARSET . "\r\n";
+			mail(ADMIN_EMAIL, $title, $text.$name.$phone.$mail, $header);        
+			$cntTemplate['{error}'] = '<font color="#339900">Thank You. Your message was sent.</font>'; 
 	    } else {
 	      if (!isset($_POST['captcha_refresh'])) {
 	      	if ($bad_title) {

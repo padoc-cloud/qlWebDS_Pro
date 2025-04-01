@@ -101,9 +101,13 @@
 	   $text = "Broken Link/Incorrect Info: ".SITE_ADDRESS."index.php?site=" . $id . "
 			From IP: $ip
 			Comment: $_POST[comment]";
-       $header = 'From: Directory User <'. $mail . '>' . "\r\n";
-       $header .= 'Reply-To: <' . $mail . '>' . "\r\n" . 'X-Mailer: PHP/' . phpversion();
-       $header .= 'Content-type: text; charset=utf-8' . "";
+      $header = 'From: Directory User <' . NOREPLY_EMAIL . '>' . "\r\n";
+      $header .= 'Reply-To: <' . $mail . '>' . "\r\n";
+      $header .= 'Return-Path: ' . NOREPLY_EMAIL . "\r\n";
+      $header .= 'X-Mailer: PHP/' . phpversion() . "\r\n";
+      $header .= 'MIME-Version: 1.0' . "\r\n";
+      $header .= 'Content-type: text/html; charset=' . DEFAULT_CHARSET . "\r\n";
+
        $dlg = strlen($mail);
        if($dlg) {     
           $ok = mail($mail, "Broken Link/Incorrect Info", $text, $header);

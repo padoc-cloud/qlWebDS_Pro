@@ -200,8 +200,10 @@ class UsersClass
 
     public function SendEmail($from_email, $to_email, $title, $mail)
     {
-        $header = 'From: <' . $from_email . '>' . "\r\n";
-        $header .= 'Reply-To: <' . $from_email . '>' . "\r\n" . 'X-Mailer: PHP/' . phpversion();
+        $header = 'From: '.SITE_NAME.' <' . NOREPLY_EMAIL . '>' . "\r\n";
+        $header .= 'Reply-To: <' . $from_email . '>' . "\r\n";
+        $header .= 'Return-Path: ' . NOREPLY_EMAIL . "\r\n";
+        $header .= 'X-Mailer: PHP/' . phpversion() . "\r\n";
         $header .= 'MIME-Version: 1.0' . "\r\n";
         $header .= 'Content-type: text/html; charset=' . DEFAULT_CHARSET . "\r\n";
 
