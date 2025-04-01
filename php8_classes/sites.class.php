@@ -797,10 +797,10 @@ class SitesClass
     public function SendEmail($aMailTpl, $aSite)
     {
 
-        if (DONT_SEND_EMAILS) {return true;}
+        if (DONT_SEND_EMAILS) return true;
 
-        if (! isset($aSite['title'])) {$aSite['title'] = '';}
-        if (! isset($aSite['url'])) {$aSite['url'] = '';}
+        if (!isset($aSite['title'])) {$aSite['title'] = '';}
+        if (!isset($aSite['url'])) {$aSite['url'] = '';}
 
         if (substr(SITE_ADDRESS, -1, 1) != '/') {$site_addr = SITE_ADDRESS . '/';} else { $site_addr = SITE_ADDRESS;}
 
@@ -817,13 +817,27 @@ class SitesClass
         $aMailTpl['email_body'] .= "<br>Listing Code: " . $aSite['id_code'];
         $aMailTpl['email_body'] = strtr($aMailTpl['email_body'], $aTpl);
         $aMailTpl['title']      = strtr($aMailTpl['title'], $aTpl);
+        $htmlBody = '<!DOCTYPE html>
+        <html>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset='.DEFAULT_CHARSET.'">
+            <title>'.$aMailTpl['title'].'</title>
+        </head>
+        <body>
+        '.nl2br($aMailTpl['email_body']).'
+        </body>
+        </html>';
 
-        $header = 'From: <' . ADMIN_EMAIL . '>' . "\r\n";
-        $header .= 'Reply-To: <' . ADMIN_EMAIL . '>' . "\r\n" . 'X-Mailer: PHP/' . phpversion();
-        $header .= 'MIME-Version: 1.0' . "\r\n";
-        $header .= 'Content-type: text/html; charset=' . DEFAULT_CHARSET . "\r\n";
+        $headers = [
+            'From: '.SITE_NAME.' <'.NOREPLY_EMAIL.'>',
+            'Reply-To: <'.ADMIN_EMAIL.'>',
+            'Return-Path: '.NOREPLY_EMAIL,
+            'X-Mailer: PHP/'.phpversion(),
+            'MIME-Version: 1.0',
+            'Content-type: text/html; charset='.DEFAULT_CHARSET
+        ];
         
-        $ret = @mail($aSite['email'], $aMailTpl['title'], $aMailTpl['email_body'], $header);
+        $ret = mail($aSite['email'], $aMailTpl['title'], $htmlBody, implode("\r\n", $headers));
         return $ret;
     }
 

@@ -212,13 +212,17 @@ if ($g_user->Level() == AL_ADMIN) {
             if (count($email_list_array) == 0) {
                 $notifications .= 'No E-mails Sent';
             } else {
-                $header = 'From: <' . $aValues['from'] . '>' . "\r\n";
-                $header .= 'Reply-To: <' . $aValues['from'] . '>' . "\r\n" . 'X-Mailer: PHP/' . phpversion();
-                $header .= 'MIME-Version: 1.0' . "\r\n";
-                $header .= 'Content-type: text/html; charset=' . DEFAULT_CHARSET . "\r\n";
+                $headers = [
+                    'From: Admin in '.SITE_NAME.' <'.NOREPLY_EMAIL . '>',
+                    'Reply-To: <'.$aValues['from']. '>',
+                    'Return-Path: '.NOREPLY_EMAIL,
+                    'X-Mailer: PHP/'.phpversion(),
+                    'MIME-Version: 1.0',
+                    'Content-type: text/html; charset='.DEFAULT_CHARSET
+                ];
 
                 foreach ($email_list_array as $email_address) {
-                    $e_sent = mail($email_address, $aValues['subject'], $aValues['email_body'], $header);
+                    mail($email_address, $aValues['subject'], $aValues['email_body'], implode("\r\n", $headers));
                 }
 
                 if (count($email_list_array) == 1) {

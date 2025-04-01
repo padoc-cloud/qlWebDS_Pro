@@ -93,14 +93,15 @@ $sub_id   = (int) $_GET['adds'];
 $category = $g_categ->GetCategory($sub_id);
 
 // check category level
-if (! $category or (! LINK_ON_TOP_CATEG and $category['level'] < 2) or $category['level'] > 4) {
+if (! $category || (! LINK_ON_TOP_CATEG && $category['level'] < 2) || $category['level'] > 4) {
     exit;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // first check if site is already in directory
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-if (isset($_POST['company']) and ! $listing_paid) {
+
+if (isset($_POST['company']) && !$listing_paid) {
 
     $values['url'] = $g_site->ParseURL($_POST['url']);
     if ($values['url']) {
@@ -124,7 +125,7 @@ if (isset($_POST['company']) and ! $listing_paid) {
 
         $site_added = true;
 
-        if ($category['level'] == 1 and ($site_row['link_type'] != LT_FEAT_TOP)) {
+        if ($category['level'] == 1 && ($site_row['link_type'] != LT_FEAT_TOP)) {
             $isError = true;
             $eMsg    = LANG_SITE_CANT_BE_IN_TOP;
 
@@ -145,7 +146,7 @@ if (isset($_POST['company']) and ! $listing_paid) {
 
 }
 
-if (! $site_added and isset($_POST['submit_step1'])) {
+if (!$site_added && isset($_POST['submit_step1'])) {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // checking POST data from step 1
@@ -184,12 +185,12 @@ if (! $site_added and isset($_POST['submit_step1'])) {
     }
 
     // if captcha refresh
-    if (isset($_POST['title']) or isset($_POST['description'])) {
+    if (isset($_POST['title']) || isset($_POST['description'])) {
         $values['title']       = $_POST['title'];
         $values['description'] = $_POST['description'];
         $values['keywords']    = $_POST['keywords'];
 
-    } else if (! $isError and COLLECT_META and ! PAY_BEFORE_SUBMIT) {
+    } else if (!$isError && COLLECT_META && !PAY_BEFORE_SUBMIT) {
 
         // get headers
         if (strlen(trim($_POST['url'])) != 0) {
@@ -197,12 +198,13 @@ if (! $site_added and isset($_POST['submit_step1'])) {
             $values = array_merge($values, $header);
         }
     }
-} else if ($listing_paid and isset($_POST['submit_step1_2'])) {
+} else if ($listing_paid && isset($_POST['submit_step1_2'])) {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // listing paid do nothing in this part of the code
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-} else if (! $site_added and (isset($_POST['submit_step1_2']) or isset($_POST['captcha_refresh1_2']))) {
+} else if (!$site_added && (isset($_POST['submit_step1_2']) || isset($_POST['captcha_refresh1_2']))) {
+
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // check POST data from step 1_2
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -227,7 +229,7 @@ if (! $site_added and isset($_POST['submit_step1'])) {
                     $isError = true;
                 }
 
-                if ($category['level'] == 1 and $link_type != LT_FEAT_TOP) {
+                if ($category['level'] == 1 && $link_type != LT_FEAT_TOP) {
                     $eMsg .= '<p>' . ADD_SITE_06 . '</p>';
                     $isError = true;
                 }
@@ -260,7 +262,7 @@ if (! $site_added and isset($_POST['submit_step1'])) {
         }
     }
 
-    if (PAY_BEFORE_SUBMIT and COLLECT_META) {
+    if (PAY_BEFORE_SUBMIT && COLLECT_META) {
         // get headers
         if (strlen(trim($_POST['url'])) != 0) {
             $header = $g_site->GetHeader($values['url']);
@@ -268,7 +270,7 @@ if (! $site_added and isset($_POST['submit_step1'])) {
         }
     }
 
-} else if (! $site_added and (isset($_POST['submit_step2']) or isset($_POST['captcha_refresh']))) {
+} else if (!$site_added && (isset($_POST['submit_step2']) || isset($_POST['captcha_refresh']))) {
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // check POST data from step 2
@@ -300,7 +302,7 @@ if (! $site_added and isset($_POST['submit_step1'])) {
 
                     // check title lenght
                     $len = strlen($values[$key]);
-                    if (($len < 3) or ($len > MAX_TITLE_LENGHT)) {
+                    if (($len < 3) || ($len > MAX_TITLE_LENGHT)) {
                         // $eMsg .= '<p>'.LANG_ERROR_TITLE_LENGHT.' '.$key.'</p>';
                         // $isError = true;
                     }
@@ -326,7 +328,7 @@ if (! $site_added and isset($_POST['submit_step1'])) {
 
                     // check title lenght
                     $len = strlen($values[$key]);
-                    if (($len < 3) or ($len > MAX_TITLE_LENGHT)) {
+                    if (($len < 3) || ($len > MAX_TITLE_LENGHT)) {
                         // $eMsg .= '<p>'.LANG_ERROR_TITLE_LENGHT.' '.$key.'</p>';
                         // $isError = true;
                     }
@@ -350,7 +352,7 @@ if (! $site_added and isset($_POST['submit_step1'])) {
                 $values[$key] = str_replace(".", "", $values[$key]);
                 // check title lenght
                 $len = strlen($values[$key]);
-                if (($len < 3) or ($len > MAX_TITLE_LENGHT)) {
+                if (($len < 3) || ($len > MAX_TITLE_LENGHT)) {
                     $eMsg .= '<p>' . LANG_ERROR_TITLE_LENGHT . '</p>';
                     $isError = true;
                 }
@@ -361,7 +363,7 @@ if (! $site_added and isset($_POST['submit_step1'])) {
                 $values[$key] = str_replace("  ", " ", $values[$key]);
                 // check short description lenght
                 $len = strlen($values[$key]);
-                if (($len < MIN_DESCR_SHORT_LENGHT) or ($len > MAX_DESCR_SHORT_LENGHT)) {
+                if (($len < MIN_DESCR_SHORT_LENGHT) || ($len > MAX_DESCR_SHORT_LENGHT)) {
 
                     $eMsg .= '<p>' . LANG_ERROR_DESCR_SHORT_LENGHT . '</p>';
                     $isError = true;
@@ -373,7 +375,7 @@ if (! $site_added and isset($_POST['submit_step1'])) {
                 $values[$key] = str_replace("  ", " ", $values[$key]);
                 // check description lenght
                 $len = strlen($values[$key]);
-                if (($len < MIN_DESCR_LENGHT) or ($len > MAX_DESCR_LENGHT)) {
+                if (($len < MIN_DESCR_LENGHT) || ($len > MAX_DESCR_LENGHT)) {
 
                     $eMsg .= '<p>' . LANG_ERROR_DESCR_LENGHT . '</p>';
                     $isError = true;
@@ -467,7 +469,7 @@ if (! $site_added and isset($_POST['submit_step1'])) {
 
                 }
 
-                if ($category['level'] == 1 and $link_type != LT_FEAT_TOP) {
+                if ($category['level'] == 1 && $link_type != LT_FEAT_TOP) {
 
                     $eMsg .= '<p>' . ADD_SITE_06 . '</p>';
                     $isError = true;
@@ -499,7 +501,7 @@ if (! $site_added and isset($_POST['submit_step1'])) {
     $max_logo_size = MAX_LOGO_SIZE; // 125 kb
 
     if (! $isError) {
-        if (isset($_FILES) and strlen($_FILES['logo_upload']['name']) > 0) {
+        if (isset($_FILES) && strlen($_FILES['logo_upload']['name']) > 0) {
             if ($_FILES['logo_upload']['size'] <= $max_logo_size) {
 
                 $cUpload = new UploadClass(LOGO_DIR, 'logo_upload', 1, ['gif', 'jpg', 'jpeg', 'png']);
@@ -530,14 +532,14 @@ if (! $site_added and isset($_POST['submit_step1'])) {
 
             // something went wrong... clean up
             if ($isError) {
-                if (! empty($logo_filename) and file_exists(LOGO_DIR . "/" . $logo_filename)) {
+                if (! empty($logo_filename) && file_exists(LOGO_DIR . "/" . $logo_filename)) {
                     unlink(LOGO_DIR . "/" . $logo_filename);
                 }
                 $logo_filename = '';
             }
         }
     } else {
-        if (isset($_FILES) and strlen($_FILES['logo_upload']['name']) > 0) {
+        if (isset($_FILES) && strlen($_FILES['logo_upload']['name']) > 0) {
             $eMsg .= '<p>' . ADD_SITE_12 . '</p>';
             $logo_msg = true;
         }
@@ -548,7 +550,7 @@ if (! $site_added and isset($_POST['submit_step1'])) {
         $isError               = true;
         $_POST['submit_step2'] = true;
         $eMsg                  = '';
-        if (isset($_FILES) and strlen($_FILES['logo_upload']['name']) > 0 and ! $logo_msg) {
+        if (isset($_FILES) && strlen($_FILES['logo_upload']['name']) > 0 && ! $logo_msg) {
             $eMsg .= '<p>' . ADD_SITE_12 . '</p>';
         }
     } else {
@@ -557,7 +559,7 @@ if (! $site_added and isset($_POST['submit_step1'])) {
         if ($link_type == 0) {$isError = true;}
 
         // check reciprocal
-        if ($g_payment["crecip[$link_type]"] == 1 and ! isset($values['reciprocal'])) {
+        if ($g_payment["crecip[$link_type]"] == 1 && ! isset($values['reciprocal'])) {
             $eMsg .= '<p>' . ADD_SITE_07 . '</p>';
             $isError = true;
         }
@@ -577,7 +579,7 @@ if (! $site_added and isset($_POST['submit_step1'])) {
                 } else {
                     $eMsg .= '<p>' . ADD_SITE_04 . '</p>';
                     $isError = true;
-                    if (isset($_FILES) and strlen($_FILES['logo_upload']['name']) > 0 and ! $logo_msg) {
+                    if (isset($_FILES) && strlen($_FILES['logo_upload']['name']) > 0 && ! $logo_msg) {
                         $eMsg .= '<p>' . ADD_SITE_12 . '</p>';
                     }
                 }
@@ -599,7 +601,7 @@ if (! $site_added and isset($_POST['submit_step1'])) {
         }
     }
 
-} else if (! $site_added) {
+} else if (!$site_added) {
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // POST data, step 1
@@ -734,7 +736,7 @@ $tpl_adds_array['{my_reciprocal value}'] = '<a href="' . $recip_url . '" target=
 // process with $_POST values
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-if ((isset($_POST['submit_step1']) and (! $isError)) or ((isset($_POST['submit_step1_2']) and $isError)) or ((isset($_POST['submit_step2']) and $isError))) {
+if ((isset($_POST['submit_step1']) && (!$isError)) || ((isset($_POST['submit_step1_2']) && $isError)) || ((isset($_POST['submit_step2']) && $isError))) {
 
     //////////////////////////////////////
     // fill prices
@@ -760,7 +762,7 @@ if ((isset($_POST['submit_step1']) and (! $isError)) or ((isset($_POST['submit_s
     $last = $i;
     for ($i = 1; $i <= LINK_TYPES; $i++) {
 
-        if (! $g_payment["ctype[$i]"] or ($category['level'] == 1 and $i != LT_FEAT_TOP)) { // ctype[] - checkbox if active link type
+        if (!$g_payment["ctype[$i]"] || ($category['level'] == 1 && $i != LT_FEAT_TOP)) { // ctype[] - checkbox if active link type
             $tpl_adds_array["{style type[$i]}"] = 'style="display: none;"';
 
         } else {
@@ -779,7 +781,7 @@ if ((isset($_POST['submit_step1']) and (! $isError)) or ((isset($_POST['submit_s
             }
             $k = 1 - $k;
 
-            if ($category['level'] == 1 and $i == LT_FEAT_TOP) {
+            if ($category['level'] == 1 && $i == LT_FEAT_TOP) {
                 $tpl_adds_array["{checked type[$i]}"] = 'checked';
             }
 
@@ -792,7 +794,7 @@ if ((isset($_POST['submit_step1']) and (! $isError)) or ((isset($_POST['submit_s
         // find first free
         $found = false;
         for ($i = 1; $i <= LINK_TYPES; $i++) {
-            if ($g_payment["ctype[$i]"] and ($tpl_adds_array['{payment type[' . $i . ']}'] == 'Free')) {
+            if ($g_payment["ctype[$i]"] && ($tpl_adds_array['{payment type[' . $i . ']}'] == 'Free')) {
                 $tpl_adds_array["{checked type[" . $i . "]}"] = 'checked';
                 $found                                        = true;
                 break;
@@ -820,7 +822,7 @@ if ((isset($_POST['submit_step1']) and (! $isError)) or ((isset($_POST['submit_s
 
     }
 
-    if (PAY_BEFORE_SUBMIT and isset($_POST['submit_step2'])) {
+    if (PAY_BEFORE_SUBMIT && isset($_POST['submit_step2'])) {
         for ($i = 1; $i <= LINK_TYPES; $i++) {
 
             if ($link_type == $i) {
@@ -832,19 +834,19 @@ if ((isset($_POST['submit_step1']) and (! $isError)) or ((isset($_POST['submit_s
     }
 
     for ($i = 1; $i <= LINK_TYPES; $i++) {
-        if (($tpl_adds_array["{checked type[$i]}"] == 'checked') and ($g_payment["videoup[$i]"] == 1)) {
+        if (($tpl_adds_array["{checked type[$i]}"] == 'checked') && ($g_payment["videoup[$i]"] == 1)) {
             $tpl_adds_array['{video_display}'] = '';
         }
-        if (($tpl_adds_array["{checked type[$i]}"] == 'checked') and ($g_payment["logoup[$i]"] == 1)) {
+        if (($tpl_adds_array["{checked type[$i]}"] == 'checked') && ($g_payment["logoup[$i]"] == 1)) {
             $tpl_adds_array['{logo_display}'] = '';
         }
-        if (($tpl_adds_array["{checked type[$i]}"] == 'checked') and ($g_payment["crecip[$i]"] == 1)) {
+        if (($tpl_adds_array["{checked type[$i]}"] == 'checked') && ($g_payment["crecip[$i]"] == 1)) {
             $tpl_adds_array['{reciprocal_display}'] = '';
         }
     }
 
     // set buttons' names
-    if (PAY_BEFORE_SUBMIT and (isset($_POST['submit_step1']) or isset($_POST['submit_step1_2']))) {
+    if (PAY_BEFORE_SUBMIT && (isset($_POST['submit_step1']) || isset($_POST['submit_step1_2']))) {
         $tpl_adds_array['{submit button}']          = 'submit_step1_2';
         $tpl_adds_array['{captcha refresh button}'] = 'captcha_refresh1_2';
     } else {
@@ -852,7 +854,7 @@ if ((isset($_POST['submit_step1']) and (! $isError)) or ((isset($_POST['submit_s
         $tpl_adds_array['{captcha refresh button}'] = 'captcha_refresh';
     }
 
-    if (! PAY_BEFORE_SUBMIT and (isset($_POST['submit_step1']) or isset($_POST['submit_step2']))) {
+    if (! PAY_BEFORE_SUBMIT && (isset($_POST['submit_step1']) || isset($_POST['submit_step2']))) {
         $tpl_adds_array['{second submit button display}'] = 'style="display: none;"';
     }
 
@@ -867,6 +869,7 @@ if ((isset($_POST['submit_step1']) and (! $isError)) or ((isset($_POST['submit_s
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // filling forms
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 if ($site_added === true) {
 
     //////////////////////////////////////
@@ -882,7 +885,7 @@ if ($site_added === true) {
     $tpl_adds_array['{category}'] = $category['name'];
     $tmp_tpl->SetTemplate(DIR_TEMPLATE . 'add_site_success.tpl.php');
 
-} else if ((isset($_POST['submit_step1']) and (! $isError))) {
+} else if ((isset($_POST['submit_step1']) && (!$isError))) {
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // successful step 1, show second form
@@ -926,10 +929,10 @@ if ($site_added === true) {
     $tmp_tpl->SetTemplate(DIR_TEMPLATE . 'add_site_step2.tpl.php');
     $tmp_tpl->IfRegion($aIfRegion);
 
-} else if (isset($_POST['submit_step1_2']) and ($isError)) {
+} else if (isset($_POST['submit_step1_2']) && ($isError)) {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // failure step 1_2, show form and errors
+    // failure step 1_2, show form && errors
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     if (USE_CAPTCHA) {
         $tpl_adds_array['{captcha text}']  = LANG_CAPTCHA;
@@ -969,7 +972,7 @@ if ($site_added === true) {
     $tmp_tpl->SetTemplate(DIR_TEMPLATE . 'add_site_step2.tpl.php');
     $tmp_tpl->IfRegion($aIfRegion);
 
-} else if (isset($_POST['submit_step1_2']) and (! $isError)) {
+} else if (isset($_POST['submit_step1_2']) && (!$isError)) {
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // successful step 1_2
@@ -977,7 +980,7 @@ if ($site_added === true) {
 
     //check if free submission
     $amount = $g_payment['type[' . $link_type . ']'];
-    if (($amount <= 0) or $listing_paid) {
+    if (($amount <= 0) || $listing_paid) {
         // proceed to step 2
         if (USE_CAPTCHA) {
             $tpl_adds_array['{captcha text}']  = LANG_CAPTCHA;
@@ -1041,7 +1044,7 @@ if ($site_added === true) {
         $if_region['pay_and_step1_2']      = 0;
         $if_region['pay_and_step2']        = 1;
 
-        // set step 2 template again w/o TOS and captcha
+        // set step 2 template again w/o TOS && captcha
         $tmp_tpl->SetTemplate(DIR_TEMPLATE . 'add_site_step2.tpl.php');
         $tmp_tpl->IfRegion($aIfRegion);
     } else {
@@ -1114,10 +1117,10 @@ if ($site_added === true) {
 
     }
 
-} else if (isset($_POST['submit_step2']) and ($isError)) {
+} else if (isset($_POST['submit_step2']) && ($isError)) {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // failure step 2, show form and errors
+    // failure step 2, show form && errors
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     if (USE_CAPTCHA) {
         $tpl_adds_array['{captcha text}']  = LANG_CAPTCHA;
@@ -1160,7 +1163,7 @@ if ($site_added === true) {
     $tmp_tpl->SetTemplate(DIR_TEMPLATE . 'add_site_step2.tpl.php');
     $tmp_tpl->IfRegion($aIfRegion);
 
-} else if (isset($_POST['submit_step2']) and (! $isError)) {
+} else if (isset($_POST['submit_step2']) && (!$isError)) {
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // successful step 2, save site
@@ -1177,7 +1180,7 @@ if ($site_added === true) {
         include 'catalog/pr.php';
         //$pr = trim(getrank($values['url']));
         $pr = trim(pagerank($values['url']));
-        if (is_numeric($pr) and $pr > 0) {
+        if (is_numeric($pr) && $pr > 0) {
             $values['pr'] = $pr;
         }
     }
@@ -1198,14 +1201,14 @@ if ($site_added === true) {
     $values['user_ip']      = $_SERVER['REMOTE_ADDR'];
 
     // add immiediately if free link?
-    if ($amount == 0 and LINK_INSTANTLY_APPEAR) {
+    if ($amount <= 0 && LINK_INSTANTLY_APPEAR) {
         $values['status'] = SITE_VIEW;
     } else {
         $values['status'] = SITE_WAITING;
     }
 
     if ($listing_paid) {
-        if (LINK_INSTANTLY_APPEAR or PAID_LINK_INSTANTLY_APPEAR) {
+        if (LINK_INSTANTLY_APPEAR || PAID_LINK_INSTANTLY_APPEAR) {
             $values['status'] = SITE_VIEW;
         }
     } else {
@@ -1233,11 +1236,11 @@ if ($site_added === true) {
         // update site
         $id = $g_site->UpdateSite($values, $p_id);
     } else {
-      $payment['log'] = "log";
+      $payment['log'] = "No log";
       $id = $g_site->AddSite($values, $payment, $sub_id);
     }
 
-    if (($id > 0) or ($listing_paid and isset($id))) {
+    if (($id > 0) || ($listing_paid && isset($id))) {
         if ($listing_paid) {
             $id = $p_id;
         }
@@ -1289,7 +1292,7 @@ if ($site_added === true) {
 
         $if_region['subscription'] = 0;
 
-        if ($amount > 0 and ! $listing_paid) {
+        if ($amount > 0 && !$listing_paid) {
 
             include 'catalog/payment.php';
             $if_region['ispayment'] = 1;
@@ -1299,12 +1302,11 @@ if ($site_added === true) {
 
             $values['id'] = $id;
 
-            if (LINK_INSTANTLY_APPEAR or ($listing_paid and PAID_LINK_INSTANTLY_APPEAR)) {
-                $g_site->SendEmail($g_params->GetParams('site_approved_email'), $values);
-            } else {
-                $g_site->SendEmail($g_params->GetParams('site_pending_email'), $values);
-            }
-
+        }
+        if ($values['status'] == SITE_VIEW) {   // if status is approved value, then approved email send to use
+            $g_site->SendEmail($g_params->GetParams('site_approved_email'), $values);
+        } else {
+            $g_site->SendEmail($g_params->GetParams('site_pending_email'), $values);
         }
 
         $tmp_tpl->SetTemplate(DIR_TEMPLATE . 'add_site_success.tpl.php');
@@ -1332,8 +1334,7 @@ if ($site_added === true) {
 
 }
 
-if (($g_params->Get('for_user', 'allow_users') and $g_params->Get('for_user', 'user_logged_to_add') and
-    ! ($g_user->Level() == AL_USER)) or ($g_user->Level() === AL_ADMIN)) {
+if (($g_params->Get('for_user', 'allow_users') && $g_params->Get('for_user', 'user_logged_to_add') && !($g_user->Level() == AL_USER)) || ($g_user->Level() === AL_ADMIN)) {
     $tpl_adds_array['{error}'] = USER_NOT_LOGGED_ADD_ERROR;
     $tpl_adds_array['{error}'] = str_replace('{user login link}', '<a href="?page=login"><u>log in</u></a>', $tpl_adds_array['{error}']);
     $tpl_adds_array['{error}'] = str_replace('{user register link}', '<a href="?page=registration"><u>register</u></a>', $tpl_adds_array['{error}']);

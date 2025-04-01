@@ -33,6 +33,8 @@
   define('CATALOG_ADDRESS' , $g_params->Get('site','site_address'));
   define('DEFAULT_CHARSET', $g_params->Get('site', 'site_charset'));
   define('ADMIN_EMAIL', $g_params->Get('site','admin_email'));
+  define('SERVER_ADMIN_EMAIL', 'ContactUSA@papirusdirectory.com');
+  define('NOREPLY_EMAIL', 'message@notifications.papirusdirectory.com');
   define('DONT_SEND_EMAILS', !$g_params->Get('site','dont_send_emails'));
   define('SITE_TITLE', $g_params->Get('site', 'site_title'));
   define('SITE_NAME', $g_params->Get('site','site_name'));

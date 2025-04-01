@@ -3,7 +3,6 @@
   // start session
   session_start();
 
-  
   // debug performance check class 
   include('php4_classes/debug.class.php');
   $g_debug = new DebugClass;
