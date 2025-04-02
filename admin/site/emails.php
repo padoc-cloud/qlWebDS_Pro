@@ -31,7 +31,7 @@
           $title = $params['title'] = $_POST['title'];
           $email_body = $params['email_body'] = $_POST['email_body'];
           $email_type = $_POST['email_type'];
-   
+          
           // check for errors
           if (( count($tmpErrors) === 0) and $g_params->UpdateParams($email_type,$params)!==false) {
              $notifications = '<div class="info">'.LANG_SETTING_SAVED.'</div>';

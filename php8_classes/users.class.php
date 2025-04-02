@@ -1,60 +1,60 @@
 <?php
-  
+
 /*
-Table Fields:
-	id;  user;  pass;  access_level;  last_active;  last_ip
-  
-Errors:
-	100 002 - 'Login and password ok, couldn`t set login time';
+  This file performs user management operations for the application. It includes methods for retrieving, updating, deleting, and registering users, as well as validating user data and managing user sessions.
+
+  Table Fields:
+    id;  user;  pass;  access_level;  last_active;  last_ip
+
 */
 
 class UsersClass
 {
-    var $m_sessionTime = 500;
-    var $m_sessionId;
-    var $m_userId;
-    var $m_userName;
-    var $m_userPassword;
-    var $m_user = false;
-    var $m_isLogged = false;
-    var $m_DB;
-    var $m_table;
-    var $m_tSites;
-    var $m_accessLevel;
-    var $m_userIp;
+    public $m_sessionTime = 500;
+    public $m_sessionId;
+    public $m_userId;
+    public $m_userName;
+    public $m_userPassword;
+    public $m_user     = false;
+    public $m_isLogged = false;
+    public $m_DB;
+    public $m_table;
+    public $m_tSites;
+    public $m_accessLevel;
+    public $m_userIp;
 
-    var $eText = '';
-    var $eNo = 0;
-    var $eFunc = '';
+    public $eText = '';
+    public $eNo   = 0;
+    public $eFunc = '';
 
-    function __construct()
+    public function __construct()
     {
         $this->UsersClass();
     }
 
-    function UsersClass()
+    public function UsersClass()
     {
         if (IS_PHP5) {
             $this->m_DB = DataBase::getInstance();
         } else {
-            $this->m_DB =& DataBase::getInstance();
+            $this->m_DB = &DataBase::getInstance();
         }
 
         if ($this->m_DB->Open()) {
-            $this->m_table = $this->m_DB->tablePrefix . 'users';
+            $this->m_table  = $this->m_DB->tablePrefix . 'users';
             $this->m_tSites = $this->m_DB->tablePrefix . 'sites';
         } else {
             $this->eText = 'DB connection failed';
-            $this->eNo = 100001;
+            $this->eNo   = 100001;
             $this->eFunc = '__construct';
         }
     }
 
-    function GetUserByLogin($login)
+    public function GetUserByLogin($login)
     {
-        $user = false;
+        $user  = false;
         $query = "SELECT * FROM " . $this->m_table . " WHERE `user`='$login'";
-        $res = $this->m_DB->query($query);
+        $res   = $this->m_DB->query($query);
 
         if ($res != false) {
             $user = $this->m_DB->GetRow($res);
@@ -62,36 +62,36 @@ class UsersClass
         return $user;
     }
 
-    function GetUserByEmail($email, $access_level = 2)
+    public function GetUserByEmail($email, $access_level = 2)
     {
-        $user = false;
+        $user  = false;
         $query = "SELECT * FROM " . $this->m_table . " WHERE `email`='" . $email . "' AND `access_level`='" . $access_level . "'";
-        $res = $this->m_DB->GetRow($query);
+        $res   = $this->m_DB->GetRow($query);
         if ($res) {
             return $res;
         }
         return false;
     }
 
-    function GetUser($id)
+    public function GetUser($id)
     {
-        $user = false;
+        $user  = false;
         $query = "SELECT * FROM " . $this->m_table . " WHERE `id`='$id'";
-        $res = $this->m_DB->GetRow($query);
+        $res   = $this->m_DB->GetRow($query);
         if ($res) {
             return $res;
         }
         return false;
     }
 
-    function UpdateUser($a_values, $id)
+    public function UpdateUser($a_values, $id)
     {
 
-        $conn = $this->m_DB->m_conn;
-        $a_values = array_map(function($value) use ($conn) {
-          return mysqli_real_escape_string($conn, $value);
+        $conn     = $this->m_DB->m_conn;
+        $a_values = array_map(function ($value) use ($conn) {
+            return mysqli_real_escape_string($conn, $value);
         }, $a_values);
-        
+
         foreach ($a_values as $key => $value) {
             $values[] = "`$key`='$value'";
         }
@@ -107,22 +107,22 @@ class UsersClass
         return false;
     }
 
-    function GetAllUsers()
+    public function GetAllUsers()
     {
         $query = 'SELECT * FROM ' . $this->m_table;
-        $res = $this->m_DB->GetTable($query);
+        $res   = $this->m_DB->GetTable($query);
         return $res;
     }
 
-    function DelUser($user_id, $delete_listings = false)
+    public function DelUser($user_id, $delete_listings = false)
     {
         if ($this->m_DB->BeginTransaction()) {
             $query = "DELETE FROM " . $this->m_table . " WHERE id=$user_id";
-            $res = $this->m_DB->query($query);
+            $res   = $this->m_DB->query($query);
             if ($res) {
                 if ($delete_listings) {
                     $query = "DELETE FROM " . $this->m_tSites . " WHERE user_id=$user_id";
-                    $res = $this->m_DB->query($query);
+                    $res   = $this->m_DB->query($query);
                 }
                 if ($res) {
                     $this->m_DB->CommitTransaction();
@@ -134,19 +134,19 @@ class UsersClass
         return false;
     }
 
-    function RegisterUserV2($a_keys, $a_values)
+    public function RegisterUserV2($a_keys, $a_values)
     {
-      $conn = $this->m_DB->m_conn;
-      $b_values = array_map(function($value) use ($conn) {
-        return mysqli_real_escape_string($conn, $value);
-      }, $a_values);
+        $conn     = $this->m_DB->m_conn;
+        $b_values = array_map(function ($value) use ($conn) {
+            return mysqli_real_escape_string($conn, $value);
+        }, $a_values);
 
-        $keys = implode(',', $a_keys);
+        $keys   = implode(',', $a_keys);
         $values = implode("','", $b_values);
 
         $query = 'INSERT INTO ' . $this->m_table . " ( $keys ) VALUES ( '$values')";
-        $res = $this->m_DB->query($query);
-        $id = $this->m_DB->GetLastId();
+        $res   = $this->m_DB->query($query);
+        $id    = $this->m_DB->GetLastId();
 
         if ($res) {
             return true;
@@ -155,97 +155,98 @@ class UsersClass
         return false;
     }
 
-    function RegisterUser($a_values)
+    public function RegisterUser($a_values)
     {
-      if ($this->m_DB && $this->m_DB->m_conn) {
-        $conn = $this->m_DB->m_conn;
-        $a_values = array_map(function($value) use ($conn) {
-          return mysqli_real_escape_string($conn, $value);
-        }, $a_values);
+        if ($this->m_DB && $this->m_DB->m_conn) {
+            $conn     = $this->m_DB->m_conn;
+            $a_values = array_map(function ($value) use ($conn) {
+                return mysqli_real_escape_string($conn, $value);
+            }, $a_values);
 
-        $id = $this->m_DB->InsertQuery($this->m_table, $a_values);
-        return $id;
-      }
-      return false;
+            $id = $this->m_DB->InsertQuery($this->m_table, $a_values);
+            return $id;
+        }
+        return false;
     }
 
-
-    function CheckEmail($email)
+    public function CheckEmail($email)
     {
         $ret = false;
         $ret = preg_match('/^[a-zA-Z0-9\._-]+@[a-zA-Z0-9\.-]+\.[a-zA-Z]{2,4}$/', $email);
         return $ret;
     }
 
-    function CheckName($name)
+    public function CheckName($name)
     {
         $ret = false;
         $ret = preg_match('/^[a-zA-Z0-9\._-]{4,20}$/', $name);
         return $ret;
     }
 
-    function NameExists($name)
+    public function NameExists($name)
     {
-        $ret = false;
+        $ret   = false;
         $query = "SELECT * FROM " . $this->m_table . " WHERE `user`='$name'";
-        $ret = $this->m_DB->GetRow($query);
+        $ret   = $this->m_DB->GetRow($query);
         return $ret;
     }
 
-    function CheckRealName($name)
+    public function CheckRealName($name)
     {
         $ret = false;
         $ret = preg_match('/^[a-zA-Z0-9\s\._-]{2,255}$/', $name);
         return $ret;
     }
 
-    function SendEmail($from_email, $to_email, $title, $mail)
+    public function SendEmail($from_email, $to_email, $title, $mail)
     {
-        $header = 'From: <' . $from_email . '>' . "\r\n";
-        $header .= 'Reply-To: <' . $from_email . '>' . "\r\n" . 'X-Mailer: PHP/' . phpversion();
+        $header = 'From: '.SITE_NAME.' <' . NOREPLY_EMAIL . '>' . "\r\n";
+        $header .= 'Reply-To: <' . $from_email . '>' . "\r\n";
+        $header .= 'Return-Path: ' . NOREPLY_EMAIL . "\r\n";
+        $header .= 'X-Mailer: PHP/' . phpversion() . "\r\n";
         $header .= 'MIME-Version: 1.0' . "\r\n";
         $header .= 'Content-type: text/html; charset=' . DEFAULT_CHARSET . "\r\n";
 
         return mail($to_email, $title, $mail, $header);
     }
-      
-      /*
+
+    /*
       ///////////////////// POSITIONS ////////////////////
       function GetPositionsT() {
         $query = "SELECT * FROM stanowiska";
         $table = $this->m_DB->GetTable($query);
         return $table;
       }
-              
+
       function GetPositions() {
         $combo = false;
-        
+
         $query = "SELECT * FROM stanowiska";
         $table = $this->m_DB->GetTable($query);
 
         if ($table) {
           $combo = array();
-          
+
           foreach ($table as $row) {
             $combo[$row['id']] = $row['nazwa'];
           }
         }
-        return $combo;      
+        return $combo;
       }
-      
+
       function AddPosition($name) {
         $id = false;
         $query = "INSERT INTO stanowiska (`nazwa`) VALUES ('$name')";
         $res = $this->m_DB->query($query);
         if ($res) {
          $id = $this->m_DB->GetLastId();
-        } 
-        return $id;       
+        }
+        return $id;
       }
 
       function DeletePosition($id) {
         $ret = false;
-  
+
         $query = "SELECT COUNT(*) as hmany FROM ".$this->m_table." WHERE stanowisko=$id";
         $res = $this->m_DB->query($query);
         if ($res) {
@@ -257,26 +258,24 @@ class UsersClass
             if ($res) {
               $ret = $this->m_DB->Affected();
             }
-          } 
-          
+          }
+
         }
 
-        $res = $this->m_DB->query($query);      
-        
+        $res = $this->m_DB->query($query);
+
         return $ret;
-    
+
       }
-        
+
       function UpdatePosition($name,$id){
         $query = "UPDATE stanowiska SET `nazwa`='$name' WHERE id=$id";
         $res = $this->m_DB->query($query);
         if ($res) {
           $res = $this->m_DB->Affected();
         }
-        return $res;      
+        return $res;
       }
       */
 
 }
-
-?>

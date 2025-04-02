@@ -27,7 +27,7 @@
 				<p><span class="si_text"><b>{lang title}:</b></span> &raquo; <span class="{url_disp}"><a href="{address}" class="link1" target="_blank" onclick="visit_count({id},'{home_url}');"><u>{title}</u></a> &laquo; (click to visit)</span><span class="{title_only_disp}">{title}</span></p>
 				<p class="{product_disp}"><span class="si_text">{lang prod_name}: </span>{product}</p>
       			<p><span class="si_text"><b>{lang url}:</b></span> <a href="{address}" class="link1" target="_blank" onclick="visit_count({id},'{home_url}');">{address}</a><span class="{url_disp}">
-				<br>-&nbsp; <a href="#" onclick="window.open('broken.php?id={id}&amp;s={categ}', 'qlWeb', 'height=250,resizable=yes,scrollbars=yes,width=550');return false;" title="Report Incorrect Info/Broken Link" class="si_text"><u>{broken}</u></a></span></p>
+				<br>-&nbsp; <a href="#" onclick="window.open('broken.php?id={id}&amp;s={categ}', 'qlWeb', 'height=457,width=630,resizable=yes,scrollbars=yes');return false;" title="Report Incorrect Info/Broken Link" class="si_text"><u>{broken}</u></a></span></p>
 				<p><span class="si_text"><b>{lang categories}:</b></span> {categories}</p>
 				<p><span class="si_text"><b>{lang deep links}</b></span> {deep links}</p>
 				<p><span class="si_text"><b>{lang description_site_info}:</b></span> {description}</p>

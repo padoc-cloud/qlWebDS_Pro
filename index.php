@@ -2,7 +2,7 @@
 
   // start session
   session_start();
-  
+
   // debug performance check class 
   include('php4_classes/debug.class.php');
   $g_debug = new DebugClass;
@@ -11,7 +11,7 @@
   define ('THUMB_DIR', './thumbnails/');
   
   define ('MAIN_CATALOG', './');
-
+  
   // initialize classes
   // filter POST data
   // makes $g_cache_addr
@@ -22,8 +22,8 @@
 
   // check if admin URL field is filled (site address)
   if ( strlen($g_params->Get('site', 'site_address'))<5 ) {
-    echo 'go to <a href="admin/">admin</a> and fill in correct Site Settings (Config->Site Settings)<br><a href="http://www.qlWebScripts.com" target="_blank"><u>qlWeb Scripts</u></a>';
-    exit; 
+    echo 'go to <a href="admin/">admin</a> and fill in correct Site Settings (Config->Site Settings)<br>';
+    // exit; 
   } 
 
   include('users_online.php');
@@ -89,14 +89,14 @@
 			}
 		}
   	} 
-	if (isset($_GET['categ'])) {
-	    if (is_numeric($_GET['categ'])) {
-	      $cur_cat_id = (int) $_GET['categ'];
-	      $cur_cat_row = $g_categ->GetCategory($cur_cat_id);
-	    }
-	}
+    if (isset($_GET['categ'])) {
+        if (is_numeric($_GET['categ'])) {
+          $cur_cat_id = (int) $_GET['categ'];
+          $cur_cat_row = $g_categ->GetCategory($cur_cat_id);
+        }
+    }
 	
-	if (!$cur_cat_row) {
+	  if (!$cur_cat_row) {
 
       include('404.php');
     	
@@ -160,7 +160,6 @@
 
   // site info
   } else if (isset($_GET['site'])) {
-  
     if (!is_numeric($_GET['site']) ) {  
 
     	include('404.php');
@@ -333,7 +332,7 @@
 	    
 	  }
       
-  } 
+  }
 
   /*
   // latest featured links    

@@ -3,12 +3,12 @@
   require_once('db_params.php');
   require_once('config.php');
   
-  // New code here
+  // Begin New code here - Short Description: Get the major version of PHP
   $versionParts = explode('.', phpversion());
   $majorVersion = (int)$versionParts[0];
   // End of new code
 
-  // Modified by: 2025-03-024
+  // Modified by: 2025-03-024    - Short Description: Check if PHP version is less than 5.0 or greater than or equal to 5.0
   if (version_compare( phpversion(), '5.0' ) < 0) {  
       define('IS_PHP5' , false);
       define('CLASS_DIR', 'php4_classes/'); 
@@ -16,6 +16,7 @@
      define('IS_PHP5' , true);                                // don't need to change this variable
      define('CLASS_DIR', 'php' . $majorVersion . '_classes/'); 
   }
+  // End of modification
   
   $g_errors = array();
 
@@ -62,20 +63,26 @@
 
   $g_user->CheckIfIsLogged();
 
- // security  Modified for simple by: 03/24/2025
+ // security 
  if (!isset($_GET['o'])) {
   foreach ($_POST as $key => $value) {
-      if (is_string($value)) {
-          if (!$g_user->IsLogged()) {
-              $value = get_magic_quotes_gpc() ? stripslashes($value) : $value;
-              $_POST[$key] = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
-          } else {
-              $value = get_magic_quotes_gpc() ? stripslashes($value) : $value;
-              $_POST[$key] = stripslashes($value);
-          }
-      }
+  
+   if(is_string($value)) {
+   
+     if (!$g_user->IsLogged()) {
+       if (function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc()) {
+          $value = stripslashes($value);
+       }     
+       $_POST[$key] =  htmlspecialchars($value);
+
+     } else {
+       if (function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc()) {
+          $_POST[$key] = stripslashes($_POST[$key]);
+       }
+     }
+   }
   }
-}
+ }
   
   $g_addr = htmlentities($_SERVER['PHP_SELF']);
   $g_cache_addr = htmlentities($_SERVER['QUERY_STRING']);

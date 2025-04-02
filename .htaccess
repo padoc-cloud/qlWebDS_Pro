@@ -8,59 +8,76 @@
 ##			      PLEASE NOTE: the following settings will only work on Linux/Apache servers.					##
 ##################################################################################################################################################
 
+RewriteEngine On
+
 # New to htaccess file?
 # (lines WITH the # in the beginning are NOT functional - OFF)
 # (lines WITHOUT the # in the beginning ARE functional - ON)
 # You may manipulate the lines below accordingly
 
 # For future reference you might want to enter your domain name below:
-# YourDomain.com
+# PapirusDirectory.com
 
 # Enter your domain to redirect http://YourDomain.com to http://www.YourDomain.com (recommended)
 # Note - this htaccess method of redirection works ONLY on Linux servers having the Apache ModRewrite module enabled
 # RENAME YourDomain.com with your actual domain name and remove the # from the beginning of the following 2 lines
-# RewriteCond %{HTTP_HOST} ^YourDomain.com [NC]
-# RewriteRule ^(.*)$ http://www.YourDomain.com/$1 [L,R=301]
+# RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^PapirusDirectory\.com$ [NC]  
+RewriteRule ^(.*)$ https://www.PapirusDirectory.com/$1 [L,R=301]
 
-# Follow symbolic links in this directory (if you have problems with your hosting account's mod rewrite, try to comment off (#) the next line
-Options +FollowSymLinks
+# Follow symbolic links in this directory (if you have problems with your hosting account's mod rewrite, try to comment off (#) the next line Options +FollowSymLinks
 
-RewriteEngine On
 # If script is installed in a subfolder, edit the line below the following example to point to the subfolder
-# Example: RewriteBase /YourSubfolder (RENAME YourSubfolder with your actual subfolder name)
+# Example: RewriteBase /YourSubfolder/ (RENAME YourSubfolder with your actual subfolder name)
+
 RewriteBase /
 
+# Allow direct access to install.php (important for setup)
+# RewriteRule ^install\.php$ - [L,QSA]
+# RewriteRule ^$ index.php [L,QSA]
+# Prevent rewriting for real files/dirs/links
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-l
-RewriteRule ^(.*)more-([^-]+).htm(.*)$ index.php?site=$2
+RewriteRule ^(.*)more-([^-]+).htm(.*)$ index.php?site=$2 [L,QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-l
-RewriteRule ^(.*).htm(.*)$ index.php?page=$1
+RewriteRule ^(.*).htm(.*)$ index.php?page=$1 [L,QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-l
-RewriteRule ^(.*)$ index.php?category_path=$1
+RewriteRule ^(.*)$ index.php?category_path=$1 [L,QSA]
 
 # Customized error messages: (must do if installed in a subfolder)
 # If installed in a subfolder, edit the line below the example
 # Example: ErrorDocument 404 YourSubfolder/index.php?404.php (RENAME YourSubfolder with your actual subfolder name)
-  ErrorDocument 404 /index.php?page=404
 
-# Protect directories
-<Files ~ "^(languages|cache)$">
-  Order deny,allow
-  Deny from all
-</Files>
+# ErrorDocument 404 /index.php?page=404
 
-# Protect files
-<Files ~ "^(.*)\.(inc|inc\.php|tpl|sql)$">
-  Order deny,allow
-  Deny from all
-</Files>
+# Security: Deny access to sensitive directories (modern Apache)
+<IfModule mod_authz_core.c>
+    <FilesMatch "^(languages|cache)$">
+        Require all denied
+    </FilesMatch>
+    <FilesMatch "\.(inc|inc\.php|tpl|sql)$">
+        Require all denied
+    </FilesMatch>
+</IfModule>
+
+# Security: Legacy Apache 2.2
+# <IfModule !mod_authz_core.c>
+#     <FilesMatch "^(languages|cache)$">
+#         Order deny,allow
+#         Deny from all
+#     </FilesMatch>
+#     <FilesMatch "\.(inc|inc\.php|tpl|sql)$">
+#         Order deny,allow
+#         Deny from all
+#     </FilesMatch>
+# </IfModule>
 
 # Disable directory browsing
 Options -Indexes

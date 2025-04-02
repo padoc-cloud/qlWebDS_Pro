@@ -1,14 +1,20 @@
 <?php
 
   require_once('db_params.php');
-  
-  if (version_compare( phpversion(), '5.0') < 0) {  
-      define('IS_PHP5' , false);
-      define('CLASS_DIR', 'php4_classes/'); 
-  } else {
-     define('IS_PHP5' , true);
-     define('CLASS_DIR', 'php5_classes/'); 
-  }
+  // Begin New code here - Short Description: Get the major version of PHP
+	$versionParts = explode('.', phpversion());
+	$majorVersion = (int)$versionParts[0];
+	// End of new code
+
+  // Modified by: 2025-03-24           - Short Description: Check if PHP version is less than 5.0 or greater than or equal to 5.0
+  if (version_compare( phpversion(), '5.0' ) < 0) {  
+		define('IS_PHP5' , false);
+		define('CLASS_DIR', 'php4_classes/'); 
+	} else if (version_compare( phpversion(), '5.0' ) >= 0) {    // modified by: 2025-03-24
+		define('IS_PHP5' , true);                                // don't need to change this variable
+		define('CLASS_DIR', 'php' . $majorVersion . '_classes/'); 
+	}
+  // End of modification
     
   // connect to database
   require_once(CLASS_DIR.'database.class.php');
@@ -29,6 +35,8 @@
   define('ADMIN_EMAIL', $g_params->Get('site', 'admin_email'));
   define('SITE_ADDRESS', $g_params->Get('site', 'site_address'));
   define('USE_CAPTCHA' , $g_params->Get('site','use_captcha'));
+  define('NOREPLY_EMAIL', 'message@notifications.papirusdirectory.com');
+  define('DEFAULT_CHARSET', $g_params->Get('site', 'site_charset'));
   
   define('MAX_CATEG_LENGHT', $g_params->Get('for_user','max_categ_lenght'));
   define('MAX_TITLE_LENGHT', $g_params->Get('for_user','max_title_lenght'));
@@ -95,9 +103,13 @@
 	   $text = "Broken Link/Incorrect Info: ".SITE_ADDRESS."index.php?site=" . $id . "
 			From IP: $ip
 			Comment: $_POST[comment]";
-       $header = 'From: Directory User <'. $mail . '>' . "\r\n";
-       $header .= 'Reply-To: <' . $mail . '>' . "\r\n" . 'X-Mailer: PHP/' . phpversion();
-       $header .= 'Content-type: text; charset=utf-8' . "";
+      $header = 'From: Directory User <' . NOREPLY_EMAIL . '>' . "\r\n";
+      $header .= 'Reply-To: <' . $mail . '>' . "\r\n";
+      $header .= 'Return-Path: ' . NOREPLY_EMAIL . "\r\n";
+      $header .= 'X-Mailer: PHP/' . phpversion() . "\r\n";
+      $header .= 'MIME-Version: 1.0' . "\r\n";
+      $header .= 'Content-type: text/html; charset=' . DEFAULT_CHARSET . "\r\n";
+
        $dlg = strlen($mail);
        if($dlg) {     
           $ok = @mail($mail, "Broken Link/Incorrect Info", $text, $header);

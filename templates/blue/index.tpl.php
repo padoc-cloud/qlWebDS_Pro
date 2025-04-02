@@ -2,26 +2,29 @@
 <html>
 	<head>
 		<title>{title}</title>
-			<meta name="description" content="{description}">
-			<meta name="keywords" content="{keywords}">
-			<meta name="author" content="{name}">
-			<meta name="copyright" content="Copyright (c) {year_foot} by {company}. All Rights Reserved.">
-			<meta name="robots" content="index,all,follow">
-			<meta name="revisit-after" content="5 days">
-			<meta name="distribution" content="global">
-			<meta name="resource-type" content="document">
-			<meta name="rating" content="general">
-			<meta name="generator" content="{full_version} - {script_name}">
-			<meta name="expires" content="0">
-			<meta http-equiv="cache-control" content="no-cache">
-			<meta http-equiv="content-type" content="text/html; charset={charset}">
+		<meta name="description" content="{description}">
+		<meta name="keywords" content="{keywords}">
+		<meta name="author" content="{name}">
+		<meta name="copyright" content="Copyright (c) {year_foot} by {company}. All Rights Reserved.">
+		<meta name="robots" content="index,all,follow">
+		<meta name="revisit-after" content="5 days">
+		<meta name="distribution" content="global">
+		<meta name="resource-type" content="document">
+		<meta name="rating" content="general">
+		<meta name="generator" content="{full_version} - {script_name}">
+		<meta name="expires" content="0">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="content-type" content="text/html; charset={charset}">
 		<link href="{home_url}{template}style.css" rel="stylesheet" type="text/css">
+		<link href="{home_url}java_scripts/custom-style.css" rel="stylesheet" type="text/css">
 		<link href="{home_url}images/directory_banners/favicon.ico" rel="shortcut icon">
-		<script src="{home_url}java_scripts/func.js" type="text/javascript" language="JavaScript">
-		</script>
 		{google_analytics}
 	</head>
 	<body>
+		<!-- Loading Spinner -->
+		<div id="loading-spinner" style="display: none;">
+			<div class="spinner"></div>
+		</div>
 <!-- {copyright} //-->
 <!-- This file may be used with Blue Template //-->
 <div style="text-align: center; width: 100%;">
@@ -176,5 +179,6 @@
 		</table>
 	</div>
 </div>
+<script src="{home_url}java_scripts/func.js" type="text/javascript" language="JavaScript"></script>
   </body>
 </html>

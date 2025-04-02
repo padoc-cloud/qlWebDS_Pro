@@ -1,5 +1,5 @@
 <?php
-  
+
   $tmp_tpl = new TemplateClass(); 
   $tpl_adds_array = array();
 
@@ -29,8 +29,10 @@
 
   $pass_confirm = '';
   
+  
   if ((isset($_POST['submit']) or isset($_POST['captcha_refresh'])) ) {
   
+    
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // check POST data  
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -93,9 +95,9 @@
             $values[$key] = $_POST[$key];
             break;
             
-      } // end switch
-      
-    } // end for
+        } // end switch
+        
+      } // end for
     
     if (isset($_POST['captcha_refresh'])) {
         $isError = true;
@@ -165,6 +167,7 @@
       $tpl_key = '{'.$key.' value}';
       $tpl_adds_array[$tpl_key] = $values[$key];
     }
+
     $tpl_adds_array['{pass_confirm value}'] = $pass_confirm;
     $country_value = $values['country'];
     

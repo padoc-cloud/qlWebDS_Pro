@@ -1,5 +1,7 @@
 <?php
 
+// This file performs database management operations for the application. It includes methods for connecting to the database, executing queries, managing transactions, and retrieving or manipulating data.
+
 class DataBase
 {
     private static $oInstance = false;
@@ -22,7 +24,7 @@ class DataBase
 
     public function __construct()
     {
-
+        $this->Open();
     }
 
     public static function getInstance()
@@ -200,7 +202,9 @@ class DataBase
     public function UpdateQuery($table, $values, $id)
     {
         $atmp   = [];
-        $values = array_map([$this->m_conn, "mysqli_real_escape_string"], $values);
+        $values = array_map(function($value) {
+            return mysqli_real_escape_string($this->m_conn, $value);
+        }, $values);
 
         foreach ($values as $key => $value) {
             $atmp[] = "$key = '$value'";
