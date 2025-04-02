@@ -22,7 +22,7 @@
    					<p style="color: rgb(170, 34, 34);">www: {address}[1]</p>
    					<p><b>Tel.</b> {tel}[1]</p>
    					<p> 
-    				:: <a href="{more address}[1]" title="Site's Detail Statistics" class="infolink">[Site Details]</a> &nbsp; | &nbsp; <a href="#" onclick="window.open('broken.php?id={id}[1]&amp;s={categ}[1]', 'qlWeb', 'height=250,resizable=yes,scrollbars=yes,width=320');return false;" title="Report Incorrect Info/Broken Link" class="infolink">{broken}[1]</a> 
+    				:: <a href="{more address}[1]" title="Site's Detail Statistics" class="infolink">[Site Details]</a> &nbsp; | &nbsp; <a href="#" onclick="window.open('broken.php?id={id}[1]&amp;s={categ}[1]', 'qlWeb', 'height=457,width=630,resizable=yes,scrollbars=yes');return false;" title="Report Incorrect Info/Broken Link" class="infolink">{broken}[1]</a> 
    					</p>
   				</div> 
  			</td> 

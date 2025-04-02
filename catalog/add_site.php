@@ -166,9 +166,7 @@ if (!$site_added && isset($_POST['submit_step1'])) {
     // check URL (if not empty)
     if (strlen(trim($_POST['url'])) != 0) {
         $values['url'] = $g_site->ParseURL($_POST['url']);
-        if ($values['url']) {
-
-        } else {
+        if (empty($values['url'])) {
             $eMsg .= '<p>' . ADD_SITE_05 . '</p>';
             $isError = true;
         }
@@ -176,9 +174,7 @@ if (!$site_added && isset($_POST['submit_step1'])) {
 
     // check e-mail
     $values['email'] = $g_site->CheckEmail($_POST['email']);
-    if ($values['email']) {
-
-    } else {
+    if (empty($values['email'])) {
         $values['email'] = '';
         $eMsg .= '<p>' . ADD_SITE_03 . '</p>';
         $isError = true;
@@ -198,11 +194,6 @@ if (!$site_added && isset($_POST['submit_step1'])) {
             $values = array_merge($values, $header);
         }
     }
-} else if ($listing_paid && isset($_POST['submit_step1_2'])) {
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // listing paid do nothing in this part of the code
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 } else if (!$site_added && (isset($_POST['submit_step1_2']) || isset($_POST['captcha_refresh1_2']))) {
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -500,7 +491,7 @@ if (!$site_added && isset($_POST['submit_step1'])) {
     $logo_filename = '';
     $max_logo_size = MAX_LOGO_SIZE; // 125 kb
 
-    if (! $isError) {
+    if (!$isError) {
         if (isset($_FILES) && strlen($_FILES['logo_upload']['name']) > 0) {
             if ($_FILES['logo_upload']['size'] <= $max_logo_size) {
 
@@ -529,10 +520,9 @@ if (!$site_added && isset($_POST['submit_step1'])) {
                 $eMsg .= '<p>' . ADD_SITE_10 . '</p>';
                 $isError = true;
             }
-
             // something went wrong... clean up
             if ($isError) {
-                if (! empty($logo_filename) && file_exists(LOGO_DIR . "/" . $logo_filename)) {
+                if (!empty($logo_filename) && file_exists(LOGO_DIR . "/" . $logo_filename)) {
                     unlink(LOGO_DIR . "/" . $logo_filename);
                 }
                 $logo_filename = '';
@@ -543,7 +533,6 @@ if (!$site_added && isset($_POST['submit_step1'])) {
             $eMsg .= '<p>' . ADD_SITE_12 . '</p>';
             $logo_msg = true;
         }
-
     }
 
     if (isset($_POST['captcha_refresh'])) {
@@ -619,10 +608,11 @@ $tpl_adds_array['{address}'] = $g_addr;
 //////////////////////////////////////////////////////////
 $payment_period = $g_params->Get('payment', 'payment_period');
 if ($payment_period > 0) {
-    if ($payment_period == 1) {{ $lang_period = LANG_1MONTHS;}
-        if ($payment_period == 6) {$lang_period = LANG_6MONTHS;}} else { $lang_period = LANG_12MONTHS;}
+    if ($payment_period == 1) {
+        $lang_period = LANG_1MONTHS;
+        if ($payment_period == 6) $lang_period = LANG_6MONTHS;
+    } else $lang_period = LANG_12MONTHS;
     $tpl_adds_array['{lang subscription}'] = LANG_SUBSCRIPTION . ': ' . $lang_period;
-
 } else {
     $tpl_adds_array['{lang subscription}'] = LANG_NO_SUBSCRIPTION;
 }
@@ -696,29 +686,26 @@ $tpl_adds_array['{deep_link_expl}'] = LANG_DEEP_LINK_EXPL;
 $tpl_adds_array['{currency}'] = CURRENCY;
 
 for ($i = 1; $i <= LINK_TYPES; $i++) {
-    if ($g_payment["crecip[$i]"] == 1) {
-        $tpl_adds_array['{is_reciprocal_' . $i . '}']   = LINK_RECIPROCAL;
-        $tpl_adds_array['{disp_reciprocal_' . $i . '}'] = 'true';
-    } else {
-        $tpl_adds_array['{is_reciprocal_' . $i . '}']   = '';
-        $tpl_adds_array['{disp_reciprocal_' . $i . '}'] = 'false';
+    switch ($g_payment["crecip[$i]"]) {
+        case 1:
+            $tpl_adds_array['{is_reciprocal_' . $i . '}'] = LINK_RECIPROCAL;
+            $tpl_adds_array['{disp_reciprocal_' . $i . '}'] = 'true';
+            break;
+        
+        default:
+            $tpl_adds_array['{is_reciprocal_' . $i . '}'] = '';
+            $tpl_adds_array['{disp_reciprocal_' . $i . '}'] = 'false';
+            break;
     }
 }
 
+
 for ($i = 1; $i <= LINK_TYPES; $i++) {
-    if ($g_payment["logoup[$i]"] == 1) {
-        $tpl_adds_array['{is_logo_' . $i . '}'] = 'true';
-    } else {
-        $tpl_adds_array['{is_logo_' . $i . '}'] = 'false';
-    }
+    $tpl_adds_array['{is_logo_' . $i . '}'] = ($g_payment["logoup[$i]"] == 1) ? 'true' : 'false';
 }
 
 for ($i = 1; $i <= LINK_TYPES; $i++) {
-    if ($g_payment["videoup[$i]"] == 1) {
-        $tpl_adds_array['{is_video_' . $i . '}'] = 'true';
-    } else {
-        $tpl_adds_array['{is_video_' . $i . '}'] = 'false';
-    }
+    $tpl_adds_array['{is_video_' . $i . '}'] = ($g_payment["videoup[$i]"] == 1) ? 'true' : 'false';
 }
 
 $if_region['top_category'] = $category['level'];
@@ -736,13 +723,13 @@ $tpl_adds_array['{my_reciprocal value}'] = '<a href="' . $recip_url . '" target=
 // process with $_POST values
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-if ((isset($_POST['submit_step1']) && (!$isError)) || ((isset($_POST['submit_step1_2']) && $isError)) || ((isset($_POST['submit_step2']) && $isError))) {
+if ((isset($_POST['submit_step1']) && (!$isError)) || (isset($_POST['submit_step1_2']) && $isError) || (isset($_POST['submit_step2']) && $isError)) {
 
     //////////////////////////////////////
     // fill prices
     //////////////////////////////////////
-    foreach ($g_payment as $key => $value) {
 
+    foreach ($g_payment as $key => $value) {
         if (preg_match("/^type\[[0-" . LINK_TYPES . "]\]$/", $key)) {
 
             $value = number_format((float) ($value), 2);
@@ -761,30 +748,20 @@ if ((isset($_POST['submit_step1']) && (!$isError)) || ((isset($_POST['submit_ste
     $k    = 0;
     $last = $i;
     for ($i = 1; $i <= LINK_TYPES; $i++) {
-
         if (!$g_payment["ctype[$i]"] || ($category['level'] == 1 && $i != LT_FEAT_TOP)) { // ctype[] - checkbox if active link type
             $tpl_adds_array["{style type[$i]}"] = 'style="display: none;"';
 
         } else {
 
             $last = $i;
-            if ($link_type == $i) {
-                $tpl_adds_array["{checked type[$i]}"] = 'checked';
-            } else {
-                $tpl_adds_array["{checked type[$i]}"] = '';
-            }
+            $tpl_adds_array["{checked type[$i]}"] = ($link_type == $i) ? 'checked' : '';
 
-            if ($k == 1) {
-                $tpl_adds_array["{style type[$i]}"] = 'class="colored"';
-            } else {
-                $tpl_adds_array["{style type[$i]}"] = '';
-            }
+            $tpl_adds_array["{style type[$i]}"] = ($k == 1) ? 'class="colored"' : '';
             $k = 1 - $k;
 
             if ($category['level'] == 1 && $i == LT_FEAT_TOP) {
                 $tpl_adds_array["{checked type[$i]}"] = 'checked';
             }
-
         }
     }
 
@@ -863,7 +840,6 @@ if ((isset($_POST['submit_step1']) && (!$isError)) || ((isset($_POST['submit_ste
         $tpl_adds_array['{url readonly}']   = 'readonly="readonly"';
         $tpl_adds_array['{email readonly}'] = 'readonly="readonly"';
     }
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1164,7 +1140,6 @@ if ($site_added === true) {
     $tmp_tpl->IfRegion($aIfRegion);
 
 } else if (isset($_POST['submit_step2']) && (!$isError)) {
-
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // successful step 2, save site
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1178,7 +1153,6 @@ if ($site_added === true) {
     if (COLLECT_PAGE_RANK) {
 
         include 'catalog/pr.php';
-        //$pr = trim(getrank($values['url']));
         $pr = trim(pagerank($values['url']));
         if (is_numeric($pr) && $pr > 0) {
             $values['pr'] = $pr;
@@ -1266,47 +1240,46 @@ if ($site_added === true) {
         }
 
         // rename logo file if uploaded
-        if (! empty($logo_filename)) {
+        if (!empty($logo_filename)) {
             rename(LOGO_DIR . '/' . $logo_filename, LOGO_DIR . '/' . $id . LOGO_NAME_SUFFIX);
         }
 
         $tpl_adds_array['{url_disp}'] = '';
-        if (trim($values['url']) == '') {
-            $tpl_adds_array['{url_disp}'] = 'do_not_disp';
-        }
+        if (trim($values['url']) == '') $tpl_adds_array['{url_disp}'] = 'do_not_disp';
 
-        if ($values['status'] == SITE_VIEW) {
-
-            $tpl_adds_array['{title}']       = $values['title'];
-            $tpl_adds_array['{address}']     = $values['url'];
-            $tpl_adds_array['{description}'] = $values['description'];
-            $tpl_adds_array['{id}']          = $id;
-            $if_region['site_new']           = 2;
-
-        } else {
-            $if_region['site_new']           = 1;
-            $tpl_adds_array['{address}']     = $values['url'];
-            $tpl_adds_array['{title}']       = $values['title'];
-            $tpl_adds_array['{description}'] = $values['description'];
+        switch ($values['status']) {
+            case SITE_VIEW:
+                $tpl_adds_array['{title}']       = $values['title'];
+                $tpl_adds_array['{address}']     = $values['url'];
+                $tpl_adds_array['{description}'] = $values['description'];
+                $tpl_adds_array['{id}']          = $id;
+                $if_region['site_new']           = 2;
+                break;
+            default:
+                $if_region['site_new']           = 1;
+                $tpl_adds_array['{title}']       = $values['title'];
+                $tpl_adds_array['{address}']     = $values['url'];
+                $tpl_adds_array['{description}'] = $values['description'];
+                break;
         }
 
         $if_region['subscription'] = 0;
 
         if ($amount > 0 && !$listing_paid) {
-
             include 'catalog/payment.php';
             $if_region['ispayment'] = 1;
-
         } else {
             $if_region['ispayment'] = 0;
-
             $values['id'] = $id;
-
         }
-        if ($values['status'] == SITE_VIEW) {   // if status is approved value, then approved email send to use
-            $g_site->SendEmail($g_params->GetParams('site_approved_email'), $values);
-        } else {
-            $g_site->SendEmail($g_params->GetParams('site_pending_email'), $values);
+
+        switch ($values['status']) {
+            case SITE_VIEW:  // Send approved email if status equals SITE_VIEW
+                $g_site->SendEmail($g_params->GetParams('site_approved_email'), $values);
+                break;
+            default:  // Send pending email for all other statuses
+                $g_site->SendEmail($g_params->GetParams('site_pending_email'), $values);
+                break;
         }
 
         $tmp_tpl->SetTemplate(DIR_TEMPLATE . 'add_site_success.tpl.php');
@@ -1314,7 +1287,6 @@ if ($site_added === true) {
     } else {
         $tmp_tpl->SetTemplate(DIR_TEMPLATE . 'add_site_failure.tpl.php');
     }
-
 } else {
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
