@@ -214,7 +214,7 @@ function hideSpinner() {
 window.addEventListener('load', hideSpinner);
 
 window.addEventListener('beforeunload', function () {
-  showSpinner(300);
+  showSpinner(500);
 });
 
 // Add submit event listener to forms
@@ -222,7 +222,7 @@ const forms = document.getElementsByTagName('form');
 if (forms.length > 0) {
   for (let i = 0; i < forms.length; i++) {
     forms[i].addEventListener('submit', function () {
-      showSpinner(5);
+      showSpinner(100);
     });
   }
 }

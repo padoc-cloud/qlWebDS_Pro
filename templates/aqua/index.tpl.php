@@ -60,15 +60,15 @@
 										</tr>
 										{if allow_users==1}
 										<tr>
-											<td style="padding: 5px 15px 5px 15px;" class="topbutton" nowrap="nowrap"><a href="./?page=login">Login</a></td>
+											<td style="padding: 5px 15px 5px 15px;" class="topbutton" nowrap="nowrap"><a href="{home_url}?page=login">Login</a></td>
 											<td><img src="{home_url}templates/aqua/images/spacer.gif" width="10" alt="spacer"></td>
-											<td style="padding: 5px 15px 5px 15px;" class="topbutton" nowrap="nowrap"><a href="./?page=registration">Register</a></td>
+											<td style="padding: 5px 15px 5px 15px;" class="topbutton" nowrap="nowrap"><a href="{home_url}?page=registration">Register</a></td>
 											<td><img src="{home_url}templates/aqua/images/spacer.gif" width="10" alt="spacer"></td>
 											{end allow_users}
 											{if user_logged_in==1}
-											<td style="padding: 5px 15px 5px 15px;" class="topbutton" nowrap="nowrap"><a href="./?page=user_account">My Account: <b>{user}</b></a></td>
+											<td style="padding: 5px 15px 5px 15px;" class="topbutton" nowrap="nowrap"><a href="{home_url}?page=user_account">My Account: <b>{user}</b></a></td>
 											<td><img src="{home_url}templates/aqua/images/spacer.gif" width="10" alt="spacer"></td>
-											<td style="padding: 5px 15px 5px 15px;" class="topbutton" nowrap="nowrap"><a href="./?page=logout">Logout</a></td>
+											<td style="padding: 5px 15px 5px 15px;" class="topbutton" nowrap="nowrap"><a href="{home_url}?page=logout">Logout</a></td>
 											<td><img src="{home_url}templates/aqua/images/spacer.gif" width="10" alt="spacer"></td>
 											{end user_logged_in}
 										</tr>
