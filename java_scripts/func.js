@@ -195,3 +195,34 @@ function visit_count(site_id,home_url) {
 //        return false;
   
 }
+
+const spinner = document.getElementById('loading-spinner');
+let spinnerTimeout = null;
+
+function showSpinner(time = 600) {
+  if (spinnerTimeout) return ;// Prevent multiple timeouts
+  spinnerTimeout = setTimeout(() => {
+    spinner.style.display = 'flex';
+  }, time);
+}
+
+function hideSpinner() {
+  clearTimeout(spinnerTimeout);
+  spinner.style.display = 'none';
+}
+
+window.addEventListener('load', hideSpinner);
+
+window.addEventListener('beforeunload', function () {
+  showSpinner(300);
+});
+
+// Add submit event listener to forms
+const forms = document.getElementsByTagName('form');
+if (forms.length > 0) {
+  for (let i = 0; i < forms.length; i++) {
+    forms[i].addEventListener('submit', function () {
+      showSpinner(5);
+    });
+  }
+}
