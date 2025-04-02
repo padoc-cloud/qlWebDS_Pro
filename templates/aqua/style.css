@@ -336,12 +336,15 @@ text-decoration: underline;
 }
 
 .ql_main div.image2 {
-padding: 2px 2px 2px 5px;
+padding: 2px 2px 2px 2px;
 margin-right: 5px;
 float: left;
 width: 163px;
 text-align: center;
 border: 1px solid #dc913e;
+}
+.ql_last_featured div.image2 a img {
+    width: 150px;
 }
 
 .ql_main div.image_latest_most {
