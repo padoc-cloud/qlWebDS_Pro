@@ -100,8 +100,8 @@
 	   $mail = ADMIN_EMAIL;
 	   $id = (int) $_GET['id'];
 	   $ip = $_SERVER['REMOTE_ADDR'];
-	   $text = "Broken Link/Incorrect Info: ".SITE_ADDRESS."index.php?site=" . $id . "
-			From IP: $ip
+	   $text = "Broken Link/Incorrect Info: ".SITE_ADDRESS."index.php?site=" . $id . "<br />
+			From IP: $ip <br />
 			Comment: $_POST[comment]";
       $header = 'From: Directory User <' . NOREPLY_EMAIL . '>' . "\r\n";
       $header .= 'Reply-To: <' . $mail . '>' . "\r\n";
@@ -111,7 +111,7 @@
       $header .= 'Content-type: text/html; charset=' . DEFAULT_CHARSET . "\r\n";
 
        $dlg = strlen($mail);
-       if($dlg) {     
+       if($dlg) {
           $ok = @mail($mail, "Broken Link/Incorrect Info", $text, $header);
        }
 	   $aIfRegion['done'] = 1; 

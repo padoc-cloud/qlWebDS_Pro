@@ -51,11 +51,13 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-l
 RewriteRule ^(.*)$ index.php?category_path=$1 [L,QSA]
 
+RewriteRule ^404\.php$ /index.php?page=404 [L,R=301]
+
 # Customized error messages: (must do if installed in a subfolder)
 # If installed in a subfolder, edit the line below the example
 # Example: ErrorDocument 404 YourSubfolder/index.php?404.php (RENAME YourSubfolder with your actual subfolder name)
 
-# ErrorDocument 404 /index.php?page=404
+ErrorDocument 404 /index.php?page=404
 
 # Security: Deny access to sensitive directories (modern Apache)
 <IfModule mod_authz_core.c>

@@ -195,7 +195,6 @@
   			include('catalog/'.$site.'.php');
   			break;
   		case '404':
-  			echo('in the 404 case');
 		    include('404.php');
   			break;
   		default:
