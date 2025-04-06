@@ -66,9 +66,6 @@
 		  $cntTemplate['{sel_default}'] = 'selected="selected"';
 	    }
 	    
-		$name = '<br>Name: '.$_POST['name'];
-		$phone = '<br>Phone Number: '.$_POST['phone'];
-		$mail = '<br>'.$_POST['mail'];
 		
 	    $dlg = strlen($text);
 	    
@@ -77,16 +74,18 @@
 	      if (!session_id()) session_start();
 	      $sid = session_id();
 	      $captcha = new CaptchaClass();
-	      if ($captcha->CheckCaptcha($sid,$_POST['captcha'])) {
-	          
-	      } else {
+	      if (!$captcha->CheckCaptcha($sid,$_POST['captcha'])) {
 	        $captcha_error = ADD_SITE_04;
 	      }
 	    }
 	    
-	    if($dlg and $mail and !$bad_title and empty($captcha_error)) {
+	    if($dlg && $mail && !$bad_title && empty($captcha_error)) {
+			$phone = '<br>Phone Number: '.$_POST['phone'];
+			$mail = '<br>'.$_POST['mail'];
+			$name = '<br>Name: '.$_POST['name'];
+
 		  	$header = 'From: '.SITE_NAME.' <' . NOREPLY_EMAIL . '>' . "\r\n";
-			$header .= 'Reply-To: <' . $mail . '>' . "\r\n";
+			$header .= 'Reply-To: <' . $_POST['mail'] . '>' . "\r\n";
 			$header .= 'Return-Path: ' . NOREPLY_EMAIL . "\r\n";
 			$header .= 'X-Mailer: PHP/' . phpversion() . "\r\n";
 			$header .= 'MIME-Version: 1.0' . "\r\n";
@@ -124,9 +123,9 @@
 		  $cntTemplate['{name}'] = $_POST['name'];
 	    }
 	
-	  } else {
+	} else {
 		  $cntTemplate['{sel_default}'] = 'selected="selected"';
-	  }
+	}
   } else {
   	  $cntIfRegion['iscontactus'] = 0;
   }

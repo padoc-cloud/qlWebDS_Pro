@@ -14,14 +14,18 @@
 			<meta name="generator" content="{full_version} - {script_name}">
 			<meta name="expires" content="0">
 			<meta http-equiv="cache-control" content="no-cache">
-			<meta http-equiv="content-type" content="text/html; charset={charset}">
-		<link href="{home_url}{template}style.css" rel="stylesheet" type="text/css">
+			<meta http-equiv="content-type" content="text/html; charset={charset}">			
+			<link href="{home_url}{template}style.css" rel="stylesheet" type="text/css">
+			<link href="{home_url}java_scripts/custom-style.css" rel="stylesheet" type="text/css">
 		<link href="{home_url}images/directory_banners/favicon.ico" rel="shortcut icon">
-		<script src="{home_url}java_scripts/func.js" type="text/javascript" language="JavaScript">
-		</script>
+		
 		{google_analytics}
 	</head>
 	<body>
+		<!-- Loading Spinner -->
+		<div id="loading-spinner" style="display: none;">
+			<div class="spinner"></div>
+		</div>
 <!-- {copyright} //-->
 <!-- his file was designed for the Coffee Template //-->
 <div style="text-align: center; width: 100%;">
@@ -176,5 +180,7 @@
 		</table>
 	</div>
 </div>
+<script src="{home_url}java_scripts/func.js" type="text/javascript" language="JavaScript"></script>
+
   </body>
 </html>
